@@ -863,8 +863,112 @@ function saveCabor(data) {
     sh.appendRow(rowData);
   }
 
+  // Jika ada permintaan reset / pembuatan akun login cabor
+  if (data.resetAccount && data.newPassword) {
+    resetUserPassword({
+      idCabor: idCabor,
+      username: data.accountUsername,
+      newPassword: data.newPassword,
+      namaCabor: data.namaCabor
+    });
+  }
+
   bump('global');
   return { success: true, message: 'Cabang olahraga berhasil disimpan!', idCabor: idCabor };
+}
+
+/**
+ * Hapus Data Cabang Olahraga & Akun Terkait
+ */
+function deleteCabor(idCabor) {
+  if (!idCabor) return { success: false, message: 'ID Cabor tidak valid.' };
+
+  const ss = getSpreadsheet_();
+  const shCabor = ss.getSheetByName('TB_Cabor');
+  const values = shCabor.getDataRange().getValues();
+  const h = values[0].map(String);
+  const idxId = h.indexOf('id_cabor');
+
+  let rowTarget = -1;
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][idxId]) === String(idCabor)) {
+      rowTarget = i + 1;
+      break;
+    }
+  }
+
+  if (rowTarget > 0) {
+    shCabor.deleteRow(rowTarget);
+  }
+
+  // Hapus akun pengguna terkait di TB_Pengguna
+  const shUser = ss.getSheetByName('TB_Pengguna');
+  if (shUser) {
+    const uValues = shUser.getDataRange().getValues();
+    const uh = uValues[0].map(String);
+    const uCaborIdx = uh.indexOf('id_cabor');
+    for (let j = uValues.length - 1; j >= 1; j--) {
+      if (String(uValues[j][uCaborIdx]) === String(idCabor)) {
+        shUser.deleteRow(j + 1);
+      }
+    }
+  }
+
+  bump('global');
+  return { success: true, message: 'Cabang olahraga berhasil dihapus!' };
+}
+
+/**
+ * Reset / Perbarui Akun Login Pengurus Cabor
+ */
+function resetUserPassword(data) {
+  const idCabor = data.idCabor;
+  const username = String(data.username || '').trim().toLowerCase();
+  const password = String(data.newPassword || data.password || '').trim();
+
+  if (!idCabor || !password) {
+    return { success: false, message: 'ID Cabor dan password baru wajib diisi!' };
+  }
+
+  const ss = getSpreadsheet_();
+  const shUser = ss.getSheetByName('TB_Pengguna');
+  const values = shUser.getDataRange().getValues();
+  const h = values[0].map(String);
+  const idxCabor = h.indexOf('id_cabor');
+  const idxPass = h.indexOf('password_hash');
+  const idxUser = h.indexOf('username');
+  const idxId = h.indexOf('id_user');
+
+  let foundRow = -1;
+  let idUser = '';
+
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][idxCabor]) === String(idCabor)) {
+      foundRow = i + 1;
+      idUser = String(values[i][idxId]);
+      break;
+    }
+  }
+
+  const salt = Utilities.getUuid();
+  const passHash = hashPass_(password, salt);
+
+  if (foundRow > 0) {
+    shUser.getRange(foundRow, idxPass + 1).setValue(passHash);
+    if (username) {
+      shUser.getRange(foundRow, idxUser + 1).setValue(username);
+    }
+    setProp_('SALT_' + idUser, salt);
+    revokeAll_(idUser);
+    return { success: true, message: 'Akun Cabor berhasil direset! Password baru aktif.' };
+  } else {
+    return createCaborAccount({
+      idCabor: idCabor,
+      username: username || ('cabor_' + idCabor.toLowerCase()),
+      password: password,
+      namaCabor: data.namaCabor || idCabor
+    });
+  }
 }
 
 /**

@@ -900,52 +900,96 @@
   </div>
 
   <!-- =========================================================================
-       4. MODAL TAMBAH CABOR & AKUN
+       4. MODAL TAMBAH & EDIT CABOR & RESET AKUN
        ========================================================================= -->
   <div id="modal-cabor" class="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 hidden">
-    <div class="bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-2xl max-w-lg w-full p-6 relative">
+    <div class="bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-2xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto custom-scrollbar">
       <button onclick="closeCaborModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
         <span class="material-symbols-outlined">close</span>
       </button>
 
-      <h3 class="font-bold text-base text-slate-900 dark:text-white mb-3">Tambah Cabang Olahraga & Akun</h3>
+      <h3 id="cabor-modal-title" class="font-extrabold text-base text-slate-900 dark:text-white mb-3">
+        Tambah Cabang Olahraga Baru
+      </h3>
 
-      <form onsubmit="submitCaborForm(event)" class="space-y-3">
+      <form onsubmit="submitCaborForm(event)" class="space-y-3.5">
         <input type="hidden" id="cabor-modal-id" />
+        
         <div>
-          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Cabor</label>
-          <input type="text" id="cabor-modal-nama" required placeholder="Contoh: Taekwondo (TI)"
-                 class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Cabang Olahraga</label>
+          <input type="text" id="cabor-modal-nama" required placeholder="Contoh: Taekwondo (TI) / Dayung (PODSI)"
+                 class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
         </div>
-        <div class="grid grid-cols-2 gap-3">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Ketua / Penanggung Jawab</label>
-            <input type="text" id="cabor-modal-ketua" placeholder="Nama pengurus..."
-                   class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Penanggung Jawab / Ketua Cabor</label>
+            <input type="text" id="cabor-modal-ketua" required placeholder="Nama pengurus penanggung jawab..."
+                   class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">No Kontak (WA)</label>
-            <input type="text" id="cabor-modal-kontak" placeholder="08xxxxxxxx"
-                   class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
-          </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Target Emas</label>
-            <input type="number" id="cabor-modal-target-emas" value="2" min="0" class="w-full text-xs p-2 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Target Perak</label>
-            <input type="number" id="cabor-modal-target-perak" value="2" min="0" class="w-full text-xs p-2 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Target Perunggu</label>
-            <input type="number" id="cabor-modal-target-perunggu" value="2" min="0" class="w-full text-xs p-2 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">No Kontak / WhatsApp</label>
+            <input type="text" id="cabor-modal-kontak" placeholder="08xxxxxxxxxx"
+                   class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
           </div>
         </div>
-        <div class="pt-3 flex justify-end gap-2">
-          <button type="button" onclick="closeCaborModal()" class="px-4 py-2 border rounded-xl text-xs font-semibold">Batal</button>
-          <button type="submit" class="px-5 py-2 bg-primary text-white rounded-xl text-xs font-bold">Simpan Cabor</button>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Target Medali Cabor (Porprov 2026)</label>
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <span class="block text-[10px] text-amber-600 font-bold mb-0.5">Emas</span>
+              <input type="number" id="cabor-modal-target-emas" value="2" min="0" class="w-full text-xs p-2 bg-slate-50 dark:bg-slate-800 border rounded-xl font-bold text-slate-900 dark:text-white" />
+            </div>
+            <div>
+              <span class="block text-[10px] text-slate-500 font-bold mb-0.5">Perak</span>
+              <input type="number" id="cabor-modal-target-perak" value="2" min="0" class="w-full text-xs p-2 bg-slate-50 dark:bg-slate-800 border rounded-xl font-bold text-slate-900 dark:text-white" />
+            </div>
+            <div>
+              <span class="block text-[10px] text-amber-800 font-bold mb-0.5">Perunggu</span>
+              <input type="number" id="cabor-modal-target-perunggu" value="2" min="0" class="w-full text-xs p-2 bg-slate-50 dark:bg-slate-800 border rounded-xl font-bold text-slate-900 dark:text-white" />
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION RESET / ATUR AKUN LOGIN CABOR -->
+        <div class="pt-2 border-t border-slate-100 dark:border-slate-800">
+          <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-primary dark:text-red-400 mb-2">
+            <input type="checkbox" id="cabor-modal-toggle-account" onchange="toggleAccountSection()" class="rounded text-primary focus:ring-primary" />
+            <span>Atur / Reset Akun Login Pengurus Cabor</span>
+          </label>
+          
+          <div id="cabor-account-fields" class="space-y-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hidden">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">Username Login Cabor</label>
+              <input type="text" id="cabor-modal-username" placeholder="Contoh: cabor_dayung"
+                     class="w-full text-xs p-2 bg-white dark:bg-slate-800 border rounded-lg font-mono text-slate-900 dark:text-white" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">Password Baru</label>
+              <input type="password" id="cabor-modal-password" placeholder="Masukkan kata sandi baru..."
+                     class="w-full text-xs p-2 bg-white dark:bg-slate-800 border rounded-lg text-slate-900 dark:text-white" />
+              <p class="text-[10px] text-slate-400 mt-0.5">Sandi baru akan langsung aktif dan menggantikan sandi lama.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTION BUTTONS: HAPUS, BATAL, SIMPAN -->
+        <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+          <button type="button" id="btn-delete-cabor-modal" onclick="deleteCurrentCaborFromModal()"
+                  class="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-950/50 dark:hover:bg-red-900 dark:text-red-300 rounded-xl text-xs font-bold transition flex items-center gap-1 hidden">
+            <span class="material-symbols-outlined text-base">delete</span>
+            <span>Hapus Cabor</span>
+          </button>
+          
+          <div class="flex items-center gap-2 ml-auto">
+            <button type="button" onclick="closeCaborModal()" class="px-4 py-2 border rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+              Batal
+            </button>
+            <button type="submit" id="btn-submit-cabor" class="px-5 py-2 bg-primary hover:bg-crimson-dark text-white rounded-xl text-xs font-bold shadow-md transition">
+              Simpan Perubahan
+            </button>
+          </div>
         </div>
       </form>
     </div>

@@ -400,11 +400,11 @@ function handleMockApi(action, payload) {
             targetEmas: Number(payload.targetEmas) || 0,
             targetPerak: Number(payload.targetPerak) || 0,
             targetPerunggu: Number(payload.targetPerunggu) || 0,
-            totalAtlet: Number(payload.totalAtlet) || 0,
-            realEmas: 0,
-            realPerak: 0,
-            realPerunggu: 0,
-            totalMedali: 0
+            totalAtlet: Number(payload.totalAtlet) || (idx >= 0 ? db.cabor[idx].totalAtlet : 0),
+            realEmas: idx >= 0 ? db.cabor[idx].realEmas : 0,
+            realPerak: idx >= 0 ? db.cabor[idx].realPerak : 0,
+            realPerunggu: idx >= 0 ? db.cabor[idx].realPerunggu : 0,
+            totalMedali: idx >= 0 ? db.cabor[idx].totalMedali : 0
           };
           if (idx >= 0) {
             db.cabor[idx] = Object.assign(db.cabor[idx], caborItem);
@@ -413,6 +413,19 @@ function handleMockApi(action, payload) {
           }
           saveLocalDb(db);
           resolve({ success: true, message: 'Cabang Olahraga berhasil disimpan!' });
+          break;
+        }
+
+        case 'deleteCabor': {
+          const idx = db.cabor.findIndex(c => c.idCabor === payload.idCabor);
+          if (idx >= 0) {
+            db.cabor.splice(idx, 1);
+            db.athletes = db.athletes.filter(a => a.idCabor !== payload.idCabor);
+            saveLocalDb(db);
+            resolve({ success: true, message: 'Cabang Olahraga berhasil dihapus!' });
+          } else {
+            resolve({ success: false, message: 'Cabang Olahraga tidak ditemukan.' });
+          }
           break;
         }
 
@@ -853,7 +866,7 @@ async function loadMasterCabor() {
       <td class="py-3 px-4 text-center text-slate-500 font-bold">${i + 1}</td>
       <td class="py-3 px-4">
         <span class="font-bold text-slate-900 dark:text-white block">${c.namaCabor}</span>
-        <span class="text-xs text-slate-400">ID: ${c.idCabor}</span>
+        <span class="text-xs text-slate-400 font-mono">ID: ${c.idCabor}</span>
       </td>
       <td class="py-3 px-4 text-slate-700 dark:text-slate-300 font-medium">${c.ketuaCabor || '-'}</td>
       <td class="py-3 px-4 text-xs font-mono text-slate-500">${c.nomorKontak || '-'}</td>
@@ -867,9 +880,14 @@ async function loadMasterCabor() {
         <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Aktif</span>
       </td>
       <td class="py-3 px-4 text-center">
-        <button class="px-2.5 py-1 text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg transition" onclick="editCaborModal('${c.idCabor}')">
-          Edit
-        </button>
+        <div class="flex items-center justify-center gap-1.5">
+          <button class="px-2.5 py-1 text-xs font-bold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg transition" onclick="editCaborModal('${c.idCabor}')">
+            Edit
+          </button>
+          <button class="px-2 py-1 text-xs font-semibold hover:bg-red-50 text-red-600 dark:hover:bg-red-950/40 rounded-lg transition" onclick="deleteCaborAction('${c.idCabor}', '${c.namaCabor}')" title="Hapus Cabor">
+            <span class="material-symbols-outlined text-base">delete</span>
+          </button>
+        </div>
       </td>
     </tr>
   `).join('');
@@ -883,13 +901,95 @@ function openAddCaborModal() {
   document.getElementById('cabor-modal-target-emas').value = '2';
   document.getElementById('cabor-modal-target-perak').value = '2';
   document.getElementById('cabor-modal-target-perunggu').value = '2';
+  
+  // Reset section akun
+  const toggleAcc = document.getElementById('cabor-modal-toggle-account');
+  if (toggleAcc) toggleAcc.checked = false;
+  const accFields = document.getElementById('cabor-account-fields');
+  if (accFields) accFields.classList.add('hidden');
   document.getElementById('cabor-modal-username').value = '';
   document.getElementById('cabor-modal-password').value = '';
+
+  const titleEl = document.getElementById('cabor-modal-title');
+  if (titleEl) titleEl.innerText = 'Tambah Cabang Olahraga Baru';
+
+  const btnDel = document.getElementById('btn-delete-cabor-modal');
+  if (btnDel) btnDel.classList.add('hidden');
+
   document.getElementById('modal-cabor').classList.remove('hidden');
+}
+
+function editCaborModal(idCabor) {
+  const cabor = AppState.caborList.find(c => c.idCabor === idCabor);
+  if (!cabor) {
+    showToast('Data cabor tidak ditemukan.', 'error');
+    return;
+  }
+
+  document.getElementById('cabor-modal-id').value = cabor.idCabor;
+  document.getElementById('cabor-modal-nama').value = cabor.namaCabor;
+  document.getElementById('cabor-modal-ketua').value = cabor.ketuaCabor || '';
+  document.getElementById('cabor-modal-kontak').value = cabor.nomorKontak || '';
+  document.getElementById('cabor-modal-target-emas').value = cabor.targetEmas || 0;
+  document.getElementById('cabor-modal-target-perak').value = cabor.targetPerak || 0;
+  document.getElementById('cabor-modal-target-perunggu').value = cabor.targetPerunggu || 0;
+
+  // Reset section akun
+  const toggleAcc = document.getElementById('cabor-modal-toggle-account');
+  if (toggleAcc) toggleAcc.checked = false;
+  const accFields = document.getElementById('cabor-account-fields');
+  if (accFields) accFields.classList.add('hidden');
+  document.getElementById('cabor-modal-username').value = 'cabor_' + cabor.namaCabor.toLowerCase().replace(/[^a-z0-9]/g, '');
+  document.getElementById('cabor-modal-password').value = '';
+
+  const titleEl = document.getElementById('cabor-modal-title');
+  if (titleEl) titleEl.innerText = 'Edit Cabang Olahraga: ' + cabor.namaCabor;
+
+  const btnDel = document.getElementById('btn-delete-cabor-modal');
+  if (btnDel) btnDel.classList.remove('hidden');
+
+  document.getElementById('modal-cabor').classList.remove('hidden');
+}
+
+function toggleAccountSection() {
+  const toggleAcc = document.getElementById('cabor-modal-toggle-account');
+  const accFields = document.getElementById('cabor-account-fields');
+  if (toggleAcc && accFields) {
+    if (toggleAcc.checked) {
+      accFields.classList.remove('hidden');
+    } else {
+      accFields.classList.add('hidden');
+    }
+  }
 }
 
 function closeCaborModal() {
   document.getElementById('modal-cabor').classList.add('hidden');
+}
+
+async function deleteCurrentCaborFromModal() {
+  const idCabor = document.getElementById('cabor-modal-id').value.trim();
+  const nama = document.getElementById('cabor-modal-nama').value.trim();
+  if (!idCabor) return;
+  closeCaborModal();
+  await deleteCaborAction(idCabor, nama);
+}
+
+async function deleteCaborAction(idCabor, namaCabor) {
+  if (!confirm(`Apakah Anda yakin ingin menghapus Cabang Olahraga "${namaCabor}"?\n\nPerhatian: Data atlet, target medali, dan akun login cabor ini akan dihapus dari sistem.`)) {
+    return;
+  }
+
+  showToast(`Menghapus cabor ${namaCabor}...`, 'info');
+  const res = await apiCall('deleteCabor', { idCabor: idCabor }, true);
+
+  if (res && res.success) {
+    showToast(res.message || 'Cabang Olahraga berhasil dihapus!', 'success');
+    await loadMasterCabor();
+    await loadPublicLanding();
+  } else {
+    showToast((res && res.message) ? res.message : 'Gagal menghapus cabor.', 'error');
+  }
 }
 
 async function submitCaborForm(e) {
@@ -906,6 +1006,27 @@ async function submitCaborForm(e) {
     showToast('Nama cabang olahraga wajib diisi!', 'error');
     return;
   }
+  if (!ketua) {
+    showToast('Penanggung jawab / ketua cabor wajib diisi!', 'warning');
+    return;
+  }
+
+  const toggleAcc = document.getElementById('cabor-modal-toggle-account');
+  const isResetAccount = toggleAcc ? toggleAcc.checked : false;
+  const username = document.getElementById('cabor-modal-username')?.value.trim();
+  const password = document.getElementById('cabor-modal-password')?.value.trim();
+
+  if (isResetAccount && !password) {
+    showToast('Harap masukkan password baru untuk mereset akun cabor!', 'warning');
+    return;
+  }
+
+  const btnSubmit = document.getElementById('btn-submit-cabor');
+  const origText = btnSubmit ? btnSubmit.innerHTML : '';
+  if (btnSubmit) {
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = '<span>Menyimpan...</span>';
+  }
 
   const payload = {
     idCabor: idCabor || undefined,
@@ -914,16 +1035,29 @@ async function submitCaborForm(e) {
     nomorKontak: kontak,
     targetEmas: emas,
     targetPerak: perak,
-    targetPerunggu: perunggu
+    targetPerunggu: perunggu,
+    resetAccount: isResetAccount,
+    accountUsername: username,
+    newPassword: password
   };
 
-  const res = await apiCall('saveCabor', payload, true);
-  if (res.success) {
-    showToast(res.message, 'success');
-    closeCaborModal();
-    loadMasterCabor();
-  } else {
-    showToast(res.message, 'error');
+  try {
+    const res = await apiCall('saveCabor', payload, true);
+    if (res && res.success) {
+      showToast(res.message, 'success');
+      closeCaborModal();
+      await loadMasterCabor();
+      await loadPublicLanding();
+    } else {
+      showToast((res && res.message) ? res.message : 'Gagal menyimpan cabor.', 'error');
+    }
+  } catch (err) {
+    showToast('Terjadi kendala: ' + err.message, 'error');
+  } finally {
+    if (btnSubmit) {
+      btnSubmit.disabled = false;
+      btnSubmit.innerHTML = origText;
+    }
   }
 }
 
