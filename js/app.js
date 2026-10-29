@@ -201,45 +201,47 @@ async function apiCall(action, payload = {}, isWrite = false) {
     return handleMockApi(action, payload);
   }
 
-  // Deduplikasi Request In-Flight untuk operasi baca (gas-scale-turbo)
-  if (!isWrite && !/^(save|register|upload|verify|update|record|delete)/i.test(action)) {
-    const key = AppState._writeEpoch + '|' + action + '|' + JSON.stringify(payload);
-    if (AppState._inflight[key]) return AppState._inflight[key];
+  const isPostAction = isWrite || /^(login|save|register|upload|verify|update|record|delete|create|reset)/i.test(action);
 
-    const promise = (async () => {
-      try {
-        const url = `${CONFIG.GAS_URL}?action=${encodeURIComponent(action)}&t=${Date.now()}`;
-        const res = await fetch(url);
-        const data = await res.json();
-        return data;
-      } catch (err) {
-        console.warn('Network GET failed, falling back to local mock data:', err);
-        return handleMockApi(action, payload);
-      }
-    })();
-
-    AppState._inflight[key] = promise;
-    promise.then(() => delete AppState._inflight[key], () => delete AppState._inflight[key]);
-    return promise;
+  // 1. Rute POST (Aksi Tulis, Login, Unggah Berkas, dll.)
+  if (isPostAction) {
+    AppState._writeEpoch++;
+    try {
+      const res = await fetch(CONFIG.GAS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // WAJIB text/plain agar bebas CORS
+        body: JSON.stringify({
+          action: action,
+          token: AppState.currentUser ? AppState.currentUser.token : '',
+          data: payload
+        })
+      });
+      return await res.json();
+    } catch (err) {
+      console.warn('Network POST failed, falling back to local mock update:', err);
+      return handleMockApi(action, payload);
+    }
   }
 
-  // Operasi Tulis: Invalidate in-flight cache & kirim via text/plain POST (anti-CORS)
-  AppState._writeEpoch++;
-  try {
-    const res = await fetch(CONFIG.GAS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // WAJIB text/plain
-      body: JSON.stringify({
-        action: action,
-        token: AppState.currentUser ? AppState.currentUser.token : '',
-        data: payload
-      })
-    });
-    return await res.json();
-  } catch (err) {
-    console.warn('Network POST failed, falling back to local mock update:', err);
-    return handleMockApi(action, payload);
-  }
+  // 2. Rute GET: Deduplikasi Request In-Flight untuk operasi baca (gas-scale-turbo)
+  const key = AppState._writeEpoch + '|' + action + '|' + JSON.stringify(payload);
+  if (AppState._inflight[key]) return AppState._inflight[key];
+
+  const promise = (async () => {
+    try {
+      const url = `${CONFIG.GAS_URL}?action=${encodeURIComponent(action)}&t=${Date.now()}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      console.warn('Network GET failed, falling back to local mock data:', err);
+      return handleMockApi(action, payload);
+    }
+  })();
+
+  AppState._inflight[key] = promise;
+  promise.then(() => delete AppState._inflight[key], () => delete AppState._inflight[key]);
+  return promise;
 }
 
 // Handler Mock Data jika Backend Belum Dideploy
@@ -1495,24 +1497,42 @@ async function handleLoginSubmit(e) {
     return;
   }
 
+  const btnSubmit = e && e.target ? e.target.querySelector('button[type="submit"]') : null;
+  const originalText = btnSubmit ? btnSubmit.innerHTML : '';
+  if (btnSubmit) {
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = '<span>Memverifikasi kredensial...</span>';
+  }
+
   showToast('Memverifikasi kredensial...', 'info');
-  const res = await apiCall('login', { username: u, password: p });
 
-  if (res.success) {
-    AppState.currentUser = Object.assign(res.user, { token: res.token });
-    localStorage.setItem('koni_session_user', JSON.stringify(AppState.currentUser));
-    updateAuthUI();
-    closeLoginModal();
-    showToast('Selamat datang, ' + res.user.nama + '!', 'success');
+  try {
+    const res = await apiCall('login', { username: u, password: p }, true);
 
-    // Arahkan ke dashboard sesuai role
-    if (res.user.role === 'ADMIN_INDUK') {
-      navigateTo('dashboard-induk');
+    if (res && res.success) {
+      AppState.currentUser = Object.assign(res.user, { token: res.token });
+      localStorage.setItem('koni_session_user', JSON.stringify(AppState.currentUser));
+      updateAuthUI();
+      closeLoginModal();
+      showToast('Selamat datang, ' + (res.user.nama || res.user.username) + '!', 'success');
+
+      // Arahkan ke dashboard sesuai role
+      if (res.user.role === 'ADMIN_INDUK') {
+        navigateTo('dashboard-induk');
+      } else {
+        navigateTo('portal-cabor');
+      }
     } else {
-      navigateTo('portal-cabor');
+      showToast((res && res.message) ? res.message : 'Username atau password salah!', 'error');
     }
-  } else {
-    showToast(res.message, 'error');
+  } catch (err) {
+    console.error('Login error:', err);
+    showToast('Terjadi kendala saat login: ' + err.message, 'error');
+  } finally {
+    if (btnSubmit) {
+      btnSubmit.disabled = false;
+      btnSubmit.innerHTML = originalText;
+    }
   }
 }
 
