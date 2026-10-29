@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pusat Keabsahan Atlet | KONI KONAWE UTARA - ROAD TO PORPROV SULTRA 2026</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS Plugins & Config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#d2e4ff",
+            "primary": "#9e001f",
+            "on-secondary-fixed": "#271900",
+            "canvas-light": "#F8FAFC",
+            "border-light": "#E2E8F0",
+            "status-rejected-bg": "#FEE2E2",
+            "on-error-container": "#93000a",
+            "primary-container": "#c8102e",
+            "on-primary-container": "#ffdad8",
+            "secondary-fixed-dim": "#ffba2c",
+            "outline-variant": "#e5bdbb",
+            "on-surface-variant": "#5c403f",
+            "error-container": "#ffdad6",
+            "surface-container": "#eaedff",
+            "on-tertiary-fixed": "#001c37",
+            "surface-bright": "#faf8ff",
+            "on-primary-fixed-variant": "#92001c",
+            "error": "#ba1a1a",
+            "surface-container-highest": "#dae2fd",
+            "tertiary-container": "#34679d",
+            "status-pending-bg": "#FEF9C3",
+            "tertiary-fixed": "#d2e4ff",
+            "inverse-surface": "#283044",
+            "status-pending-text": "#854D0E",
+            "surface": "#faf8ff",
+            "on-tertiary-fixed-variant": "#07497d",
+            "secondary": "#7d5700",
+            "primary-fixed": "#ffdad8",
+            "on-secondary": "#ffffff",
+            "surface-light": "#FFFFFF",
+            "surface-container-low": "#f2f3ff",
+            "canvas-dark": "#0B1120",
+            "secondary-fixed": "#ffdeaa",
+            "inverse-on-surface": "#eef0ff",
+            "surface-dim": "#d2d9f4",
+            "surface-container-high": "#e2e7ff",
+            "on-secondary-fixed-variant": "#5f4100",
+            "konut-teal": "#0D9488",
+            "status-verified-bg": "#DCFCE7",
+            "on-surface": "#131b2e",
+            "secondary-container": "#feb71a",
+            "crimson-dark": "#9E0D24",
+            "status-rejected-text": "#991B1B",
+            "tertiary-fixed-dim": "#a0c9ff",
+            "border-dark": "#334155",
+            "on-primary": "#ffffff",
+            "tertiary": "#144f84",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#906f6e",
+            "surface-dark": "#1E293B",
+            "surface-variant": "#dae2fd",
+            "on-tertiary": "#ffffff",
+            "on-background": "#131b2e",
+            "background": "#faf8ff",
+            "primary-fixed-dim": "#ffb3b1",
+            "gold-deep": "#D48806",
+            "on-primary-fixed": "#410007",
+            "inverse-primary": "#ffb3b1",
+            "on-secondary-container": "#6b4b00",
+            "on-error": "#ffffff",
+            "surface-tint": "#bf0229",
+            "status-verified-text": "#166534"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "margin": "1rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "margin-md": "1.5rem",
+            "space-xs": "0.25rem",
+            "gutter-md": "1.5rem",
+            "margin-lg": "2.5rem",
+            "space-sm": "0.5rem",
+            "gutter-lg": "2rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "metric-display": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "metric-display": ["32px", { "lineHeight": "38px", "fontWeight": "800" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "800" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "800" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #F8FAFC;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="bg-canvas-light text-on-surface antialiased font-body-md text-body-md min-h-screen flex flex-col selection:bg-primary selection:text-white">
+<!-- ==================== TOP NAVIGATION BAR (FROM SHARED COMPONENT) ==================== -->
+<header class="sticky top-0 z-40 flex items-center justify-between px-space-lg w-full h-16 bg-surface-light border-b border-border-light shadow-sm">
+<!-- Brand Anchor & Search cluster -->
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-white shadow-sm ring-2 ring-primary-container/20">
+<span class="material-symbols-outlined" data-icon="sports" data-weight="fill" style="font-variation-settings: 'FILL' 1;">sports</span>
+</div>
+<div>
+<span class="text-headline-sm font-headline-sm font-bold text-primary tracking-tight block">KONI KONAWE UTARA</span>
+<span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider block font-bold">Road to Porprov 2026</span>
+</div>
+</div>
+<!-- Quick Global Nav (Top Links) -->
+<nav class="hidden xl:flex items-center gap-space-md ml-space-md border-l border-border-light pl-space-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 text-label-lg font-label-lg" href="#">Dashboard</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 text-label-lg font-label-lg" href="#">Verifikasi</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 text-label-lg font-label-lg" href="#">Cabor</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 text-label-lg font-label-lg" href="#">Klasemen</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 text-label-lg font-label-lg" href="#">Cetak PDF</a>
+</nav>
+</div>
+<!-- Search in Navbar -->
+<div class="hidden md:flex items-center flex-1 max-w-xs mx-space-md">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-9 pr-3 py-1.5 text-body-sm font-body-sm rounded-lg border border-border-light bg-canvas-light focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" placeholder="Pencarian cepat ID atlet..." type="text"/>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-space-sm">
+<button class="hidden lg:flex items-center gap-space-xs px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-primary font-label-md text-label-md transition-all active:scale-95 border border-border-light">
+<span class="material-symbols-outlined text-primary" data-icon="cloud_sync">cloud_sync</span>
+<span>Sinkronisasi Google Workspace</span>
+</button>
+<div class="flex items-center gap-1 border-l border-border-light pl-space-sm ml-1">
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150 relative" title="Notifikasi Verifikasi">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container ring-2 ring-white"></span>
+</button>
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150" title="Mode Gelap">
+<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+</button>
+</div>
+<!-- User Profile Anchor -->
+<div class="flex items-center gap-space-xs pl-space-xs">
+<div class="w-9 h-9 rounded-full ring-2 ring-primary/20 overflow-hidden bg-primary/10 flex items-center justify-center text-primary font-bold">
+<span class="material-symbols-outlined" data-icon="account_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+<div class="hidden sm:block text-left text-xs">
+<div class="font-bold text-on-surface text-label-md font-label-md leading-none">Tim Keabsahan</div>
+<div class="text-outline text-label-sm font-label-sm leading-tight mt-0.5">Admin Konut #04</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+<main class="flex-1 flex flex-col overflow-hidden max-w-[1920px] w-full mx-auto">
+<!-- SUB-HEADER / BREADCRUMB & TOOLBAR -->
+<div class="bg-surface-light border-b border-border-light px-space-lg py-space-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-sm shadow-xs">
+<div class="flex flex-col sm:flex-row sm:items-center gap-2">
+<nav class="flex items-center gap-1.5 text-label-md font-label-md text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+<span class="hover:text-primary cursor-pointer">Pusat Keabsahan Atlet</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-bold">Verifikasi Dokumen Porprov 2026</span>
+</nav>
+<span class="hidden sm:inline text-border-light">|</span>
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-status-pending-bg text-status-pending-text font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-gold-deep animate-ping"></span>
+          14 Menunggu Verifikasi
+        </span>
+</div>
+<!-- Batch Actions & Export -->
+<div class="flex items-center gap-space-xs self-stretch md:self-auto justify-end">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-light bg-surface-light hover:bg-canvas-light text-on-surface text-label-md font-label-md font-semibold transition-colors shadow-2xs">
+<span class="material-symbols-outlined text-sm text-konut-teal" data-icon="folder_zip">folder_zip</span>
+<span class="hidden sm:inline">Unduh Semua Berkas Cabor (.ZIP)</span>
+<span class="sm:hidden">Unduh .ZIP</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-light bg-surface-light hover:bg-canvas-light text-on-surface text-label-md font-label-md font-semibold transition-colors shadow-2xs">
+<span class="material-symbols-outlined text-sm text-status-verified-text" data-icon="table_view">table_view</span>
+<span>Ekspor Status (Excel)</span>
+</button>
+</div>
+</div>
+<!-- FILTER MATRIX BAR -->
+<div class="bg-surface-light/80 backdrop-blur-xs border-b border-border-light px-space-lg py-2.5 flex flex-wrap items-center justify-between gap-space-md">
+<!-- Left Filters: Status Tabs + Cabor Dropdown -->
+<div class="flex flex-wrap items-center gap-space-sm flex-1">
+<!-- Cabor Selector -->
+<div class="relative min-w-[200px]">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="sports_kabaddi">sports_kabaddi</span>
+<select class="w-full pl-8 pr-8 py-1.5 text-body-sm font-body-sm font-medium rounded-lg border border-border-light bg-canvas-light focus:ring-1 focus:ring-primary focus:border-primary appearance-none cursor-pointer">
+<option>Semua Cabor (32 Cabor)</option>
+<option selected="">Dayung (PODSI) - 18 Atlet</option>
+<option>Atletik (PASI) - 24 Atlet</option>
+<option>Taekwondo (TI) - 16 Atlet</option>
+<option>Pencak Silat (IPSI) - 20 Atlet</option>
+<option>Bulu Tangkis (PBSI) - 12 Atlet</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline text-lg pointer-events-none" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+<!-- Status Filter Segmented Controls -->
+<div class="flex items-center bg-canvas-light p-1 rounded-lg border border-border-light overflow-x-auto text-label-md font-label-md">
+<button class="px-3 py-1 rounded-md text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap">
+<span>Semua</span>
+<span class="text-xs text-outline font-semibold">418</span>
+</button>
+<button class="px-3 py-1 rounded-md bg-surface-light text-status-pending-text shadow-xs font-bold border border-border-light/60 flex items-center gap-1.5 whitespace-nowrap">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span>Menunggu Review</span>
+<span class="px-1.5 py-0.2 rounded-full bg-status-pending-bg text-status-pending-text text-label-sm font-label-sm">14</span>
+</button>
+<button class="px-3 py-1 rounded-md text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>Disetujui</span>
+<span class="text-xs text-outline font-semibold">312</span>
+</button>
+<button class="px-3 py-1 rounded-md text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1.5 whitespace-nowrap">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span>Ditolak / Revisi</span>
+<span class="text-xs text-outline font-semibold">30</span>
+</button>
+</div>
+</div>
+<!-- Right Search Filter -->
+<div class="relative w-full sm:w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="badge">badge</span>
+<input class="w-full pl-9 pr-3 py-1.5 text-body-sm font-body-sm rounded-lg border border-border-light bg-surface-light focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Cari NIK (16 digit) atau Nama Atlet..." type="text"/>
+</div>
+</div>
+<!-- ==================== 2-PANEL SPLIT WORKSPACE ==================== -->
+<div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+<!-- ==================== LEFT PANEL (38% WIDTH): ATHLETE QUEUE LIST ==================== -->
+<section class="lg:w-[38%] border-r border-border-light bg-canvas-light flex flex-col h-full overflow-hidden">
+<!-- Queue Meta Header -->
+<div class="px-space-md py-2.5 bg-surface-light border-b border-border-light flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-label-md font-label-md font-bold text-on-surface">Antrean Verifikasi Dokumen</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-bold">14 Berkas Baru</span>
+</div>
+<div class="flex items-center gap-1 text-label-sm font-label-sm text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="sort">sort</span>
+<span>Terbaru Diunggah</span>
+</div>
+</div>
+<!-- Scrollable Athlete Cards Container -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-space-md space-y-space-sm">
+<!-- CARD 1: ACTIVE / SELECTED CARD (La Ode Rudi) -->
+<div class="relative rounded-xl bg-surface-light border-2 border-primary-container shadow-md p-space-md transition-all cursor-pointer ring-4 ring-primary-container/10">
+<!-- Active Selected Indicator Flag -->
+<div class="absolute -top-2.5 -right-2 bg-primary-container text-white text-label-sm font-label-sm font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Sedang Ditinjau</span>
+</div>
+<div class="flex items-start gap-space-md">
+<!-- Athlete Photo Preview (3x4 square preview) -->
+<div class="relative flex-shrink-0">
+<img class="w-14 h-16 rounded-lg object-cover border-2 border-primary-container/40 shadow-xs" data-alt="Official Indonesian athlete formal ID photo with plain red background, young muscular male athlete looking straight with serious confident expression for sports federation registry, high-resolution portrait lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3YVTUrdsh4n5aZiD6usETc0gF1pKzGMLsuhqNmFTVv9O89FcaD0pJF9yKFZjkOGKKQ8XIOWI4ywCcL84fVDUOLLQrLZfD8J56_rhuc-emJtCa29iwYEfxfK5DsduJVuiy7cUC6wwcaYZavAxOTZLF1OlfJGoxX3cw-8t42GQQvoMBQnX5j1ICfYqYs6-uGm71G8mW6HpaN6f2FWIwZ9EpZUNlNdjwxdgSZpqhPDg"/>
+<span class="absolute -bottom-1.5 -right-1 bg-konut-teal text-white p-0.5 rounded-md shadow-xs" title="Terdata di SI-PODSI">
+<span class="material-symbols-outlined text-xs block" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+</span>
+</div>
+<!-- Content details -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface truncate">La Ode Rudi</h3>
+<span class="text-label-sm font-label-sm text-outline flex items-center gap-1 whitespace-nowrap">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+                    10 Menit Lalu
+                  </span>
+</div>
+<div class="flex items-center gap-1.5 font-mono text-label-md font-label-md text-primary font-semibold mb-1">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="fingerprint">fingerprint</span>
+<span>7409012304980002</span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="rowing">rowing</span>
+<span class="font-medium truncate">Dayung - Men Single Scull 2000m</span>
+</div>
+<!-- Footer tags & Status Pill -->
+<div class="flex items-center justify-between pt-2 border-t border-border-light/60">
+<span class="text-xs text-outline font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-konut-teal" data-icon="location_on">location_on</span>
+                    Kec. Lasolo, Konut
+                  </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-status-pending-bg text-status-pending-text font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+                    Menunggu Review
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 2: Siti Nurhaliza -->
+<div class="relative rounded-xl bg-surface-light border border-border-light hover:border-primary/40 shadow-xs hover:shadow-sm p-space-md transition-all cursor-pointer group">
+<div class="flex items-start gap-space-md">
+<div class="relative flex-shrink-0">
+<img class="w-14 h-16 rounded-lg object-cover border border-border-light shadow-xs group-hover:border-primary/30 transition-colors" data-alt="Official Indonesian female athlete passport format portrait with solid bright red background, wearing sports national tracksuit, bright studio light, sharp focused sports credential registration photo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7gFu5EgQLNa9wNO6RbjMSlxi24bjOD5hgLJE5Zk8QwmGOdok3x6MyD-zwU2Skbkf41w_rDjQa4bYEwrXKKRVxJrwW6K3kYj4n2kwvHUI4DAvJi4tEreZ57JHTfweAFAWAPIoX8rfumYqIoh4f8hu-Qdp3xrMXceHrGAl4NQ3vLi3ByyTjVh7hQetyL3-_kG88gOJARDxLusHQuPuKcsQJJRUY8olNzHa9uImi6cU"/>
+<span class="absolute -bottom-1.5 -right-1 bg-secondary-container text-on-secondary-fixed p-0.5 rounded-md shadow-xs" title="Atlet Pelatda Konut">
+<span class="material-symbols-outlined text-xs block" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface group-hover:text-primary transition-colors truncate">Siti Nurhaliza</h3>
+<span class="text-label-sm font-label-sm text-outline flex items-center gap-1 whitespace-nowrap">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+                    28 Menit Lalu
+                  </span>
+</div>
+<div class="flex items-center gap-1.5 font-mono text-label-md font-label-md text-on-surface-variant font-semibold mb-1">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="fingerprint">fingerprint</span>
+<span>7409026411010004</span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="rowing">rowing</span>
+<span class="font-medium truncate">Dayung - Women Lightweight Double</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-border-light/60">
+<span class="text-xs text-outline font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-konut-teal" data-icon="location_on">location_on</span>
+                    Kec. Asera, Konut
+                  </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-status-pending-bg text-status-pending-text font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+                    Menunggu Review
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 3: Andi Pratama -->
+<div class="relative rounded-xl bg-surface-light border border-border-light hover:border-primary/40 shadow-xs hover:shadow-sm p-space-md transition-all cursor-pointer group">
+<div class="flex items-start gap-space-md">
+<div class="relative flex-shrink-0">
+<img class="w-14 h-16 rounded-lg object-cover border border-border-light shadow-xs group-hover:border-primary/30 transition-colors" data-alt="Indonesian young male runner athlete passport photo with sharp crisp focus against standard sports red background, wearing athletic competition jersey with official Konawe Utara crest embroidery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJZjjbe-4EjwuyvrXqeJol2N-sZ3P5pHW4zHsJscLeSIW0hAIJcAV3n24nGDkCFhnT8FHsTCH2Nngx1edrO2BkWb4TvaLwAipzYO29PIfc4kJp_VJyKjcWzbunbClOWpCjj8g4H8AlehjXeS7jaQzOSVqpIyReJZmCySOGgDOVxdBa8TemjUJz4y2_oRpR_rKSu_MGycnBEcSrlBQkIZyI3Pn5_pMuH-yEEMdSlpg"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface group-hover:text-primary transition-colors truncate">Andi Pratama</h3>
+<span class="text-label-sm font-label-sm text-outline flex items-center gap-1 whitespace-nowrap">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+                    45 Menit Lalu
+                  </span>
+</div>
+<div class="flex items-center gap-1.5 font-mono text-label-md font-label-md text-on-surface-variant font-semibold mb-1">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="fingerprint">fingerprint</span>
+<span>7409041508990001</span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="sprint">sprint</span>
+<span class="font-medium truncate">Atletik - Lari 100m Putra &amp; 4x100m</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-border-light/60">
+<span class="text-xs text-outline font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-konut-teal" data-icon="location_on">location_on</span>
+                    Kec. Molawe, Konut
+                  </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-status-pending-bg text-status-pending-text font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+                    Menunggu Review
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 4: Nurul Wahyuni (Already Verified example in queue) -->
+<div class="relative rounded-xl bg-surface-light border border-border-light hover:border-border-light shadow-xs p-space-md opacity-85 transition-all cursor-pointer">
+<div class="flex items-start gap-space-md">
+<div class="relative flex-shrink-0">
+<img class="w-14 h-16 rounded-lg object-cover border border-border-light shadow-xs" data-alt="Official registration photo of young female athlete with red plain background, high school graduate category, crisp portrait light with formal athletic profile documentation for regional sports." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTsjqx0PmXDQujzw4rHZFb3rBIWGrlCQmJWxBVoOsRePMDyRAC9yVJzXmpuRMjmwmziwIma0LgcW7EtlDw0siR4HymzRjVrB4sCZiss95RWB5G5cTgJbcQBPjLe2ZC9wFr2sGLVTC9NHhO7Ijof9rJ3Ri_Jjy1htilshvG7Tm8YPur2EOKdAi6f04kGsLTDCcY4aJkiA6yVFipFzuYkCKNwPdRqnUGrve6Im6YnRE"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface truncate">Nurul Wahyuni</h3>
+<span class="text-label-sm font-label-sm text-outline whitespace-nowrap">1 Jam Lalu</span>
+</div>
+<div class="flex items-center gap-1.5 font-mono text-label-md font-label-md text-on-surface-variant font-semibold mb-1">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="fingerprint">fingerprint</span>
+<span>7409035209020005</span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-sm text-konut-teal" data-icon="sports_martial_arts">sports_martial_arts</span>
+<span class="font-medium truncate">Taekwondo - Kyorugi U-54kg Putri</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-border-light/60">
+<span class="text-xs text-outline font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-konut-teal" data-icon="location_on">location_on</span>
+                    Kec. Wiwirano, Konut
+                  </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-status-verified-bg text-status-verified-text font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                    Disetujui
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 5: Herman Syahputra (Revision example) -->
+<div class="relative rounded-xl bg-surface-light border border-border-light hover:border-border-light shadow-xs p-space-md opacity-85 transition-all cursor-pointer">
+<div class="flex items-start gap-space-md">
+<div class="relative flex-shrink-0">
+<img class="w-14 h-16 rounded-lg object-cover border border-border-light shadow-xs" data-alt="Formal sports credential athlete identification headshot photo, male athlete with red official backdrop, neat hair, facing forward with professional athlete passport framing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB55ux5Tt83ItNJxVjxxxag62oDCyXseKvWQ-n953C2yOKC56-5pLiTleZOEfun6ttUV1xpk18oWe8JiwvBU1JP5y3U7MGVBMgSdh3ynTChuUhtLxgyit90bghBVAtm3Fe0FfSjp6GQk74VRIxz32SHFYqgpiqiMShwnQskFCiBwHf4h3SarEDFv3ExHk93cMf1B6euTC6ydCPb70bfnH6oh3IHPqdrjNXpLANJtcY"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface truncate">Herman Syahputra</h3>
+<span class="text-label-sm font-label-sm text-outline whitespace-nowrap">2 Jam Lalu</span>
+</div>
+<div class="flex items-center gap-1.5 font-mono text-label-md font-label-md text-on-surface-variant font-semibold mb-1">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="fingerprint">fingerprint</span>
+<span>7409051806970003</span>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="sports_kabaddi">sports_kabaddi</span>
+<span class="font-medium truncate">Pencak Silat - Kelas C Putra</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-border-light/60">
+<span class="text-xs text-outline font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-konut-teal" data-icon="location_on">location_on</span>
+                    Kec. Sawa, Konut
+                  </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-status-rejected-bg text-status-rejected-text font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                    Minta Revisi
+                  </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Left Panel Footer: Fast Pagination -->
+<div class="px-space-md py-2 bg-surface-light border-t border-border-light flex items-center justify-between text-label-sm font-label-sm text-outline">
+<span>Menampilkan 1-5 dari 14 antrean</span>
+<div class="flex items-center gap-1">
+<button class="w-7 h-7 rounded border border-border-light flex items-center justify-center hover:bg-canvas-light text-on-surface disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-base" data-icon="chevron_left">chevron_left</span>
+</button>
+<span class="px-2 font-bold text-on-surface">1</span>
+<button class="w-7 h-7 rounded border border-border-light flex items-center justify-center hover:bg-canvas-light text-on-surface">
+<span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ==================== RIGHT PANEL (62% WIDTH): INTERACTIVE DOCUMENT INSPECTOR ==================== -->
+<section class="lg:w-[62%] bg-surface-light flex flex-col h-full overflow-hidden">
+<!-- RIGHT PANEL TOP: ATHLETE IDENTITY SUMMARY BAR -->
+<div class="p-space-md lg:p-space-lg bg-surface-light border-b border-border-light flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex items-start sm:items-center gap-space-md">
+<div class="w-14 h-14 rounded-xl ring-2 ring-primary/30 p-0.5 bg-canvas-light shadow-sm flex-shrink-0">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Ultra sharp official biometric athlete credential photo in high definition, male athlete looking straight with red studio backdrop, sports administrative verification standard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtRpl3i4lTY9FswTVdEAJxaAxibddtfMmarijnhDsuFURA-Q5kJfmZJjoaJqGFqLQQ9PcjMd2J9g-C9NvK2RS6092hgHhsWqY3NKHRs5mw_VPYTGtdhYupKXblxQGuCLNqwXAHuH3hQ9jaWN80lHlzRgFZxugOHwjlS4TME5u-enAsiLQQ1b26hwO5Yhzuqy_9xh4gAbaeSnE7itGRrjd42sA0evzDNrtz1FycKfY"/>
+</div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface">La Ode Rudi</h2>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-status-pending-bg text-status-pending-text font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+                  Tahap: Verifikasi Faktual Dokumen
+                </span>
+</div>
+<!-- Metadata Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1 mt-1 text-label-md font-label-md text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="text-outline">TTL:</span>
+<span class="font-medium text-on-surface">Wanggudu, 23 Apr 1998 (26 Th)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="text-outline">Cabor:</span>
+<span class="font-medium text-primary font-bold">Dayung (PODSI)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="text-outline">No. WA:</span>
+<a class="font-mono text-konut-teal hover:underline flex items-center gap-0.5" href="https://wa.me/6281245678901" target="_blank">
+                    0812-4567-8901
+                    <span class="material-symbols-outlined text-xs" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Action: Download Athlete Packet -->
+<div class="flex sm:flex-col items-center sm:items-end justify-between gap-2 border-t sm:border-t-0 pt-2 sm:pt-0 border-border-light">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border-light hover:bg-canvas-light text-on-surface text-label-md font-label-md font-semibold shadow-xs">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="cloud_download">cloud_download</span>
+<span>Download Dokumen Atlet</span>
+</button>
+<span class="text-label-sm font-label-sm text-outline">ID Berkas: KONUT-2026-POD-0012</span>
+</div>
+</div>
+<!-- RIGHT PANEL TABS: DOCUMENT NAVIGATION TABS WITH STATUS BADGES -->
+<div class="px-space-md lg:px-space-lg bg-surface-container-low border-b border-border-light flex items-center justify-between overflow-x-auto">
+<div class="flex items-center gap-2 py-1.5">
+<!-- Tab 1: Pas Foto -->
+<button class="flex items-center gap-2 px-3 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-light transition-all whitespace-nowrap">
+<span class="material-symbols-outlined text-base" data-icon="photo_camera">photo_camera</span>
+<span>Foto Resmi 3x4</span>
+<span class="px-1.5 py-0.2 rounded-full bg-status-verified-bg text-status-verified-text text-label-sm font-bold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px]" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+                Valid
+              </span>
+</button>
+<!-- Tab 2: KTP / KIA (ACTIVE TAB) -->
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-light text-primary font-bold shadow-xs border border-border-light transition-all whitespace-nowrap">
+<span class="material-symbols-outlined text-base text-primary" data-icon="badge">badge</span>
+<span>KTP / KIA</span>
+<span class="px-1.5 py-0.2 rounded-full bg-status-pending-bg text-status-pending-text text-label-sm font-bold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px]" data-icon="warning" data-weight="fill" style="font-variation-settings: 'FILL' 1;">warning</span>
+                Perlu Periksa
+              </span>
+</button>
+<!-- Tab 3: Akta / Rekomendasi -->
+<button class="flex items-center gap-2 px-3 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-light transition-all whitespace-nowrap">
+<span class="material-symbols-outlined text-base" data-icon="description">description</span>
+<span>Akta / Surat Rekomendasi</span>
+<span class="px-1.5 py-0.2 rounded-full bg-canvas-light text-outline text-label-sm font-bold border border-border-light">
+                Tersedia (2)
+              </span>
+</button>
+</div>
+<!-- Document Inspection Quick Tools (Zoom & Rotation) -->
+<div class="hidden sm:flex items-center gap-1 bg-surface-light p-1 rounded-lg border border-border-light my-1 shadow-2xs">
+<button class="w-7 h-7 rounded hover:bg-canvas-light flex items-center justify-center text-on-surface-variant" title="Perkecil">
+<span class="material-symbols-outlined text-sm" data-icon="zoom_out">zoom_out</span>
+</button>
+<span class="text-label-sm font-label-sm font-bold px-1 text-on-surface">125%</span>
+<button class="w-7 h-7 rounded hover:bg-canvas-light flex items-center justify-center text-on-surface-variant" title="Perbesar">
+<span class="material-symbols-outlined text-sm" data-icon="zoom_in">zoom_in</span>
+</button>
+<div class="h-4 w-px bg-border-light mx-0.5"></div>
+<button class="w-7 h-7 rounded hover:bg-canvas-light flex items-center justify-center text-on-surface-variant" title="Reset 100%">
+<span class="material-symbols-outlined text-sm" data-icon="restart_alt">restart_alt</span>
+</button>
+<button class="w-7 h-7 rounded hover:bg-canvas-light flex items-center justify-center text-on-surface-variant" title="Putar 90 Derajat">
+<span class="material-symbols-outlined text-sm" data-icon="rotate_right">rotate_right</span>
+</button>
+</div>
+</div>
+<!-- MAIN INSPECTOR CANVAS WORKSPACE (Scrollable Content + Comparison) -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-space-md lg:p-space-lg space-y-space-md bg-canvas-light">
+<!-- SCAN CANVAS PREVIEW AREA WITH CROSS-VALIDATION HUD -->
+<div class="relative bg-surface-dark rounded-xl p-4 shadow-inner border border-border-dark flex flex-col items-center justify-center min-h-[340px] overflow-hidden group">
+<!-- Canvas HUD Overlay Badges -->
+<div class="absolute top-3 left-3 z-10 flex items-center gap-2">
+<span class="px-2.5 py-1 rounded bg-black/70 backdrop-blur-md text-white text-label-sm font-label-sm flex items-center gap-1.5 border border-white/10">
+<span class="material-symbols-outlined text-xs text-status-verified-text" data-icon="verified_user">verified_user</span>
+                Pemindaian OCR Otomatis: Cocok 98.4%
+              </span>
+<span class="px-2 py-1 rounded bg-black/70 backdrop-blur-md text-emerald-400 text-label-sm font-label-sm border border-emerald-500/20">
+                Resolusi: 300 DPI (Valid)
+              </span>
+</div>
+<div class="absolute top-3 right-3 z-10">
+<button class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-label-sm font-label-sm flex items-center gap-1 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="fullscreen">fullscreen</span>
+<span>Layar Penuh</span>
+</button>
+</div>
+<!-- Simulated High-Fidelity e-KTP Scan Rendering -->
+<div class="relative w-full max-w-lg bg-sky-950/90 rounded-lg p-4 border border-cyan-400/40 shadow-2xl text-white transform transition-transform duration-200">
+<!-- Watermark pattern header -->
+<div class="text-center border-b border-cyan-400/30 pb-2 mb-3">
+<div class="text-[11px] font-bold tracking-widest text-cyan-200 uppercase">Republik Indonesia</div>
+<div class="text-[12px] font-extrabold tracking-wider text-cyan-100 uppercase">Provinsi Sulawesi Tenggara</div>
+<div class="text-[12px] font-extrabold tracking-wider text-cyan-100 uppercase">Kabupaten Konawe Utara</div>
+</div>
+<!-- Main KTP Body -->
+<div class="flex items-start gap-4">
+<div class="flex-1 space-y-1 text-[11px] font-mono leading-tight">
+<div class="flex items-center gap-2">
+<span class="w-20 text-cyan-300 font-sans font-semibold">NIK</span>
+<span class="text-sm font-bold tracking-wider text-amber-300 bg-amber-400/10 px-1 py-0.5 rounded border border-amber-300/30">7409012304980002</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans">Nama</span>
+<span class="font-bold">: LA ODE RUDI</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans">Tempat/Tgl Lahir</span>
+<span>: WANGGUDU, 23-04-1998</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans">Jenis Kelamin</span>
+<span>: LAKI-LAKI</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans">Alamat</span>
+<span>: DESA WANGGUDU RAYA</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans pl-2">RT/RW</span>
+<span>: 002 / 001</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans pl-2">Kel/Desa</span>
+<span>: WANGGUDU</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans pl-2">Kecamatan</span>
+<span class="font-bold text-emerald-300 bg-emerald-500/10 px-1 rounded">: LASOLO (KONAWE UTARA)</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans">Agama</span>
+<span>: ISLAM</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans">Status Perkawinan</span>
+<span>: BELUM KAWIN</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans">Pekerjaan</span>
+<span>: ATLET / PELAJAR</span>
+</div>
+<div class="flex">
+<span class="w-20 text-cyan-300 font-sans">Berlaku Hingga</span>
+<span class="font-bold text-amber-200">: SEUMUR HIDUP</span>
+</div>
+</div>
+<!-- KTP Photo & Signature section inside card -->
+<div class="flex flex-col items-center gap-2 w-24">
+<div class="w-22 h-28 border border-white/30 rounded overflow-hidden shadow-sm bg-primary/20">
+<img class="w-full h-full object-cover" data-alt="Clear passport photo of Indonesian young athlete cropped into electronic national ID card layout, red solid background with official civil registry look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTOsIX037ojZeKli1lecdscTLcC_K9EGI96T99qxhq8q1AhLc7WH5yqUm0Vkz6c1cxdTM163bUGJOgDB9wBeGS2mBKMlaSoem_tbtpGjgyJdz6rw8Wg1QrGbyGDEpMBQFd9BX6mp7I4FLry56okAmPe958iTVxjtp-eAUdGUN7lIhgZjl1kUed8e3dOqAEO-M4AhXbXEt4lNzw9YsGILj9FNGgq1vTyRMlS5R3Vuw"/>
+</div>
+<div class="text-[9px] text-cyan-200 tracking-tighter text-center">KONAWE UTARA<br/>24-04-2016</div>
+<div class="w-16 h-6 border-b border-white/40 flex items-center justify-center italic text-xs text-white/70">
+                    LaOdeR.
+                  </div>
+</div>
+</div>
+</div>
+<!-- Hint footer inside preview canvas -->
+<div class="mt-3 text-xs text-slate-400 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary-fixed-dim" data-icon="info">info</span>
+<span>Gunakan Scroll Mouse untuk Zoom in/out dokumen. Klik dan geser untuk mengarahkan lensa pan.</span>
+</div>
+</div>
+<!-- COMPARISON & REGULATION VALIDATION BOX -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Box 1: Validasi NIK & Domisili -->
+<div class="bg-surface-light rounded-xl p-space-md border border-border-light shadow-xs">
+<div class="flex items-center justify-between mb-space-sm pb-space-xs border-b border-border-light">
+<span class="text-label-md font-label-md font-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-konut-teal" data-icon="home_pin">home_pin</span>
+                  Uji Domisili &amp; Wilayah Atlet
+                </span>
+<span class="text-label-sm font-label-sm text-status-verified-text bg-status-verified-bg px-2 py-0.5 rounded-full font-bold">
+                  Sesuai Kuota Konut
+                </span>
+</div>
+<ul class="space-y-2 text-label-md font-label-md">
+<li class="flex items-center justify-between">
+<span class="text-outline">Kode Wilayah NIK:</span>
+<span class="font-mono font-bold text-on-surface">74.09 (Kab. Konawe Utara)</span>
+</li>
+<li class="flex items-center justify-between">
+<span class="text-outline">Masa Domicile Terbit:</span>
+<span class="font-medium text-on-surface">8 Tahun (&gt; Batas Minimal 1 Th)</span>
+</li>
+<li class="flex items-center justify-between">
+<span class="text-outline">Status Mutasi Atlet:</span>
+<span class="text-emerald-700 font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span>
+                    Bukan Atlet Mutasi Luar Sultra
+                  </span>
+</li>
+</ul>
+</div>
+<!-- Box 2: Batas Usia & Aturan Cabor Porprov -->
+<div class="bg-surface-light rounded-xl p-space-md border border-border-light shadow-xs">
+<div class="flex items-center justify-between mb-space-sm pb-space-xs border-b border-border-light">
+<span class="text-label-md font-label-md font-bold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-secondary" data-icon="rule">rule</span>
+                  Regulasi Batasan Cabor PODSI
+                </span>
+<span class="text-label-sm font-label-sm text-status-verified-text bg-status-verified-bg px-2 py-0.5 rounded-full font-bold">
+                  Memenuhi Syarat
+                </span>
+</div>
+<ul class="space-y-2 text-label-md font-label-md">
+<li class="flex items-center justify-between">
+<span class="text-outline">Kategori Usia:</span>
+<span class="font-medium text-on-surface">Senior Terbuka (Max 30 Th)</span>
+</li>
+<li class="flex items-center justify-between">
+<span class="text-outline">Usia Atlet Saat Porprov:</span>
+<span class="font-bold text-on-surface">27 Tahun 7 Bulan (Valid)</span>
+</li>
+<li class="flex items-center justify-between">
+<span class="text-outline">Surat Keterangan Sehat:</span>
+<span class="text-emerald-700 font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="task_alt">task_alt</span>
+                    RSUD Konawe Utara (Terverifikasi)
+                  </span>
+</li>
+</ul>
+</div>
+</div>
+<!-- VERIFICATION DECISION & NOTES FORM -->
+<div class="bg-surface-light rounded-xl p-space-md lg:p-space-lg border border-border-light shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="fact_check">fact_check</span>
+<h4 class="text-headline-sm font-headline-sm font-bold text-on-surface">Keputusan Verifikator Keabsahan</h4>
+</div>
+<span class="text-label-sm font-label-sm text-outline">Pemeriksa: M. Fahri (Verifikator #04)</span>
+</div>
+<!-- Quick Reason Tags for Inspector -->
+<div class="mb-space-sm">
+<label class="block text-label-md font-label-md text-on-surface-variant font-semibold mb-1.5">
+                Pilih Cepat Catatan / Template Temuan:
+              </label>
+<div class="flex flex-wrap gap-1.5">
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm border border-border-light hover:border-primary-container bg-canvas-light text-on-surface hover:text-primary transition-colors" type="button">
+                  KTP Kurang Jelas / Buram
+                </button>
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm border border-border-light hover:border-primary-container bg-canvas-light text-on-surface hover:text-primary transition-colors" type="button">
+                  Foto Bukan Background Merah
+                </button>
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm border border-border-light hover:border-primary-container bg-canvas-light text-on-surface hover:text-primary transition-colors" type="button">
+                  Usia Melebihi Batas Regulasi
+                </button>
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm border border-border-light hover:border-primary-container bg-canvas-light text-on-surface hover:text-primary transition-colors" type="button">
+                  NIK Luar Sultra
+                </button>
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm border border-emerald-300 bg-status-verified-bg text-status-verified-text font-semibold hover:brightness-95 transition-colors" type="button">
+                  Semua Berkas Lengkap &amp; Sah
+                </button>
+</div>
+</div>
+<!-- Notes Textarea -->
+<div class="mb-space-md">
+<label class="block text-label-md font-label-md text-on-surface font-semibold mb-1" for="catatan">
+                Catatan Verifikasi Resmi (Disimpan ke Berita Acara &amp; Lembar Cabor):
+              </label>
+<textarea class="w-full px-3 py-2 text-body-sm font-body-sm rounded-lg border border-border-light bg-canvas-light focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" id="catatan" placeholder="Tuliskan catatan detail jika membutuhkan revisi dokumen atau konfirmasi ke pengurus cabang olahraga..." rows="2"></textarea>
+</div>
+<!-- Primary Decision Action Buttons -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-xs border-t border-border-light">
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-outline w-full sm:w-auto">
+<span class="material-symbols-outlined text-base text-gold-deep" data-icon="sync">sync</span>
+<span>Auto-sync terhubung ke Google Sheets Sekretariat</span>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<!-- Reject Action -->
+<button class="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg border-2 border-red-600 bg-white hover:bg-red-50 text-red-600 font-label-lg text-label-lg font-bold transition-all active:scale-95 shadow-xs" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
+<span>Tolak Berkas (Minta Revisi)</span>
+</button>
+<!-- Approve & Issue Card Action -->
+<button class="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-label-lg text-label-lg font-bold transition-all active:scale-95 shadow-md shadow-emerald-700/20" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>Setujui &amp; Terbitkan Kartu Atlet</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SIMULATED LIVE TOAST NOTIFICATION AT BOTTOM OF INSPECTOR -->
+<div class="bg-surface-light border-t border-border-light px-space-md py-2 flex items-center justify-between">
+<div class="flex items-center gap-2 text-label-sm font-label-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-on-surface font-semibold">Status Sinkronisasi Sistem:</span>
+<span class="text-status-verified-text font-bold bg-status-verified-bg px-2 py-0.5 rounded-md flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span>
+              Verifikasi Berhasil Disimpan ke Google Sheets
+            </span>
+</div>
+<div class="text-xs text-outline font-mono">
+            Sheet: KONUT_PORPROV26_PODSI_VERIFIED (Rev 14.2)
+          </div>
+</div>
+</section>
+</div>
+</main>
+<!-- ==================== MOBILE BOTTOM NAVBAR (FROM SHARED COMPONENT) ==================== -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex md:hidden justify-around items-center px-space-sm py-space-xs pb-safe bg-surface-light border-t border-border-light shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span class="text-label-sm font-label-sm mt-0.5">Eksekutif</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-white rounded-full px-space-md py-space-xs font-bold shadow-sm" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-label-sm font-label-sm mt-0.5">Keabsahan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="sports_handball">sports_handball</span>
+<span class="text-label-sm font-label-sm mt-0.5">Cabor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="military_tech">military_tech</span>
+<span class="text-label-sm font-label-sm mt-0.5">Medali</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="manage_accounts">manage_accounts</span>
+<span class="text-label-sm font-label-sm mt-0.5">Akun</span>
+</a>
+</nav>
+<!-- Interactive Demo Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Allow clicking quick reason buttons to auto-populate the notes field
+      const quickButtons = document.querySelectorAll('button[type="button"]');
+      const textarea = document.getElementById('catatan');
+
+      quickButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const text = btn.innerText.trim();
+          if (text.includes('KTP') || text.includes('Foto') || text.includes('Usia') || text.includes('NIK') || text.includes('Berkas')) {
+            textarea.value = `[TEMUAN KEABSAHAN]: ${text}.`;
+            textarea.focus();
+          }
+        });
+      });
+    });
+  </script>
+</body></html>

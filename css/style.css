@@ -1,0 +1,144 @@
+/* ==========================================================================
+   KONI KONAWE UTARA - ROAD TO PORPROV SULTRA 2026
+   CUSTOM STYLESHEET, DESIGN TOKENS & PRINT OPTIMIZATIONS
+   ========================================================================== */
+
+/* 1. Material Symbols Outlined Custom Tuning */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.material-symbols-outlined.fill-icon {
+  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+}
+
+/* 2. Custom Scrollbar Styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 3. Smooth Transitions & Micro-Animations */
+.transition-smooth {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover-elevation {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover-elevation:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(200, 16, 46, 0.08), 0 8px 10px -6px rgba(200, 16, 46, 0.05);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+/* 4. Document Viewer Zoom & Canvas */
+.doc-canvas {
+  background: radial-gradient(circle, #f1f5f9 10%, transparent 11%);
+  background-size: 16px 16px;
+}
+
+.dark .doc-canvas {
+  background: radial-gradient(circle, #1e293b 10%, transparent 11%);
+  background-size: 16px 16px;
+}
+
+/* 5. Mobile Mockup Viewport Outer Frame */
+.mobile-device-frame {
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35);
+}
+
+/* 6. A4 Official Print Layout Tuning (@media print) */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 10mm 12mm 10mm 12mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Sembunyikan elemen navigasi, tombol, sidebar, dan header aplikasi saat cetak */
+  header,
+  nav,
+  aside,
+  #app-sidebar,
+  #app-header,
+  #mobile-bottom-nav,
+  .no-print,
+  button,
+  .btn-action,
+  #toast-container {
+    display: none !important;
+  }
+
+  /* Pastikan hanya kontainer dokumen resmi yang tampil */
+  #main-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .print-only-show {
+    display: block !important;
+  }
+
+  .print-page-break {
+    page-break-after: always;
+  }
+
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  th, td {
+    border: 1px solid #1e293b !important;
+    padding: 6px 8px !important;
+    color: #000000 !important;
+  }
+
+  th {
+    background-color: #f1f5f9 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

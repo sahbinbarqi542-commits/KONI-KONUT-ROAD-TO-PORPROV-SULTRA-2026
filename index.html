@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KONI KONAWE UTARA - ROAD TO PORPROV SULTRA 2026</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#9e001f",
+            "primary-container": "#c8102e",
+            "crimson-dark": "#9E0D24",
+            "secondary-container": "#feb71a",
+            "gold-deep": "#D48806",
+            "tertiary": "#144f84",
+            "tertiary-container": "#34679d",
+            "konut-teal": "#0D9488",
+            "canvas-light": "#F8FAFC",
+            "surface-light": "#FFFFFF",
+            "border-light": "#E2E8F0",
+            "canvas-dark": "#0B1120",
+            "surface-dark": "#1E293B",
+            "border-dark": "#334155"
+          },
+          fontFamily: {
+            sans: ["Plus Jakarta Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- External Libraries: Chart.js & SheetJS (Excel) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-canvas-light dark:bg-canvas-dark text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- =========================================================================
+       1. TOP FIXED APP NAVBAR
+       ========================================================================= -->
+  <header id="app-header" class="h-16 bg-white dark:bg-surface-dark border-b border-border-light dark:border-border-dark sticky top-0 z-40 px-4 lg:px-8 flex items-center justify-between shadow-xs">
+    <!-- Brand / Dual Emblem -->
+    <div class="flex items-center gap-3">
+      <button id="btn-mobile-menu-toggle" class="lg:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" aria-label="Menu">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+
+      <div class="flex items-center -space-x-1.5 cursor-pointer" onclick="navigateTo('public-landing')">
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-black border-2 border-white dark:border-surface-dark shadow-sm">
+          K
+        </div>
+        <div class="w-8 h-8 rounded-full bg-tertiary flex items-center justify-center text-white text-[10px] font-black border-2 border-white dark:border-surface-dark shadow-sm">
+          KU
+        </div>
+      </div>
+
+      <div class="cursor-pointer" onclick="navigateTo('public-landing')">
+        <div class="flex items-center gap-2">
+          <h1 class="font-extrabold text-base lg:text-lg text-primary dark:text-red-400 tracking-tight leading-none">
+            KONI KONAWE UTARA
+          </h1>
+          <span class="hidden sm:inline-block px-2 py-0.5 bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-[10px] font-extrabold rounded-full">
+            PORPROV 2026
+          </span>
+        </div>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block">
+          Sistem Informasi Atlet & Kontingen Resmi Sultra
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Links (Public) -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
+      <button onclick="navigateTo('public-landing')" class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-red-400 transition">
+        Beranda Publik
+      </button>
+      <button onclick="navigateTo('dokumen-nominatif-print')" class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-red-400 transition flex items-center gap-1">
+        <span class="material-symbols-outlined text-base">print</span> Cetak Nominatif
+      </button>
+    </nav>
+
+    <!-- Header Actions (Theme Toggle & Auth) -->
+    <div class="flex items-center gap-2.5">
+      <!-- Theme Toggle -->
+      <button onclick="toggleTheme()" class="w-9 h-9 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Toggle Theme">
+        <span class="material-symbols-outlined text-xl">contrast</span>
+      </button>
+
+      <!-- User Profile (When Logged In) -->
+      <div id="user-profile-chip" class="hidden flex items-center gap-2 pl-2 pr-1 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+        <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">
+          <span class="material-symbols-outlined text-base">person</span>
+        </div>
+        <div class="text-left hidden sm:block pr-1">
+          <span id="user-profile-name" class="text-xs font-bold block leading-tight text-slate-900 dark:text-white">Admin</span>
+          <span id="user-profile-role" class="text-[10px] text-slate-500 block leading-none">Super Admin</span>
+        </div>
+        <button onclick="handleLogout()" class="p-1 hover:bg-red-100 dark:hover:bg-red-950/50 text-red-600 dark:text-red-400 rounded-full transition" title="Keluar">
+          <span class="material-symbols-outlined text-lg">logout</span>
+        </button>
+      </div>
+
+      <!-- Login Button (When Logged Out) -->
+      <button id="btn-open-login" onclick="openLoginModal()" class="px-3.5 py-1.5 bg-primary hover:bg-crimson-dark text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs transition">
+        <span class="material-symbols-outlined text-base">lock</span>
+        <span>Masuk Portal</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. MAIN APP SHELL (SIDEBAR + CONTENT WRAPPER)
+       ========================================================================= -->
+  <div class="flex-1 flex overflow-hidden">
+
+    <!-- DESKTOP COLLAPSIBLE SIDEBAR -->
+    <aside id="app-sidebar" class="w-64 bg-slate-900 text-slate-300 flex-shrink-0 hidden lg:flex flex-col justify-between border-r border-slate-800">
+      <div class="p-4 space-y-1 overflow-y-auto custom-scrollbar">
+        <div class="px-3 py-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+          Navigasi Utama
+        </div>
+        
+        <button onclick="navigateTo('public-landing')" data-view="public-landing" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-800">
+          <span class="material-symbols-outlined text-xl">home</span>
+          <span>Beranda Publik</span>
+        </button>
+
+        <!-- ADMIN INDUK ONLY MENU -->
+        <div class="admin-induk-only hidden pt-3">
+          <div class="px-3 py-2 text-[10px] font-bold text-red-400 uppercase tracking-wider">
+            Admin Induk KONI
+          </div>
+          <button onclick="navigateTo('dashboard-induk')" data-view="dashboard-induk" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">dashboard</span>
+            <span>Dashboard Eksekutif</span>
+          </button>
+          <button onclick="navigateTo('master-cabor')" data-view="master-cabor" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">trophy</span>
+            <span>Master Cabor & Akun</span>
+          </button>
+          <button onclick="navigateTo('verifikasi-berkas')" data-view="verifikasi-berkas" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-800">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-xl">verified</span>
+              <span>Pusat Keabsahan</span>
+            </div>
+            <span class="px-1.5 py-0.2 bg-red-600 text-white text-[10px] font-extrabold rounded-full">Review</span>
+          </button>
+          <button onclick="navigateTo('klasemen-medali')" data-view="klasemen-medali" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">medal</span>
+            <span>Target & Medali Live</span>
+          </button>
+          <button onclick="navigateTo('pengaturan-branding')" data-view="pengaturan-branding" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">settings</span>
+            <span>Pengaturan Branding</span>
+          </button>
+        </div>
+
+        <!-- ADMIN CABOR ONLY MENU -->
+        <div class="admin-cabor-only hidden pt-3">
+          <div class="px-3 py-2 text-[10px] font-bold text-amber-400 uppercase tracking-wider">
+            Portal Pengurus Cabor
+          </div>
+          <button onclick="navigateTo('portal-cabor')" data-view="portal-cabor" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">badge</span>
+            <span>Pendaftaran & Atlet Cabor</span>
+          </button>
+        </div>
+
+        <!-- LAPORAN & CETAK -->
+        <div class="pt-3">
+          <div class="px-3 py-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+            Dokumen & Laporan
+          </div>
+          <button onclick="navigateTo('dokumen-nominatif-print')" data-view="dokumen-nominatif-print" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">print</span>
+            <span>Cetak Nominatif PDF (A4)</span>
+          </button>
+          <button onclick="exportToExcel()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition text-emerald-400 hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">download</span>
+            <span>Unduh Excel Kontingen</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer Info Sidebar -->
+      <div class="p-4 border-t border-slate-800 text-xs text-slate-500">
+        <div class="flex items-center justify-between mb-1">
+          <span>KONI Konut Porprov</span>
+          <span class="font-bold text-slate-400">v2.0-PRO</span>
+        </div>
+        <p class="text-[10px]">Google Workspace Cloud API</p>
+      </div>
+    </aside>
+
+    <!-- MOBILE SIDEBAR DRAWER OVERLAY -->
+    <div id="mobile-sidebar-drawer" class="fixed inset-0 z-50 bg-black/60 lg:hidden hidden" onclick="this.classList.add('hidden')">
+      <div class="w-72 bg-slate-900 text-slate-300 h-full p-4 overflow-y-auto" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
+          <h2 class="font-bold text-white text-base">Menu Aplikasi</h2>
+          <button onclick="document.getElementById('mobile-sidebar-drawer').classList.add('hidden')" class="text-slate-400 hover:text-white">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="space-y-1">
+          <button onclick="navigateTo('public-landing')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800">
+            <span class="material-symbols-outlined">home</span> Beranda Publik
+          </button>
+          <div class="admin-induk-only hidden">
+            <button onclick="navigateTo('dashboard-induk')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800">
+              <span class="material-symbols-outlined">dashboard</span> Dashboard Eksekutif
+            </button>
+            <button onclick="navigateTo('master-cabor')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800">
+              <span class="material-symbols-outlined">trophy</span> Master Cabor & Akun
+            </button>
+            <button onclick="navigateTo('verifikasi-berkas')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800">
+              <span class="material-symbols-outlined">verified</span> Pusat Keabsahan
+            </button>
+            <button onclick="navigateTo('klasemen-medali')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800">
+              <span class="material-symbols-outlined">medal</span> Medali Porprov
+            </button>
+          </div>
+          <div class="admin-cabor-only hidden">
+            <button onclick="navigateTo('portal-cabor')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800">
+              <span class="material-symbols-outlined">badge</span> Portal Cabor
+            </button>
+          </div>
+          <button onclick="navigateTo('dokumen-nominatif-print')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800">
+            <span class="material-symbols-outlined">print</span> Cetak Nominatif (A4)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN SCROLLABLE CONTENT VIEW -->
+    <main id="main-content" class="flex-1 overflow-y-auto custom-scrollbar p-4 lg:p-8">
+
+      <!-- =====================================================================
+           VIEW 1: PUBLIC LANDING PAGE (PRODUCT RECEIVER & TRANSPARENCY)
+           ===================================================================== -->
+      <section id="view-public-landing" class="app-view space-y-8">
+        
+        <!-- HERO BANNER -->
+        <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-primary via-crimson-dark to-slate-900 text-white p-6 lg:p-10 shadow-xl">
+          <div class="relative z-10 max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur text-xs font-extrabold uppercase tracking-wider mb-4 border border-white/20">
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+              KONTINGEN RESMI KONAWE UTARA
+            </div>
+            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-3">
+              Road to Porprov Sulawesi Tenggara 2026
+            </h1>
+            <p class="text-sm sm:text-base text-red-100 font-medium leading-relaxed mb-6">
+              Sistem verifikasi keabsahan digital atlet, pemantauan target medali cabor, dan pelaporan perolehan medali terpadu Komite Olahraga Nasional Indonesia Kabupaten Konawe Utara.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="openLoginModal()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-sm shadow-md transition flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">login</span>
+                <span>Masuk Portal Akun</span>
+              </button>
+              <button onclick="document.getElementById('pub-search-query').focus()" class="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-sm border border-white/30 backdrop-blur transition flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">search</span>
+                <span>Cek Keabsahan Atlet</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 QUICK STATS CARDS -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Card 1 -->
+          <div class="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark p-4 rounded-xl shadow-xs">
+            <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-1">
+              <span class="text-xs font-bold uppercase">Total Cabor</span>
+              <span class="material-symbols-outlined text-primary">trophy</span>
+            </div>
+            <div id="pub-stat-cabor" class="text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white">32</div>
+            <span class="text-[11px] text-slate-500">Cabang Terdaftar</span>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark p-4 rounded-xl shadow-xs">
+            <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-1">
+              <span class="text-xs font-bold uppercase">Total Atlet</span>
+              <span class="material-symbols-outlined text-tertiary">groups</span>
+            </div>
+            <div id="pub-stat-atlet" class="text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white">418</div>
+            <span id="pub-stat-verified-percent" class="text-[11px] text-emerald-600 font-bold">75% Terverifikasi</span>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark p-4 rounded-xl shadow-xs">
+            <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-1">
+              <span class="text-xs font-bold uppercase">Target Emas</span>
+              <span class="material-symbols-outlined text-amber-500">flag</span>
+            </div>
+            <div id="pub-stat-target-emas" class="text-2xl lg:text-3xl font-extrabold text-amber-600">45</div>
+            <span class="text-[11px] text-slate-500">Target KONI Konut</span>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-white dark:bg-surface-dark border border-amber-300 dark:border-amber-700/50 p-4 rounded-xl shadow-xs bg-gradient-to-b from-amber-50/40 to-white dark:to-surface-dark">
+            <div class="flex items-center justify-between text-amber-900 dark:text-amber-300 mb-1">
+              <span class="text-xs font-bold uppercase">Raihan Emas</span>
+              <span class="material-symbols-outlined text-amber-500 fill-icon">emoji_events</span>
+            </div>
+            <div id="pub-stat-real-emas" class="text-2xl lg:text-3xl font-extrabold text-primary dark:text-red-400">12</div>
+            <span class="text-[11px] text-amber-800 dark:text-amber-200 font-bold">#1 Porprov Sultra</span>
+          </div>
+        </div>
+
+        <!-- CEK KEABSAHAN ATLET (PORTAL PENCARIAN PUBLIK) -->
+        <div class="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark p-6 rounded-2xl shadow-xs">
+          <div class="max-w-2xl">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">verified_user</span>
+              Portal Transparansi Keabsahan Atlet
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">
+              Cek keabsahan berkas atlet kontingen Konawe Utara secara mandiri dengan memasukkan NIK atau Nama Lengkap.
+            </p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-2 max-w-xl">
+            <div class="relative flex-1">
+              <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400">search</span>
+              <input type="text" id="pub-search-query" placeholder="Masukkan NIK 16 digit atau Nama Atlet..."
+                     class="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-sm focus:ring-2 focus:ring-primary focus:border-primary text-slate-900 dark:text-white"
+                     onkeypress="if(event.key==='Enter') searchAthletePublic()" />
+            </div>
+            <button onclick="searchAthletePublic()" class="px-5 py-2.5 bg-primary hover:bg-crimson-dark text-white font-bold rounded-xl text-sm transition">
+              Cek Keabsahan
+            </button>
+          </div>
+
+          <!-- Search Result Box -->
+          <div id="pub-search-result" class="mt-4 hidden"></div>
+        </div>
+
+        <!-- PODIUM MEDALI TERATAS PER CABOR -->
+        <div class="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-2xl shadow-xs overflow-hidden">
+          <div class="p-5 border-b border-border-light dark:border-border-dark flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-base text-slate-900 dark:text-white">Papan Klasemen Medali Porprov Sultra 2026</h3>
+              <p class="text-xs text-slate-500">Perolehan medali resmi kontingen Kabupaten Konawe Utara</p>
+            </div>
+            <button onclick="navigateTo('dokumen-nominatif-print')" class="text-xs font-bold text-primary dark:text-red-400 hover:underline flex items-center gap-1">
+              <span>Unduh Rekap Lengkap</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase text-[11px] font-bold border-b border-border-light dark:border-border-dark">
+                <tr>
+                  <th class="py-3 px-4 w-12 text-center">Rank</th>
+                  <th class="py-3 px-4">Cabang Olahraga</th>
+                  <th class="py-3 px-4 text-center">Emas</th>
+                  <th class="py-3 px-4 text-center">Perak</th>
+                  <th class="py-3 px-4 text-center">Perunggu</th>
+                  <th class="py-3 px-4 text-center">Total</th>
+                </tr>
+              </thead>
+              <tbody id="pub-medal-standings-body">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- DIREKTORI CABOR GRID -->
+        <div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-3">Cabang Olahraga Kontingen Konawe Utara</h3>
+          <div id="pub-cabor-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Dynamically Rendered -->
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 2: EXECUTIVE DASHBOARD (ADMIN INDUK)
+           ===================================================================== -->
+      <section id="view-dashboard-induk" class="app-view space-y-6 hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl lg:text-2xl font-extrabold text-slate-900 dark:text-white">Dashboard Eksekutif KONI</h2>
+            <p class="text-xs text-slate-500">Monitoring kesiapan dan progres verifikasi kontingen Porprov Sultra 2026</p>
+          </div>
+          <button onclick="navigateTo('verifikasi-berkas')" class="px-3.5 py-2 bg-primary hover:bg-crimson-dark text-white rounded-xl text-xs font-bold shadow-xs transition flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-base">verified</span>
+            <span>Buka Pusat Keabsahan</span>
+          </button>
+        </div>
+
+        <!-- 4 KPI Metrics -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-xs">
+            <span class="text-xs font-bold text-slate-500 uppercase">Cabang Olahraga</span>
+            <div id="dash-stat-cabor" class="text-2xl font-black text-slate-900 dark:text-white my-1">32 Cabor</div>
+            <span class="text-[11px] text-slate-500">Terdaftar di KONI</span>
+          </div>
+          <div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-xs">
+            <span class="text-xs font-bold text-slate-500 uppercase">Kontingen Atlet</span>
+            <div id="dash-stat-atlet" class="text-2xl font-black text-slate-900 dark:text-white my-1">418 Atlet</div>
+            <span id="dash-stat-atlet-sub" class="text-[11px] text-emerald-600 font-bold">312 Lolos • 76 Pending</span>
+          </div>
+          <div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-xs">
+            <span class="text-xs font-bold text-slate-500 uppercase">Target Emas</span>
+            <div id="dash-stat-target-emas" class="text-2xl font-black text-amber-500 my-1">45 Emas</div>
+            <span id="dash-stat-target-sub" class="text-[11px] text-slate-500">35 Perak • 50 Perunggu</span>
+          </div>
+          <div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-xs">
+            <span class="text-xs font-bold text-slate-500 uppercase">Realisasi Emas</span>
+            <div id="dash-stat-real-emas" class="text-2xl font-black text-primary dark:text-red-400 my-1">12 Emas</div>
+            <span class="text-[11px] text-amber-600 font-bold">#1 Peringkat Sultra</span>
+          </div>
+        </div>
+
+        <!-- Analytics Charts Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-8 bg-white dark:bg-surface-dark p-5 rounded-2xl border border-border-light dark:border-border-dark shadow-xs">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-4">Target vs Realisasi Medali Emas per Cabor</h4>
+            <div class="h-64">
+              <canvas id="chart-target-realisasi"></canvas>
+            </div>
+          </div>
+          <div class="lg:col-span-4 bg-white dark:bg-surface-dark p-5 rounded-2xl border border-border-light dark:border-border-dark shadow-xs flex flex-col justify-between">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-2">Status Keabsahan Berkas</h4>
+            <div class="h-56 relative flex items-center justify-center">
+              <canvas id="chart-status-keabsahan"></canvas>
+            </div>
+            <p class="text-center text-xs text-slate-500 mt-2">Total Atlet se-Kabupaten Konawe Utara</p>
+          </div>
+        </div>
+
+        <!-- Quick Pending Review Table -->
+        <div class="bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-xs overflow-hidden">
+          <div class="p-4 border-b border-border-light dark:border-border-dark flex items-center justify-between">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white">Antrean Berkas Menunggu Verifikasi</h4>
+            <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs font-bold rounded-full">Prioritas</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase text-[11px] font-bold border-b border-border-light dark:border-border-dark">
+                <tr>
+                  <th class="py-3 px-4">Nama Atlet</th>
+                  <th class="py-3 px-4">Cabor</th>
+                  <th class="py-3 px-4">Nomor Tanding</th>
+                  <th class="py-3 px-4 text-center">Status</th>
+                  <th class="py-3 px-4 text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="dash-quick-queue-body">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 3: MASTER CABOR & MANAJEMEN AKUN
+           ===================================================================== -->
+      <section id="view-master-cabor" class="app-view space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl lg:text-2xl font-extrabold text-slate-900 dark:text-white">Master Cabang Olahraga & Akun</h2>
+            <p class="text-xs text-slate-500">Kelola kuota atlet, target medali, dan akun login pengurus cabor</p>
+          </div>
+          <button onclick="openAddCaborModal()" class="px-4 py-2 bg-primary hover:bg-crimson-dark text-white rounded-xl text-xs font-bold shadow-xs transition flex items-center gap-1.5 w-fit">
+            <span class="material-symbols-outlined text-base">add</span>
+            <span>Tambah Cabor Baru</span>
+          </button>
+        </div>
+
+        <div class="bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-xs overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase text-[11px] font-bold border-b border-border-light dark:border-border-dark">
+                <tr>
+                  <th class="py-3 px-4 text-center w-10">No</th>
+                  <th class="py-3 px-4">Cabang Olahraga</th>
+                  <th class="py-3 px-4">Penanggung Jawab</th>
+                  <th class="py-3 px-4">Kontak WA</th>
+                  <th class="py-3 px-4 text-center">Jml Atlet</th>
+                  <th class="py-3 px-4 text-center">Target Medali</th>
+                  <th class="py-3 px-4 text-center">Status</th>
+                  <th class="py-3 px-4 text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="master-cabor-table-body">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 4: PUSAT KEABSAHAN & VERIFIKASI BERKAS (SPLIT-VIEW)
+           ===================================================================== -->
+      <section id="view-verifikasi-berkas" class="app-view space-y-4 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl lg:text-2xl font-extrabold text-slate-900 dark:text-white">Pusat Keabsahan Berkas Atlet</h2>
+            <p class="text-xs text-slate-500">Periksa KTP, foto 3x4, dan dokumen keabsahan atlet kontingen KONUT</p>
+          </div>
+          <!-- Quick Filter Controls -->
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="verif-filter-cabor" onchange="filterVerificationQueue()" class="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200">
+              <option value="">Semua Cabor</option>
+            </select>
+            <select id="verif-filter-status" onchange="filterVerificationQueue()" class="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200">
+              <option value="">Semua Status</option>
+              <option value="PENDING" selected>Menunggu Review</option>
+              <option value="DITERIMA">Disetujui</option>
+              <option value="DITOLAK">Ditolak</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 2-Panel Split Review Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- LEFT PANEL: Antrean Atlet (40%) -->
+          <div class="lg:col-span-5 bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-xs flex flex-col h-[700px]">
+            <div class="p-3 border-b border-border-light dark:border-border-dark">
+              <div class="relative">
+                <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-sm">search</span>
+                <input type="text" id="verif-search-input" placeholder="Cari NIK atau Nama Atlet..."
+                       oninput="filterVerificationQueue()"
+                       class="w-full pl-9 pr-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-lg text-xs" />
+              </div>
+            </div>
+            <div id="verif-queue-list" class="flex-1 overflow-y-auto custom-scrollbar">
+              <!-- Dynamically Rendered -->
+            </div>
+          </div>
+
+          <!-- RIGHT PANEL: Penampil Dokumen & Form Keputusan (60%) -->
+          <div class="lg:col-span-7 bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-xs p-5 flex flex-col h-[700px] justify-between">
+            <div>
+              <!-- Inspector Header -->
+              <div class="flex items-start justify-between border-b border-border-light dark:border-border-dark pb-3 mb-3">
+                <div>
+                  <h3 id="verif-inspect-name" class="font-extrabold text-lg text-slate-900 dark:text-white">Pilih Atlet</h3>
+                  <p class="text-xs text-slate-500">NIK: <span id="verif-inspect-nik" class="font-mono font-bold">-</span> • Cabor: <span id="verif-inspect-cabor" class="font-bold text-primary">-</span></p>
+                </div>
+                <div class="flex items-center gap-1">
+                  <button onclick="zoomDoc(-0.2)" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 flex items-center justify-center text-slate-700 dark:text-slate-300" title="Zoom Out">
+                    <span class="material-symbols-outlined text-base">zoom_out</span>
+                  </button>
+                  <button onclick="zoomDoc(0.2)" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 flex items-center justify-center text-slate-700 dark:text-slate-300" title="Zoom In">
+                    <span class="material-symbols-outlined text-base">zoom_in</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Document Tab Selector -->
+              <div class="flex items-center gap-2 p-1 bg-slate-100 dark:bg-slate-800/80 rounded-xl mb-3 w-fit text-xs">
+                <button onclick="switchDocTab('foto')" data-tab="foto" class="doc-tab-btn px-3 py-1.5 rounded-lg font-bold bg-white dark:bg-slate-800 text-primary shadow-xs transition">
+                  Pas Foto 3x4
+                </button>
+                <button onclick="switchDocTab('ktp')" data-tab="ktp" class="doc-tab-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 font-semibold transition">
+                  KTP / KIA
+                </button>
+                <button onclick="switchDocTab('dokumen')" data-tab="dokumen" class="doc-tab-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 font-semibold transition">
+                  Dokumen Pendukung
+                </button>
+              </div>
+
+              <!-- Document Canvas -->
+              <div id="verif-document-canvas" class="doc-canvas rounded-xl border border-dashed border-slate-300 dark:border-slate-700 relative overflow-hidden flex items-center justify-center">
+                <!-- Dynamically Rendered Image/Viewer -->
+              </div>
+
+              <!-- Metadata Summary Mini Box -->
+              <div class="grid grid-cols-3 gap-2 mt-3 text-xs bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-border-light dark:border-border-dark">
+                <div>
+                  <span class="text-[10px] text-slate-400 uppercase font-bold block">Nomor Tanding</span>
+                  <span id="verif-inspect-kelas" class="font-bold text-slate-800 dark:text-slate-200">-</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-400 uppercase font-bold block">Tempat, Tgl Lahir</span>
+                  <span id="verif-inspect-ttl" class="font-bold text-slate-800 dark:text-slate-200">-</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-400 uppercase font-bold block">Domisili</span>
+                  <span id="verif-inspect-alamat" class="font-bold text-slate-800 dark:text-slate-200 truncate block">-</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Decision Action Box -->
+            <div class="border-t border-border-light dark:border-border-dark pt-3 mt-3 space-y-2">
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300">
+                Catatan Verifikator <span class="text-slate-400 font-normal">(Wajib jika menolak berkas)</span>:
+              </label>
+              <textarea id="verif-decision-notes" rows="2" placeholder="Tuliskan catatan perbaikan berkas di sini (misal: Foto KTP buram, mohon unggah ulang)..."
+                        class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white"></textarea>
+              
+              <div class="flex items-center justify-end gap-2.5">
+                <button onclick="submitVerificationDecision('DITOLAK')" class="px-4 py-2 border-2 border-red-500 text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-base">close</span>
+                  <span>Tolak Berkas</span>
+                </button>
+                <button onclick="submitVerificationDecision('DITERIMA')" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-base">check</span>
+                  <span>Setujui & Nyatakan Lolos</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 5: TARGET & PEROLEHAN MEDALI PORPROV LIVE
+           ===================================================================== -->
+      <section id="view-klasemen-medali" class="app-view space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl lg:text-2xl font-extrabold text-slate-900 dark:text-white">Papan Perolehan Medali Porprov Sultra 2026</h2>
+            <p class="text-xs text-slate-500">Pencatatan hasil pertandingan live kontingen Kabupaten Konawe Utara</p>
+          </div>
+          <button onclick="openRecordMedalModal()" class="px-4 py-2 bg-primary hover:bg-crimson-dark text-white rounded-xl text-xs font-bold shadow-xs transition flex items-center gap-1.5 w-fit">
+            <span class="material-symbols-outlined text-base">add</span>
+            <span>+ Catat Medali Baru</span>
+          </button>
+        </div>
+
+        <div class="bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-xs overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase text-[11px] font-bold border-b border-border-light dark:border-border-dark">
+                <tr>
+                  <th class="py-3 px-4 text-center w-12">Rank</th>
+                  <th class="py-3 px-4">Cabang Olahraga</th>
+                  <th class="py-3 px-4 text-center">Target</th>
+                  <th class="py-3 px-4 text-center font-bold text-amber-600">Emas</th>
+                  <th class="py-3 px-4 text-center font-bold text-slate-400">Perak</th>
+                  <th class="py-3 px-4 text-center font-bold text-amber-800">Perunggu</th>
+                  <th class="py-3 px-4 text-center">Total</th>
+                  <th class="py-3 px-4 text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="medal-standings-table-body">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 6: PORTAL ADMIN CABOR (PENDAFTARAN ATLET)
+           ===================================================================== -->
+      <section id="view-portal-cabor" class="app-view space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl lg:text-2xl font-extrabold text-slate-900 dark:text-white">Portal Pengurus Cabang Olahraga</h2>
+            <p class="text-xs text-slate-500">Pendaftaran data atlet, unggah berkas keabsahan, dan pantau hasil verifikasi</p>
+          </div>
+          <button onclick="openAthleteDrawer()" class="px-4 py-2.5 bg-primary hover:bg-crimson-dark text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5 w-fit">
+            <span class="material-symbols-outlined text-base">person_add</span>
+            <span>+ Daftarkan Atlet Baru</span>
+          </button>
+        </div>
+
+        <!-- URGENT CONDITIONAL REJECTION ALERT -->
+        <div id="cabor-urgent-rejected-card" class="hidden p-4 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 flex items-start gap-3">
+          <span class="material-symbols-outlined text-red-600 text-2xl shrink-0 mt-0.5">warning</span>
+          <div class="flex-1">
+            <h4 class="font-bold text-red-900 dark:text-red-200 text-sm">Perlu Tindakan Perbaikan Berkas!</h4>
+            <p id="cabor-urgent-rejected-msg" class="text-xs text-red-700 dark:text-red-300 mt-1"></p>
+          </div>
+        </div>
+
+        <!-- 3 Quick Metrics -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-xs">
+            <span class="text-xs font-bold text-slate-500 uppercase">Total Atlet Cabor</span>
+            <div id="cabor-portal-total-atlet" class="text-2xl font-black text-slate-900 dark:text-white my-1">0</div>
+          </div>
+          <div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-xs">
+            <span class="text-xs font-bold text-slate-500 uppercase">Disetujui KONI</span>
+            <div id="cabor-portal-verified" class="text-2xl font-black text-emerald-600 my-1">0</div>
+          </div>
+          <div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-xs">
+            <span class="text-xs font-bold text-slate-500 uppercase">Menunggu Review</span>
+            <div id="cabor-portal-pending" class="text-2xl font-black text-amber-500 my-1">0</div>
+          </div>
+          <div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-xs">
+            <span class="text-xs font-bold text-slate-500 uppercase">Ditolak / Revisi</span>
+            <div id="cabor-portal-rejected" class="text-2xl font-black text-red-600 my-1">0</div>
+          </div>
+        </div>
+
+        <!-- Cabor Athlete List Table -->
+        <div class="bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-xs overflow-hidden">
+          <div class="p-4 border-b border-border-light dark:border-border-dark">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white">Daftar Atlet Terdaftar Cabor</h4>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-50 dark:bg-slate-800/60 text-slate-500 uppercase text-[11px] font-bold border-b border-border-light dark:border-border-dark">
+                <tr>
+                  <th class="py-3 px-4 w-10 text-center">No</th>
+                  <th class="py-3 px-4">Nama Lengkap & NIK</th>
+                  <th class="py-3 px-4">Nomor Tanding</th>
+                  <th class="py-3 px-4 text-center">Status Keabsahan</th>
+                  <th class="py-3 px-4">Catatan Verifikasi</th>
+                </tr>
+              </thead>
+              <tbody id="cabor-athletes-table-body">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 7: CETAK DOKUMEN NOMINATIF RESMI A4 LANDSCAPE (PRINT VIEW)
+           ===================================================================== -->
+      <section id="view-dokumen-nominatif-print" class="app-view space-y-4 hidden">
+        <div class="no-print flex items-center justify-between bg-white dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-xs">
+          <div>
+            <h2 class="font-bold text-base text-slate-900 dark:text-white">Cetak Dokumen Nominatif Resmi Kontingen</h2>
+            <p class="text-xs text-slate-500">Format A4 Landscape standar pelaporan resmi Porprov Sulawesi Tenggara 2026</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="exportToExcel()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-base">file_download</span>
+              <span>Unduh Excel</span>
+            </button>
+            <button onclick="printOfficialDocument()" class="px-4 py-1.5 bg-primary hover:bg-crimson-dark text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-xs">
+              <span class="material-symbols-outlined text-base">print</span>
+              <span>Cetak PDF Resmi (A4)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- FORMAL PRINT SHEET CONTAINER -->
+        <div id="official-roster-print-view" class="bg-white text-black p-8 rounded-xl shadow-lg border border-slate-300 max-w-5xl mx-auto">
+          <!-- Kop Surat Resmi -->
+          <div class="border-b-4 border-double border-black pb-3 mb-4 text-center">
+            <h3 class="font-extrabold text-sm sm:text-base tracking-wider uppercase">KOMITE OLAHRAGA NASIONAL INDONESIA (KONI)</h3>
+            <h2 class="font-black text-lg sm:text-xl tracking-tight uppercase">KABUPATEN KONAWE UTARA</h2>
+            <p class="text-xs italic text-slate-700">Sekretariat: Kompleks Gelanggang Olahraga Wanggudu, Kab. Konawe Utara, Sulawesi Tenggara</p>
+            <p class="text-[11px] font-bold tracking-widest mt-1 uppercase text-red-700">DAFTAR NOMINATIF ATLET KONTINGEN PORPROV SULTRA 2026</p>
+          </div>
+
+          <!-- Tabel Nominatif Atlet -->
+          <table class="w-full text-xs border border-black mb-6">
+            <thead class="bg-slate-100 border-b border-black text-center font-bold">
+              <tr>
+                <th class="py-2 px-2 border-r border-black w-8">NO</th>
+                <th class="py-2 px-3 border-r border-black">NAMA ATLET</th>
+                <th class="py-2 px-3 border-r border-black">NIK (16 DIGIT)</th>
+                <th class="py-2 px-3 border-r border-black">CABANG OLAHRAGA</th>
+                <th class="py-2 px-3 border-r border-black">NOMOR / KELAS TANDING</th>
+                <th class="py-2 px-2 border-r border-black w-14">L / P</th>
+                <th class="py-2 px-2">KEABSAHAN</th>
+              </tr>
+            </thead>
+            <tbody id="print-roster-body">
+              <!-- Dynamically Rendered -->
+            </tbody>
+          </table>
+
+          <!-- Blok Tanda Tangan & QR Keabsahan -->
+          <div class="grid grid-cols-2 pt-6 items-end">
+            <div class="text-center">
+              <div class="w-24 h-24 border-2 border-dashed border-slate-400 mx-auto flex items-center justify-center text-[10px] text-slate-500 font-mono">
+                [ QR CODE KEABSAHAN ]
+              </div>
+              <p class="text-[10px] mt-1 text-slate-500">Diverifikasi secara digital melalui Sistem KONI Konut</p>
+            </div>
+            <div class="text-center">
+              <p class="text-xs">Wanggudu, 2026</p>
+              <p class="text-xs font-bold uppercase mt-1">Ketua Umum KONI Kabupaten Konawe Utara,</p>
+              <div class="h-16"></div>
+              <p class="text-xs font-bold underline uppercase">( ............................................................ )</p>
+              <p class="text-[10px] text-slate-600">NIP / KTA KONI KONAWE UTARA</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 8: PENGATURAN SISTEM & PERSONALISASI BRANDING
+           ===================================================================== -->
+      <section id="view-pengaturan-branding" class="app-view space-y-6 hidden">
+        <div class="max-w-3xl">
+          <h2 class="text-xl lg:text-2xl font-extrabold text-slate-900 dark:text-white">Pengaturan Identitas & Branding</h2>
+          <p class="text-xs text-slate-500">Ubah judul aplikasi, nama pimpinan, dan logo instansi secara dinamis</p>
+        </div>
+
+        <div class="bg-white dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-xs max-w-3xl space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Aplikasi</label>
+            <input type="text" id="set-nama-aplikasi" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Sub-Judul / Slogan</label>
+            <input type="text" id="set-sub-judul" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Ketua Umum KONI</label>
+              <input type="text" id="set-ketua-koni" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Kontak Helpdesk (WA)</label>
+              <input type="text" id="set-kontak-bantuan" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">URL Logo KONI</label>
+            <input type="text" id="set-logo-koni" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">URL Logo Pemkab Konawe Utara</label>
+            <input type="text" id="set-logo-konut" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+          </div>
+          <div class="pt-3">
+            <button onclick="submitSystemSettings()" class="px-5 py-2.5 bg-primary hover:bg-crimson-dark text-white rounded-xl text-xs font-bold shadow-md transition">
+              Simpan Pengaturan
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       3. MODAL LOGIN (UNIFIED AUTHENTICATION)
+       ========================================================================= -->
+  <div id="modal-login" class="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-2xl max-w-md w-full p-6 relative">
+      <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="text-center mb-5">
+        <div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-2">
+          <span class="material-symbols-outlined text-2xl">lock</span>
+        </div>
+        <h3 class="font-extrabold text-lg text-slate-900 dark:text-white">Masuk Portal KONI Konut</h3>
+        <p class="text-xs text-slate-500">Akses khusus Admin Induk dan Pengurus Cabang Olahraga</p>
+      </div>
+
+      <form onsubmit="handleLoginSubmit(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Username</label>
+          <input type="text" id="login-username" required placeholder="Masukkan username..."
+                 class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Password</label>
+          <input type="password" id="login-password" required placeholder="••••••••"
+                 class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
+        </div>
+        <button type="submit" class="w-full py-2.5 bg-primary hover:bg-crimson-dark text-white rounded-xl text-xs font-bold shadow-md transition">
+          Masuk ke Sistem
+        </button>
+      </form>
+
+      <!-- Demo Credentials Quick Helper -->
+      <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
+        <p class="text-[11px] text-slate-400 font-semibold mb-2">Klik untuk mengisi akun demo otomatis:</p>
+        <div class="flex items-center justify-center gap-2">
+          <button type="button" onclick="autofillDemo('admin')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-bold rounded-lg transition">
+            Admin Induk
+          </button>
+          <button type="button" onclick="autofillDemo('cabor')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-bold rounded-lg transition">
+            Admin Cabor
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       4. MODAL TAMBAH CABOR & AKUN
+       ========================================================================= -->
+  <div id="modal-cabor" class="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-2xl max-w-lg w-full p-6 relative">
+      <button onclick="closeCaborModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <h3 class="font-bold text-base text-slate-900 dark:text-white mb-3">Tambah Cabang Olahraga & Akun</h3>
+
+      <form onsubmit="submitCaborForm(event)" class="space-y-3">
+        <input type="hidden" id="cabor-modal-id" />
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Cabor</label>
+          <input type="text" id="cabor-modal-nama" required placeholder="Contoh: Taekwondo (TI)"
+                 class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Ketua / Penanggung Jawab</label>
+            <input type="text" id="cabor-modal-ketua" placeholder="Nama pengurus..."
+                   class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">No Kontak (WA)</label>
+            <input type="text" id="cabor-modal-kontak" placeholder="08xxxxxxxx"
+                   class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl" />
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Target Emas</label>
+            <input type="number" id="cabor-modal-target-emas" value="2" min="0" class="w-full text-xs p-2 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Target Perak</label>
+            <input type="number" id="cabor-modal-target-perak" value="2" min="0" class="w-full text-xs p-2 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Target Perunggu</label>
+            <input type="number" id="cabor-modal-target-perunggu" value="2" min="0" class="w-full text-xs p-2 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+          </div>
+        </div>
+        <div class="pt-3 flex justify-end gap-2">
+          <button type="button" onclick="closeCaborModal()" class="px-4 py-2 border rounded-xl text-xs font-semibold">Batal</button>
+          <button type="submit" class="px-5 py-2 bg-primary text-white rounded-xl text-xs font-bold">Simpan Cabor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       5. MODAL CATAT MEDALI LIVE
+       ========================================================================= -->
+  <div id="modal-record-medal" class="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark shadow-2xl max-w-md w-full p-6 relative">
+      <button onclick="closeRecordMedalModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <h3 class="font-bold text-base text-slate-900 dark:text-white mb-3">Catat Hasil Perolehan Medali</h3>
+
+      <form onsubmit="submitRecordMedal(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Cabang Olahraga</label>
+          <select id="medal-modal-cabor" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl"></select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nomor / Kelas Pertandingan</label>
+          <input type="text" id="medal-modal-kelas" required placeholder="Contoh: Kayak 1 (K-1) 1000m Putra"
+                 class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Kategori Medali</label>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="flex items-center justify-center gap-1.5 p-2 bg-amber-50 dark:bg-amber-950/40 border border-amber-300 rounded-xl cursor-pointer text-xs font-bold text-amber-800 dark:text-amber-300">
+              <input type="radio" name="kategori_medali" value="EMAS" checked /> EMAS
+            </label>
+            <label class="flex items-center justify-center gap-1.5 p-2 bg-slate-100 dark:bg-slate-800 border border-slate-300 rounded-xl cursor-pointer text-xs font-bold text-slate-700 dark:text-slate-300">
+              <input type="radio" name="kategori_medali" value="PERAK" /> PERAK
+            </label>
+            <label class="flex items-center justify-center gap-1.5 p-2 bg-orange-50 dark:bg-orange-950/40 border border-orange-300 rounded-xl cursor-pointer text-xs font-bold text-orange-900 dark:text-orange-300">
+              <input type="radio" name="kategori_medali" value="PERUNGGU" /> PERUNGGU
+            </label>
+          </div>
+        </div>
+        <div class="pt-3 flex justify-end gap-2">
+          <button type="button" onclick="closeRecordMedalModal()" class="px-4 py-2 border rounded-xl text-xs font-semibold">Batal</button>
+          <button type="submit" class="px-5 py-2 bg-primary text-white rounded-xl text-xs font-bold">Simpan Medali</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       6. SLIDE-OVER DRAWER: REGISTRASI ATLET & UNGGAH BERKAS
+       ========================================================================= -->
+  <div id="drawer-athlete-registration" class="fixed inset-0 z-50 bg-black/60 hidden flex justify-end" onclick="closeAthleteDrawer()">
+    <div class="w-full max-w-lg bg-white dark:bg-surface-dark h-full shadow-2xl p-6 overflow-y-auto custom-scrollbar flex flex-col justify-between" onclick="event.stopPropagation()">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-border-light dark:border-border-dark mb-4">
+          <h3 class="font-extrabold text-base text-slate-900 dark:text-white">Pendaftaran Atlet Baru</h3>
+          <button onclick="closeAthleteDrawer()" class="text-slate-400 hover:text-slate-600">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <form id="form-athlete-reg" onsubmit="submitAthleteRegistration(event)" class="space-y-3.5">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nomor Induk Kependudukan (NIK)</label>
+            <input type="text" id="reg-nik" required maxlength="16" placeholder="16 digit angka NIK..."
+                   class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl font-mono" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Lengkap (Sesuai KTP)</label>
+            <input type="text" id="reg-nama" required placeholder="Nama lengkap atlet..."
+                   class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Tempat Lahir</label>
+              <input type="text" id="reg-tempat-lahir" placeholder="Contoh: Wanggudu" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Tanggal Lahir</label>
+              <input type="date" id="reg-tgl-lahir" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Jenis Kelamin</label>
+            <div class="flex gap-4 text-xs font-semibold">
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="reg_jk" value="L" checked /> Laki-Laki
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="reg_jk" value="P" /> Perempuan
+              </label>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nomor / Kelas Pertandingan</label>
+            <input type="text" id="reg-kelas-tanding" required placeholder="Contoh: Kayak 1 (K-1) 1000m Putra"
+                   class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Alamat Domisili</label>
+              <input type="text" id="reg-alamat" placeholder="Kecamatan..." class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">No HP / WhatsApp</label>
+              <input type="text" id="reg-hp" placeholder="08xxxxxxxx" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+            </div>
+          </div>
+
+          <!-- DROPZONES UNGGAH BERKAS -->
+          <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-3">
+            <span class="block text-xs font-bold text-primary">Unggah Berkas Keabsahan Digital</span>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">1. Pas Foto Resmi 3x4 (Maks 2MB)</label>
+              <input type="file" id="reg-file-foto" accept="image/*" class="w-full text-xs file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">2. Scan KTP / KIA (Jelas & Terbaca)</label>
+              <input type="file" id="reg-file-ktp" accept="image/*" class="w-full text-xs file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
+            </div>
+          </div>
+
+          <div class="pt-4 flex justify-end gap-2">
+            <button type="button" onclick="closeAthleteDrawer()" class="px-4 py-2 border rounded-xl text-xs font-semibold">Batal</button>
+            <button type="submit" class="px-5 py-2 bg-primary text-white rounded-xl text-xs font-bold">Simpan & Daftarkan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm"></div>
+
+  <!-- App Configuration & Engine -->
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

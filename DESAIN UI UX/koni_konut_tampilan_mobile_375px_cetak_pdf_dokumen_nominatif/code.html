@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>KONI KONAWE UTARA - Porprov Sultra 2026 Admin Suite</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#d2e4ff",
+            "primary": "#9e001f",
+            "on-secondary-fixed": "#271900",
+            "canvas-light": "#F8FAFC",
+            "border-light": "#E2E8F0",
+            "status-rejected-bg": "#FEE2E2",
+            "on-error-container": "#93000a",
+            "primary-container": "#c8102e",
+            "on-primary-container": "#ffdad8",
+            "secondary-fixed-dim": "#ffba2c",
+            "outline-variant": "#e5bdbb",
+            "on-surface-variant": "#5c403f",
+            "error-container": "#ffdad6",
+            "surface-container": "#eaedff",
+            "on-tertiary-fixed": "#001c37",
+            "surface-bright": "#faf8ff",
+            "on-primary-fixed-variant": "#92001c",
+            "error": "#ba1a1a",
+            "surface-container-highest": "#dae2fd",
+            "tertiary-container": "#34679d",
+            "status-pending-bg": "#FEF9C3",
+            "tertiary-fixed": "#d2e4ff",
+            "inverse-surface": "#283044",
+            "status-pending-text": "#854D0E",
+            "surface": "#faf8ff",
+            "on-tertiary-fixed-variant": "#07497d",
+            "secondary": "#7d5700",
+            "primary-fixed": "#ffdad8",
+            "on-secondary": "#ffffff",
+            "surface-light": "#FFFFFF",
+            "surface-container-low": "#f2f3ff",
+            "canvas-dark": "#0B1120",
+            "secondary-fixed": "#ffdeaa",
+            "inverse-on-surface": "#eef0ff",
+            "surface-dim": "#d2d9f4",
+            "surface-container-high": "#e2e7ff",
+            "on-secondary-fixed-variant": "#5f4100",
+            "konut-teal": "#0D9488",
+            "status-verified-bg": "#DCFCE7",
+            "on-surface": "#131b2e",
+            "secondary-container": "#feb71a",
+            "crimson-dark": "#9E0D24",
+            "status-rejected-text": "#991B1B",
+            "tertiary-fixed-dim": "#a0c9ff",
+            "border-dark": "#334155",
+            "on-primary": "#ffffff",
+            "tertiary": "#144f84",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#906f6e",
+            "surface-dark": "#1E293B",
+            "surface-variant": "#dae2fd",
+            "on-tertiary": "#ffffff",
+            "on-background": "#131b2e",
+            "background": "#faf8ff",
+            "primary-fixed-dim": "#ffb3b1",
+            "gold-deep": "#D48806",
+            "on-primary-fixed": "#410007",
+            "inverse-primary": "#ffb3b1",
+            "on-secondary-container": "#6b4b00",
+            "on-error": "#ffffff",
+            "surface-tint": "#bf0229",
+            "status-verified-text": "#166534"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "margin": "1rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "margin-md": "1.5rem",
+            "space-xs": "0.25rem",
+            "gutter-md": "1.5rem",
+            "margin-lg": "2.5rem",
+            "space-sm": "0.5rem",
+            "gutter-lg": "2rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "metric-display": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "metric-display": ["32px", { "lineHeight": "38px", "fontWeight": "800" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "800" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "800" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1;
+    }
+    /* Hide scrollbar for tab swipers */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Official Document Print styling simulate A4 */
+    .a4-sheet {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      background-image: radial-gradient(#9e001f05 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-100 text-on-surface antialiased min-h-screen pb-12">
+<!-- Desktop Presentation Bar (Allows toggle between Mobile & A4 PDF preview) -->
+<aside class="w-full bg-slate-900 text-white px-4 py-2.5 flex items-center justify-between text-xs sticky top-0 z-50 shadow-md">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+<span class="font-bold tracking-wide text-slate-200">KONI KONAWE UTARA PORPROV SULTRA 2026</span>
+<span class="bg-primary px-2 py-0.5 rounded text-[10px] font-semibold text-white tracking-wider">UI-11 &amp; UI-10 SUITE</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded flex items-center gap-1.5 transition" onclick="scrollToSection('mobile-view')">
+<span class="material-symbols-outlined text-sm">phone_iphone</span>
+<span>Aplikasi Mobile (375px)</span>
+</button>
+<button class="px-2.5 py-1 bg-primary hover:bg-crimson-dark text-white rounded font-medium flex items-center gap-1.5 shadow-sm transition" onclick="scrollToSection('a4-view')">
+<span class="material-symbols-outlined text-sm">print</span>
+<span>Cetak Nominatif PDF (A4)</span>
+</button>
+</div>
+</aside>
+<!-- Layout Container: Dual Showcase Responsive Grid -->
+<main class="max-w-7xl mx-auto px-2 sm:px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: Mobile Screen Mockup (375px Viewport Experience) -->
+<div class="lg:col-span-5 flex flex-col items-center" id="mobile-view">
+<div class="w-full max-w-[400px] bg-canvas-light rounded-[36px] overflow-hidden border-[8px] border-slate-800 shadow-2xl relative flex flex-col min-h-[820px]">
+<!-- Mobile Native Status Bar -->
+<div class="w-full bg-surface-light px-6 pt-3 pb-1 flex justify-between items-center text-[11px] font-bold text-slate-800 border-b border-border-light">
+<span>09:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-xs">wifi</span>
+<span class="material-symbols-outlined text-xs">battery_full</span>
+</div>
+</div>
+<!-- 1. Mobile Header (56px) -->
+<header class="h-14 bg-surface-light px-space-md flex items-center justify-between border-b border-border-light sticky top-0 z-30">
+<div class="flex items-center gap-2">
+<!-- Dual Emblem Badge -->
+<div class="flex items-center -space-x-1.5">
+<div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-[11px] font-black border-2 border-white shadow-xs">
+                K
+              </div>
+<div class="w-7 h-7 rounded-full bg-tertiary flex items-center justify-center text-white text-[10px] font-black border-2 border-white shadow-xs">
+                KU
+              </div>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-primary font-extrabold tracking-tight leading-none">KONI KONUT 2026</span>
+</div>
+<span class="inline-block bg-surface-container-low text-tertiary text-[9px] font-bold px-1.5 py-0.2 rounded mt-0.5">
+                Admin Cabor / Pelatih
+              </span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<!-- Theme Toggle Mini -->
+<button aria-label="Toggle theme" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-slate-100 transition active:scale-95" onclick="toggleVisualTheme()">
+<span class="material-symbols-outlined text-lg">contrast</span>
+</button>
+<!-- Notifications with Red Alert Dot -->
+<button aria-label="Notifikasi" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-slate-100 transition relative active:scale-95">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary ring-2 ring-white"></span>
+</button>
+</div>
+</header>
+<!-- Scrollable Mobile Content Canvas -->
+<div class="flex-1 overflow-y-auto pb-24 px-space-md pt-3 space-y-4">
+<!-- Banner Sub-Bar: Kontingen Konawe Utara -->
+<div class="bg-gradient-to-r from-primary to-crimson-dark text-white rounded-xl p-3 flex items-center justify-between shadow-sm">
+<div>
+<p class="text-[10px] font-semibold text-primary-fixed uppercase tracking-wider">KONTINGEN PORPROV SULTRA</p>
+<h2 class="font-headline-sm text-headline-sm text-white font-bold leading-tight">Kabupaten Konawe Utara</h2>
+</div>
+<span class="px-2 py-1 bg-white/20 backdrop-blur rounded-md text-[10px] font-bold text-white tracking-wide">
+              KOLAKA 2026
+            </span>
+</div>
+<!-- 2. Mobile Quick Stat Swiper / Grid -->
+<div class="grid grid-cols-3 gap-2">
+<!-- Stat 1: Atlet -->
+<div class="bg-surface-light rounded-xl p-2.5 border border-border-light shadow-xs flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-[10px] font-bold text-slate-500 uppercase">Total Atlet</span>
+<span class="material-symbols-outlined text-sm text-tertiary">groups</span>
+</div>
+<div class="my-1">
+<span class="font-metric-display text-2xl font-extrabold text-on-surface tracking-tight">418</span>
+</div>
+<div class="flex items-center text-[10px] text-emerald-700 font-bold bg-emerald-50 rounded px-1 py-0.5 w-fit">
+<span class="material-symbols-outlined text-[12px] mr-0.5">check_circle</span> 75% Lolos
+              </div>
+</div>
+<!-- Stat 2: Target Emas -->
+<div class="bg-surface-light rounded-xl p-2.5 border border-border-light shadow-xs flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-[10px] font-bold text-slate-500 uppercase">Target Emas</span>
+<span class="material-symbols-outlined text-sm text-gold-deep">flag</span>
+</div>
+<div class="my-1">
+<span class="font-metric-display text-2xl font-extrabold text-primary tracking-tight">45</span>
+</div>
+<div class="flex items-center text-[10px] text-slate-600 font-semibold bg-slate-100 rounded px-1 py-0.5 w-fit">
+                KONI Target
+              </div>
+</div>
+<!-- Stat 3: Medali Diraih -->
+<div class="bg-surface-light rounded-xl p-2.5 border border-gold-deep/30 shadow-xs flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-amber-50/50 to-white">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-[10px] font-bold text-amber-900 uppercase">Perolehan</span>
+<span class="material-symbols-outlined text-sm text-secondary-container fill-icon">emoji_events</span>
+</div>
+<div class="my-1">
+<span class="font-metric-display text-2xl font-extrabold text-amber-800 tracking-tight">12</span>
+</div>
+<div class="flex items-center text-[10px] text-amber-900 font-bold bg-amber-100 rounded px-1 py-0.5 w-fit">
+                #1 Sultra
+              </div>
+</div>
+</div>
+<!-- 3. Emergency Alert Card (KTP Buram) -->
+<div class="bg-status-rejected-bg/70 border border-status-rejected-text/30 rounded-xl p-3 flex items-start gap-3 shadow-xs">
+<div class="w-8 h-8 rounded-full bg-status-rejected-text/10 text-status-rejected-text flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-base">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-status-rejected-text">Perlu Tindakan Mendesak</span>
+<span class="text-[10px] text-status-rejected-text font-medium">Batas: 18:00</span>
+</div>
+<p class="font-body-sm text-body-sm text-slate-700 mt-0.5 leading-snug">
+<strong>1 Berkas Atlet Perlu Perbaikan</strong> (KTP Buram / Tidak Terbaca Sistem Keabsahan).
+              </p>
+<div class="mt-2 flex items-center gap-2">
+<button class="px-2.5 py-1.5 bg-status-rejected-text text-white text-[11px] font-bold rounded-lg flex items-center gap-1 shadow-xs hover:bg-crimson-dark active:scale-95 transition" onclick="openUploadSheet()">
+<span class="material-symbols-outlined text-xs">add_a_photo</span>
+<span>Perbaiki &amp; Foto Ulang KTP</span>
+</button>
+<button class="px-2 py-1.5 bg-white border border-slate-300 text-slate-700 text-[11px] font-semibold rounded-lg hover:bg-slate-50 transition">
+                  Detail
+                </button>
+</div>
+</div>
+</div>
+<!-- Filter & Action Segment -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Roster Atlet Cabor</h3>
+<span class="text-[11px] font-semibold text-slate-500">Dayung (PODSI KONUT)</span>
+</div>
+<!-- Horizontal Filter Scroll -->
+<div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1 text-[11px]">
+<button class="px-3 py-1 rounded-full bg-primary text-white font-bold whitespace-nowrap shadow-xs">
+                Semua (18)
+              </button>
+<button class="px-3 py-1 rounded-full bg-white border border-border-light text-slate-600 font-medium whitespace-nowrap hover:bg-slate-50">
+                Lolos Keabsahan (14)
+              </button>
+<button class="px-3 py-1 rounded-full bg-white border border-border-light text-slate-600 font-medium whitespace-nowrap hover:bg-slate-50">
+                Menunggu (3)
+              </button>
+<button class="px-3 py-1 rounded-full bg-status-rejected-bg text-status-rejected-text font-bold whitespace-nowrap">
+                Perlu Perbaikan (1)
+              </button>
+</div>
+</div>
+<!-- 4. Mobile Athlete Card Roster Feed -->
+<div class="space-y-3">
+<!-- Athlete Card 1: Perlu Revisi / Menunggu -->
+<div class="bg-surface-light rounded-xl p-3 border-2 border-red-200 shadow-xs relative">
+<div class="flex items-start gap-3">
+<!-- Athlete Photo -->
+<div class="relative shrink-0">
+<img alt="Foto Atlet" class="w-14 h-14 rounded-lg object-cover border border-slate-200 shadow-inner" data-alt="High-resolution professional ID portrait photograph of a young Indonesian male rower athlete in an official red and white jersey against a clean studio neutral background, sharp focus, athletic stance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC77QW-_C2Q6VnHLWcUzIVaLYxzQ9NAs8clQ2KThS3KPEsvgU5ThV_soEn-Pwwb1gNKmc0zQWW0F5PHq5_C3cuX5rkos1XMzZ8tns6SZ-nxP58US-ym3aGABzNqbUddDi9vOCY6G-De8uiPC4enqwL4A43UAJfiaswt_CuGnhB2QXs_wGtFuJZjDU4IShiLVgrKAaiK_OCeja3CEcrF5jJxPWMp_QvPWPcMtdxLFO4"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-status-rejected-text text-white rounded-full flex items-center justify-center text-[9px] font-black">!</span>
+</div>
+<!-- Metadata -->
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-1">
+<div>
+<h4 class="font-headline-sm text-sm font-bold text-slate-900 truncate">Muh. Fathurrahman</h4>
+<p class="text-[10px] text-slate-500 font-mono">NIK: 7408012903020003</p>
+</div>
+<!-- Status Pill: Ditolak / Revisi -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-status-rejected-bg text-status-rejected-text uppercase shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-status-rejected-text"></span>
+                      Revisi
+                    </span>
+</div>
+<div class="flex items-center gap-2 mt-1 text-[11px] text-slate-600">
+<span class="font-semibold text-primary">Dayung (Canoeing M-1000m)</span>
+<span class="text-slate-300">•</span>
+<span>No. Dada 084</span>
+</div>
+</div>
+</div>
+<!-- Action Bar for Athlete 1 -->
+<div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-2">
+<button class="flex-1 h-9 bg-status-rejected-bg hover:bg-red-100 text-status-rejected-text font-bold text-[11px] rounded-lg flex items-center justify-center gap-1 transition" onclick="openDocModal('Muh. Fathurrahman', 'KTP &amp; BPJS Ketenagakerjaan', 'KTP Buram - Resolusi terlalu rendah')">
+<span class="material-symbols-outlined text-sm">visibility</span>
+<span>Review Dokumen</span>
+</button>
+<button class="h-9 px-3 bg-primary text-white font-bold text-[11px] rounded-lg flex items-center justify-center gap-1 shadow-xs hover:bg-crimson-dark active:scale-95 transition" onclick="openUploadSheet()">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+<span>Foto Ulang</span>
+</button>
+</div>
+</div>
+<!-- Athlete Card 2: Diterima / Terverifikasi -->
+<div class="bg-surface-light rounded-xl p-3 border border-border-light shadow-xs">
+<div class="flex items-start gap-3">
+<img alt="Foto Atlet" class="w-14 h-14 rounded-lg object-cover border border-slate-200 shadow-inner shrink-0" data-alt="Official headshot portrait of an Indonesian female weightlifter athlete wearing national athletic jersey in red accents with serene determined expression, bright studio light, sharp detailed composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGA5nUCMsD68bEC6F5JSawZakM4jSbEGiUTa43Bd8PIl17_yATBM90Zr52TD_6HTEBGcD5FBJVl8Zbd6y92P5pLz8guxQz_fTtfjOaH7PCFOKejlt28KOPyWGcWy_1ay2uS37WkVtFsljiQ2bRjlUj1JYNEKFE50Z18S2n_tnQqGVIEdz7HK8aevUXM_nbyHVxvre5UFf1sTaePYwj6jOH7_t1jL1AXMp4brEkTTg"/>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-1">
+<div>
+<h4 class="font-headline-sm text-sm font-bold text-slate-900 truncate">Siti Rahmawati S.</h4>
+<p class="text-[10px] text-slate-500 font-mono">NIK: 7408035108030002</p>
+</div>
+<!-- Status Pill: Diterima -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-status-verified-bg text-status-verified-text uppercase shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-status-verified-text"></span>
+                      Diterima
+                    </span>
+</div>
+<div class="flex items-center gap-2 mt-1 text-[11px] text-slate-600">
+<span class="font-semibold text-primary">Dayung (Kayak W-500m)</span>
+<span class="text-slate-300">•</span>
+<span>No. Dada 085</span>
+</div>
+</div>
+</div>
+<!-- Action Bar for Athlete 2 -->
+<div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-2">
+<button class="flex-1 h-9 bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold text-[11px] rounded-lg flex items-center justify-center gap-1 border border-slate-200 transition" onclick="openDocModal('Siti Rahmawati S.', 'KTP, Ijazah &amp; Rekomendasi Pengcab', 'Dokumen Valid &amp; Lolos Verifikasi Faktual')">
+<span class="material-symbols-outlined text-sm">badge</span>
+<span>Kartu Keabsahan</span>
+</button>
+<button class="h-9 px-3 bg-emerald-50 text-status-verified-text font-bold text-[11px] rounded-lg flex items-center justify-center gap-1 border border-emerald-200">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span>Siap Tanding</span>
+</button>
+</div>
+</div>
+<!-- Athlete Card 3: Menunggu Verifikasi -->
+<div class="bg-surface-light rounded-xl p-3 border border-border-light shadow-xs">
+<div class="flex items-start gap-3">
+<img alt="Foto Atlet" class="w-14 h-14 rounded-lg object-cover border border-slate-200 shadow-inner shrink-0" data-alt="Portrait photography of an Indonesian male sprinter athlete wearing sportswear, confident look, outdoor sports complex background in soft warm morning lighting, high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPQZBOKRRZEsZmAgO4rhWfxL_zIHvWx_icQA5llp8K8wkyz7lOFf-LOpp92JwC5WH_S2WwtVs6m5exnTB40iT-I3n3nTufG3V-hc0COzBUzyPCaOJbx08zSeZbHGt5gUhc3lgJesKAtZ96mrZWCCk5CjoK6CvxL3QgXX14FIlhJD5yLqkNk4eQ5ZYkeZKW4xjaLvxYKXYiYHRxwSqsdZ_Qx7D-UZKQ2ZK-FtE2jH8"/>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between gap-1">
+<div>
+<h4 class="font-headline-sm text-sm font-bold text-slate-900 truncate">Andi Saputra M.</h4>
+<p class="text-[10px] text-slate-500 font-mono">NIK: 7408021101010005</p>
+</div>
+<!-- Status Pill: Menunggu -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-status-pending-bg text-status-pending-text uppercase shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-status-pending-text"></span>
+                      Menunggu
+                    </span>
+</div>
+<div class="flex items-center gap-2 mt-1 text-[11px] text-slate-600">
+<span class="font-semibold text-primary">Dayung (Dragon Boat Campuran)</span>
+<span class="text-slate-300">•</span>
+<span>No. Dada 088</span>
+</div>
+</div>
+</div>
+<!-- Action Bar for Athlete 3 -->
+<div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-2">
+<button class="flex-1 h-9 bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold text-[11px] rounded-lg flex items-center justify-center gap-1 border border-slate-200 transition" onclick="openDocModal('Andi Saputra M.', 'Dokumen KTP &amp; SK Mutasi Atlet', 'Sedang dalam antrean pengecekan Dewan Hakim Keabsahan')">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Status Antrean (#04)</span>
+</button>
+<button class="h-9 px-3 bg-amber-50 text-status-pending-text font-bold text-[11px] rounded-lg flex items-center justify-center gap-1 border border-amber-200 hover:bg-amber-100 transition" onclick="showQuickAlert('Notifikasi pengingat verifikasi telah dikirim ke Tim Keabsahan KONI Konawe Utara.')">
+<span class="material-symbols-outlined text-sm">send</span>
+<span>Follow Up</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 5. Quick Action Trigger Panel -->
+<div class="bg-surface-light rounded-xl p-3 border border-border-light shadow-xs space-y-2">
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Tindakan Cepat Lapangan</span>
+<div class="grid grid-cols-2 gap-2">
+<button class="h-11 bg-secondary-container hover:bg-amber-500 text-on-secondary-container font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition" onclick="openMedalModal()">
+<span class="material-symbols-outlined text-base fill-icon">military_tech</span>
+<span>Input Medali</span>
+</button>
+<button class="h-11 bg-primary text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-sm hover:bg-crimson-dark active:scale-95 transition" onclick="openUploadSheet()">
+<span class="material-symbols-outlined text-base">photo_camera</span>
+<span>Kamera Cepat</span>
+</button>
+</div>
+<!-- 6. Floating / Bottom Action: Quick Switch to A4 PDF Sheet -->
+<button class="w-full h-11 mt-1 bg-surface-container-high hover:bg-surface-container text-tertiary font-bold text-xs rounded-xl flex items-center justify-center gap-2 border border-tertiary-container/30 transition" onclick="scrollToSection('a4-view')">
+<span class="material-symbols-outlined text-base">picture_as_pdf</span>
+<span>Preview Surat Nominatif A4 (Siap Cetak)</span>
+</button>
+</div>
+</div>
+<!-- 7. Docked Mobile Bottom Navigation Bar (64px) -->
+<nav class="h-16 bg-surface-light border-t border-border-light fixed bottom-0 left-0 right-0 max-w-[384px] mx-auto z-40 flex items-center justify-around px-2 shadow-lg">
+<!-- Item 1: Beranda -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition py-1 px-2">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-[10px] font-semibold mt-0.5">Eksekutif</span>
+</button>
+<!-- Item 2: Verifikasi (Active State based on JSON style_active_navigation) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary rounded-full px-space-md py-space-xs font-bold transition shadow-xs scale-100">
+<span class="material-symbols-outlined text-xl fill-icon">verified_user</span>
+<span class="text-[10px] font-bold">Keabsahan</span>
+</button>
+<!-- Item 3: Medali -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition py-1 px-2">
+<span class="material-symbols-outlined text-xl">emoji_events</span>
+<span class="text-[10px] font-semibold mt-0.5">Medali</span>
+</button>
+<!-- Item 4: Profil Akun -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition py-1 px-2">
+<span class="material-symbols-outlined text-xl">manage_accounts</span>
+<span class="text-[10px] font-semibold mt-0.5">Akun</span>
+</button>
+</nav>
+</div>
+<p class="text-xs text-slate-500 font-medium mt-3 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary">touch_app</span>
+        Tampilan Mobile Native (Ergonomi jempol, touch target min. 44px)
+      </p>
+</div>
+<!-- RIGHT COLUMN: Official A4 Printable Contingent Sheet (PAGE UI-10 Export Suite) -->
+<div class="lg:col-span-7 flex flex-col items-center" id="a4-view">
+<!-- Export Action Control Bar -->
+<div class="w-full max-w-[680px] bg-white rounded-xl p-3 border border-border-light shadow-sm mb-4 flex items-center justify-between">
+<div>
+<h2 class="font-headline-sm text-sm font-bold text-slate-900">Official Export Suite (UI-10)</h2>
+<p class="text-[11px] text-slate-500">Standar Dokumen Keabsahan PB PORPROV XIV Sultra 2026</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-primary hover:bg-crimson-dark text-white rounded-lg text-xs font-bold flex items-center gap-1 shadow-sm transition active:scale-95" onclick="window.print()">
+<span class="material-symbols-outlined text-sm">print</span>
+<span>Cetak Dokumen A4</span>
+</button>
+<button class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold flex items-center gap-1 border border-slate-300 transition" onclick="downloadMockPDF()">
+<span class="material-symbols-outlined text-sm">download</span>
+<span>Download PDF</span>
+</button>
+</div>
+</div>
+<!-- Simulated Official A4 Paper Container -->
+<div class="w-full max-w-[680px] bg-white border border-slate-300 rounded-lg p-6 sm:p-8 a4-sheet text-slate-900 text-[12px] leading-relaxed relative">
+<!-- Watermark KONI Konut -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
+<span class="text-9xl font-black text-primary">KONI</span>
+</div>
+<!-- 1. OFFICIAL KOP SURAT (Pemkab Konawe Utara & KONI KONUT) -->
+<header class="border-b-[3px] border-double border-slate-900 pb-4 mb-4">
+<div class="flex items-center justify-between gap-4">
+<!-- Left Logo: Pemkab Konawe Utara -->
+<div class="w-16 h-16 rounded-full border border-slate-300 flex items-center justify-center p-1 bg-white shrink-0">
+<div class="w-full h-full rounded-full bg-slate-100 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-tertiary text-2xl">account_balance</span>
+<span class="text-[6px] font-black text-slate-700 uppercase">PEMKAB KONUT</span>
+</div>
+</div>
+<!-- Central Heading -->
+<div class="text-center flex-1">
+<p class="font-bold text-xs uppercase tracking-wider text-slate-800">KOMITE OLAHRAGA NASIONAL INDONESIA (KONI)</p>
+<h1 class="font-extrabold text-base sm:text-lg text-primary tracking-tight uppercase leading-tight">KABUPATEN KONAWE UTARA</h1>
+<p class="text-[10px] text-slate-600 italic">Sekretariat: Kompleks Gelanggang Olahraga Wanggudu, Kec. Asera, Kab. Konawe Utara, Sulawesi Tenggara 93351</p>
+<p class="text-[9px] text-slate-500 font-mono">Laman: koni.konaweutarakab.go.id | Pos-el: sekretariat@koni-konut.id</p>
+</div>
+<!-- Right Logo: KONI Pusat / Porprov Sultra -->
+<div class="w-16 h-16 rounded-full border border-primary/30 flex items-center justify-center p-1 bg-white shrink-0">
+<div class="w-full h-full rounded-full bg-red-50 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary text-2xl fill-icon">sports</span>
+<span class="text-[6px] font-black text-primary uppercase">PORPROV 2026</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Document Identity & SK Header -->
+<div class="text-center my-3">
+<p class="font-bold text-xs tracking-wide uppercase underline">SURAT KEPUTUSAN KETUA UMUM KONI KONAWE UTARA</p>
+<p class="font-mono text-[10px] font-semibold text-slate-700">NOMOR: 426.1 / 188 / SK-KONTINGEN / KONI-KU / X / 2026</p>
+<p class="text-[11px] font-medium text-slate-800 mt-1">
+            TENTANG PENETAPAN DAFTAR NOMINATIF ATLET DAN OFISIAL CABANG OLAHRAGA DAYUNG (PODSI)<br/>
+            KONTINGEN KABUPATEN KONAWE UTARA PADA PORPROV SULTRA 2026
+          </p>
+</div>
+<!-- Metadata Summary Box -->
+<div class="grid grid-cols-2 gap-2 bg-slate-50 p-2.5 rounded border border-slate-200 my-3 text-[11px]">
+<div>
+<div class="flex"><span class="w-28 text-slate-500">Cabang Olahraga</span><span class="font-semibold">: PODSI (DAYUNG)</span></div>
+<div class="flex"><span class="w-28 text-slate-500">Jumlah Nomor Lomba</span><span class="font-semibold">: 8 Nomor Pertandingan</span></div>
+<div class="flex"><span class="w-28 text-slate-500">Manajer Tim</span><span class="font-semibold">: Drs. H. Tamrin, M.Si</span></div>
+</div>
+<div>
+<div class="flex"><span class="w-28 text-slate-500">Lokasi Pertandingan</span><span class="font-semibold">: Danau Biru / Venue Kolaka</span></div>
+<div class="flex"><span class="w-28 text-slate-500">Status Keabsahan PB</span><span class="font-bold text-emerald-700">: VERIFIKASI RESMI (100%)</span></div>
+<div class="flex"><span class="w-28 text-slate-500">Tanggal Terbit SK</span><span class="font-semibold">: 24 Oktober 2026</span></div>
+</div>
+</div>
+<!-- Table of Official Verified Athletes (A4 Standard) -->
+<div class="my-4 overflow-x-auto">
+<table class="w-full border-collapse border border-slate-300 text-[10px]">
+<thead>
+<tr class="bg-slate-100 text-slate-800 font-bold uppercase text-center">
+<th class="border border-slate-300 p-1.5 w-6">No</th>
+<th class="border border-slate-300 p-1.5 w-12">Foto</th>
+<th class="border border-slate-300 p-1.5 text-left">Nama Lengkap &amp; NIK</th>
+<th class="border border-slate-300 p-1.5 w-20">Kecamatan Asal</th>
+<th class="border border-slate-300 p-1.5 text-left">Nomor Lomba / Kelas</th>
+<th class="border border-slate-300 p-1.5 w-20">ID Barcode Keabsahan</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200">
+<tr>
+<td class="border border-slate-300 p-1.5 text-center font-bold">1</td>
+<td class="border border-slate-300 p-1 text-center">
+<img alt="Pasfoto" class="w-8 h-10 object-cover mx-auto rounded-xs border border-slate-200" data-alt="Small thumbnail ID photo of an Indonesian female rower athlete in formal sporting uniform, neutral white background, centered framing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6yoUxmR3-Yh9Vu63hfKNG-qK3LCrzMPr1y7yQg8CZLBhYKQwYLvdiPbBV_L7AKo6SjtfrcRkugyO72bK7C6pvfXy1_P0_40l_8DHP1VHETF9rhaK25E3K0RshQTkbmyw3aLEmyuKO7gvV5QULwTwqsu_Q5k8SREL_6s74DAIuuYktpqCzXMtzKRYaNZqXTbwBSweuxyNf2uSEc7Ay7lfDZjxxlyHP1SWQckBqt5g"/>
+</td>
+<td class="border border-slate-300 p-1.5">
+<div class="font-bold text-slate-900">Siti Rahmawati S.</div>
+<div class="font-mono text-slate-500 text-[9px]">NIK: 7408035108030002</div>
+</td>
+<td class="border border-slate-300 p-1.5 text-center">Asera</td>
+<td class="border border-slate-300 p-1.5 font-medium">Kayak W-500 Meter (Single)</td>
+<td class="border border-slate-300 p-1 text-center font-mono text-[9px]">
+<div class="bg-slate-100 py-0.5 px-1 border border-slate-200 font-bold text-slate-700">KN-26-085</div>
+<span class="text-[8px] text-emerald-700 font-semibold">SAH PB</span>
+</td>
+</tr>
+<tr>
+<td class="border border-slate-300 p-1.5 text-center font-bold">2</td>
+<td class="border border-slate-300 p-1 text-center">
+<img alt="Pasfoto" class="w-8 h-10 object-cover mx-auto rounded-xs border border-slate-200" data-alt="Identification document photograph of an Indonesian male dragon boat athlete in clean sporty outfit, clean background, sharp portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5mrvyDlwOxn3EHcASyP2C5E6G7px3J7q4JnBY8TUWfjqSzd6QwCoBosBl6KQxY5CjYCQ4Ngje0SUlIJX1oNCE2UtSOE2QMFkhTUDd-AE_cfvD0UHKJoAenfp1CB8oWJUHS3aSJmb6Sbf8n6xwIhNjXaF690_2jKQCe3HbqP7ECCm-Y_ZIFJ7C7fn-qxVvmYMLc8kIH-6M5HxydWmR9U0ka36eIt3s-QRPCLmejJM"/>
+</td>
+<td class="border border-slate-300 p-1.5">
+<div class="font-bold text-slate-900">Muh. Fathurrahman</div>
+<div class="font-mono text-slate-500 text-[9px]">NIK: 7408012903020003</div>
+</td>
+<td class="border border-slate-300 p-1.5 text-center">Molawe</td>
+<td class="border border-slate-300 p-1.5 font-medium">Canoeing M-1000 Meter</td>
+<td class="border border-slate-300 p-1 text-center font-mono text-[9px]">
+<div class="bg-slate-100 py-0.5 px-1 border border-slate-200 font-bold text-slate-700">KN-26-084</div>
+<span class="text-[8px] text-amber-700 font-semibold">LULUS FAKTUAL</span>
+</td>
+</tr>
+<tr>
+<td class="border border-slate-300 p-1.5 text-center font-bold">3</td>
+<td class="border border-slate-300 p-1 text-center">
+<img alt="Pasfoto" class="w-8 h-10 object-cover mx-auto rounded-xs border border-slate-200" data-alt="Official portrait thumbnail of an Indonesian male rower athlete wearing red training polo, clear lighting, plain backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYKsuJeLjgfBPAHthUFAnEu5nSRMY_FjhH9tg6Mks7iaGCV8Apr7CeTSJkG-gYevyLx1lLZZuXbbzroNTJRf52xhKNATxvgW0hNM9VLfNnbWB2IayVZy6RxLyaa-Mpp7VUrrbVHcS_2JRcNnvMSI_ixX2RxlRPyBo72LDL54OfhDtUM168zcvP3bpoRtE4cKPAceMH4hPeBExDwLd83GMGEJoC8yK6vx1_bklyoAI"/>
+</td>
+<td class="border border-slate-300 p-1.5">
+<div class="font-bold text-slate-900">Andi Saputra M.</div>
+<div class="font-mono text-slate-500 text-[9px]">NIK: 7408021101010005</div>
+</td>
+<td class="border border-slate-300 p-1.5 text-center">Lasolo</td>
+<td class="border border-slate-300 p-1.5 font-medium">Dragon Boat 12 Kru Campuran</td>
+<td class="border border-slate-300 p-1 text-center font-mono text-[9px]">
+<div class="bg-slate-100 py-0.5 px-1 border border-slate-200 font-bold text-slate-700">KN-26-088</div>
+<span class="text-[8px] text-emerald-700 font-semibold">SAH PB</span>
+</td>
+</tr>
+<tr>
+<td class="border border-slate-300 p-1.5 text-center font-bold">4</td>
+<td class="border border-slate-300 p-1 text-center">
+<img alt="Pasfoto" class="w-8 h-10 object-cover mx-auto rounded-xs border border-slate-200" data-alt="Athlete credential badge portrait of a female sports competitor wearing athletic shirt with national color highlights, studio light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBywbUXyPZKVzZohn5F8wCFXfQqLV2-mb0jqxrXxXjbz02163CIJX_GLb6p2raU_4Y2vckiRvoWDqeDRHdmvShSZGfeJJQaRxdanCblmOLURHopghgYxmkp7Np7SWud44fz83MyoHu-KcQvYNujNYnlKJTLztHvSJhgJ_zqd-0ak9h-S0aEpJUofH4HWx4nrSWZqwz10PT9lhFXIWGnAgK3mz6v7BLu8fA6HS7dlL8"/>
+</td>
+<td class="border border-slate-300 p-1.5">
+<div class="font-bold text-slate-900">Nurul Hidayah Putri</div>
+<div class="font-mono text-slate-500 text-[9px]">NIK: 7408044204040001</div>
+</td>
+<td class="border border-slate-300 p-1.5 text-center">Landawe</td>
+<td class="border border-slate-300 p-1.5 font-medium">Kayak Double W-500 Meter</td>
+<td class="border border-slate-300 p-1 text-center font-mono text-[9px]">
+<div class="bg-slate-100 py-0.5 px-1 border border-slate-200 font-bold text-slate-700">KN-26-089</div>
+<span class="text-[8px] text-emerald-700 font-semibold">SAH PB</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="text-[10px] text-slate-500 italic mt-1">
+          * Lampiran ini merupakan dokumen hukum sah yang dikeluarkan secara elektronik melalui Sistem Keabsahan Terpadu KONI Konawe Utara dan dilindungi kode kriptografi verifikasi.
+        </p>
+<!-- Official Signatures Block & Barcode Validation -->
+<div class="mt-6 pt-2 border-t border-slate-200 flex justify-between items-end">
+<!-- Verification Barcode & QR Stamp -->
+<div class="flex items-center gap-3">
+<div class="w-20 h-20 bg-slate-900 text-white p-1.5 rounded flex flex-col items-center justify-center font-mono">
+<span class="material-symbols-outlined text-4xl">qr_code_2</span>
+<span class="text-[7px] text-center leading-none mt-0.5">SECURE VERIFIED</span>
+</div>
+<div class="text-[9px] text-slate-500 font-mono leading-tight">
+<span class="font-bold text-slate-800">PB PORPROV SULTRA VALIDATION</span><br/>
+              Hash: 9A8F-44CE-KONUT-2026<br/>
+              Sinkronisasi: Google Workspace Cloud<br/>
+              Status: DITERIMA RESMI DEWAN HAKIM
+            </div>
+</div>
+<!-- Official Signature Block of Ketua Umum -->
+<div class="text-center w-52">
+<p class="text-[10px] text-slate-600">Ditetapkan di: Wanggudu</p>
+<p class="text-[10px] text-slate-600 mb-1">Pada Tanggal: 24 Oktober 2026</p>
+<p class="font-bold text-[10px] text-slate-800 leading-snug">
+              KETUA UMUM KONI KABUPATEN KONAWE UTARA,
+            </p>
+<!-- Official Stamp Mockup -->
+<div class="h-16 flex items-center justify-center relative my-1">
+<div class="w-16 h-16 rounded-full border-2 border-primary/40 text-primary flex items-center justify-center -rotate-12 absolute -left-2 opacity-80 pointer-events-none">
+<span class="text-[8px] font-black uppercase text-center leading-tight">KONI<br/>KONAWE UTARA<br/>CAP RESMI</span>
+</div>
+<span class="font-serif italic font-bold text-base text-slate-800 tracking-wider">H. Ikbar, S.H., M.H.</span>
+</div>
+<p class="font-bold text-[11px] text-slate-900 underline">H. IKBAR, S.H., M.H.</p>
+<p class="text-[9px] text-slate-600 font-mono">NRP. KONI-KU-01.2026</p>
+</div>
+</div>
+</div>
+<p class="text-xs text-slate-500 font-medium mt-3 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-tertiary">verified</span>
+        Format siap cetak PDF A4 resmi dengan Kop Surat Pemerintah Daerah &amp; KONI
+      </p>
+</div>
+</main>
+<!-- ========================================================================= -->
+<!-- MODAL 1: Document Review Overlay (Level 3 Elevation) -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs hidden flex items-center justify-center p-4" id="doc-modal">
+<div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-slate-200 animate-in fade-in zoom-in-95 duration-150">
+<!-- Modal Header -->
+<div class="bg-slate-900 text-white p-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">description</span>
+<div>
+<h3 class="font-bold text-sm" id="modal-athlete-name">Muh. Fathurrahman</h3>
+<p class="text-xs text-slate-300" id="modal-doc-title">Pusat Review Dokumen Keabsahan</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition" onclick="closeDocModal()">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+<!-- Document Mock View -->
+<div class="p-4 space-y-3 bg-slate-50">
+<div class="border-2 border-dashed border-red-300 bg-red-50/50 rounded-xl p-4 text-center">
+<span class="material-symbols-outlined text-4xl text-status-rejected-text mb-2">image_not_supported</span>
+<p class="font-bold text-xs text-status-rejected-text" id="modal-notes">Catatan: Resolusi KTP terlalu rendah / blur pada bagian NIK</p>
+<p class="text-[11px] text-slate-500 mt-1">Harap instruksikan atlet/pelatih untuk mengunggah ulang foto KTP fisik dengan pencahayaan jelas.</p>
+</div>
+<div class="bg-white p-3 rounded-lg border border-slate-200 text-xs space-y-1.5">
+<div class="flex justify-between"><span class="text-slate-500">Kesesuaian Domisili:</span> <span class="font-bold text-emerald-600">Valid (KTP Konawe Utara &gt; 1 Tahun)</span></div>
+<div class="flex justify-between"><span class="text-slate-500">BPJS Ketenagakerjaan:</span> <span class="font-bold text-slate-800">Aktif (KONI Sultra Mandiri)</span></div>
+<div class="flex justify-between"><span class="text-slate-500">SK Mutasi:</span> <span class="text-slate-400">Tidak Diperlukan (Atlet Binaan Lokal)</span></div>
+</div>
+</div>
+<!-- Modal Footer Approval Actions -->
+<div class="p-4 bg-white border-t border-slate-200 flex items-center justify-end gap-2">
+<button class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition" onclick="closeDocModal()">
+          Tutup
+        </button>
+<button class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg flex items-center gap-1 shadow-sm transition" onclick="approveAthlete()">
+<span class="material-symbols-outlined text-sm">check</span>
+<span>Setujui Berkas Manual</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- MODAL 2: Camera & File Upload Dropzone Sheet (Mobile Friendly) -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4" id="upload-sheet">
+<div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-200 animate-in slide-in-from-bottom duration-200">
+<!-- Drag pill for mobile -->
+<div class="w-12 h-1.5 bg-slate-300 rounded-full mx-auto my-3 sm:hidden"></div>
+<div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between">
+<div>
+<h3 class="font-bold text-base text-slate-900">Unggah Foto / Berkas Atlet</h3>
+<p class="text-xs text-slate-500">Kompresi cerdas otomatis &amp; deteksi OCR NIK</p>
+</div>
+<button class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition" onclick="closeUploadSheet()">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div class="p-5 space-y-4">
+<!-- Live Camera Trigger -->
+<button class="w-full h-12 bg-primary hover:bg-crimson-dark text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm transition active:scale-95" onclick="simulateCameraCapture()">
+<span class="material-symbols-outlined text-lg">photo_camera</span>
+<span>Buka Kamera HP Langsung</span>
+</button>
+<div class="relative flex py-1 items-center">
+<div class="flex-grow border-t border-slate-200"></div>
+<span class="flex-shrink mx-3 text-slate-400 text-[10px] font-bold uppercase">Atau Pilih dari Galeri</span>
+<div class="flex-grow border-t border-slate-200"></div>
+</div>
+<!-- File Upload Dropzone -->
+<div class="border-2 border-dashed border-slate-300 hover:border-primary rounded-xl p-5 text-center bg-slate-50 hover:bg-red-50/20 transition cursor-pointer">
+<span class="material-symbols-outlined text-3xl text-slate-400">cloud_upload</span>
+<p class="font-semibold text-xs text-slate-700 mt-1">Ketuk untuk Memilih Berkas KTP / Pasfoto</p>
+<p class="text-[10px] text-slate-400 mt-0.5">Format JPG, PNG, PDF (Maks. 5MB per berkas)</p>
+</div>
+<!-- Upload Status Indicator -->
+<div class="hidden p-2.5 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center gap-2 text-xs text-emerald-800 font-medium" id="upload-status">
+<span class="material-symbols-outlined text-sm text-emerald-600">check_circle</span>
+<span>Foto berhasil dikompresi (142 KB). Siap dikirim ke Tim Keabsahan.</span>
+</div>
+</div>
+<div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-2">
+<button class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-lg transition" onclick="closeUploadSheet()">
+          Batal
+        </button>
+<button class="px-5 py-2 bg-primary text-white text-xs font-bold rounded-lg shadow-sm hover:bg-crimson-dark transition active:scale-95" onclick="submitUpload()">
+          Kirim Berkas
+        </button>
+</div>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- MODAL 3: Input Medali Tanding Quick Sheet -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4" id="medal-modal">
+<div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-200">
+<div class="px-5 py-3 bg-secondary-container text-on-secondary-container flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-2xl fill-icon">military_tech</span>
+<h3 class="font-bold text-sm">Input Medali Pertandingan</h3>
+</div>
+<button class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition" onclick="closeMedalModal()">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<form class="p-5 space-y-3" onsubmit="handleMedalSubmit(event)">
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">Pilih Cabang Olahraga</label>
+<select class="w-full text-xs rounded-lg border-slate-300 focus:border-primary focus:ring-primary p-2">
+<option>PODSI - Dayung (Kayak W-500m)</option>
+<option>Wushu - Sanda Putra 60kg</option>
+<option>PABBSI - Angkat Besi Kelas 67kg</option>
+<option>PASI - Lari 100m Putra</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">Jenis Medali yang Diraih</label>
+<div class="grid grid-cols-3 gap-2">
+<label class="flex flex-col items-center p-2 rounded-lg border-2 border-amber-400 bg-amber-50 cursor-pointer">
+<input checked="" class="text-amber-600 focus:ring-amber-500" name="medal_type" type="radio" value="gold"/>
+<span class="material-symbols-outlined text-amber-600 text-xl mt-1 fill-icon">emoji_events</span>
+<span class="text-[11px] font-bold text-amber-800 mt-0.5">Emas</span>
+</label>
+<label class="flex flex-col items-center p-2 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100">
+<input class="text-slate-500 focus:ring-slate-400" name="medal_type" type="radio" value="silver"/>
+<span class="material-symbols-outlined text-slate-400 text-xl mt-1 fill-icon">military_tech</span>
+<span class="text-[11px] font-bold text-slate-700 mt-0.5">Perak</span>
+</label>
+<label class="flex flex-col items-center p-2 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100">
+<input class="text-amber-800 focus:ring-amber-800" name="medal_type" type="radio" value="bronze"/>
+<span class="material-symbols-outlined text-amber-800 text-xl mt-1 fill-icon">workspace_premium</span>
+<span class="text-[11px] font-bold text-amber-900 mt-0.5">Perunggu</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">Nama Atlet Peraih Medali</label>
+<input class="w-full text-xs rounded-lg border-slate-300 focus:border-primary focus:ring-primary p-2 font-medium" placeholder="Masukkan nama atlet" type="text" value="Siti Rahmawati S."/>
+</div>
+<div class="pt-2 flex justify-end gap-2">
+<button class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg" onclick="closeMedalModal()" type="button">
+            Batal
+          </button>
+<button class="px-4 py-2 bg-secondary-container hover:bg-amber-500 text-on-secondary-container font-bold text-xs rounded-lg shadow-sm" type="submit">
+            Simpan &amp; Perbarui Klasemen
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Micro-Interactions Script -->
+<script>
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function toggleVisualTheme() {
+      const html = document.documentElement;
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+      } else {
+        html.classList.add('dark');
+        html.classList.remove('light');
+      }
+    }
+
+    function openDocModal(name, docType, note) {
+      document.getElementById('modal-athlete-name').innerText = name;
+      document.getElementById('modal-doc-title').innerText = docType;
+      document.getElementById('modal-notes').innerText = note;
+      document.getElementById('doc-modal').classList.remove('hidden');
+    }
+
+    function closeDocModal() {
+      document.getElementById('doc-modal').classList.add('hidden');
+    }
+
+    function openUploadSheet() {
+      document.getElementById('upload-sheet').classList.remove('hidden');
+    }
+
+    function closeUploadSheet() {
+      document.getElementById('upload-sheet').classList.add('hidden');
+      document.getElementById('upload-status').classList.add('hidden');
+    }
+
+    function openMedalModal() {
+      document.getElementById('medal-modal').classList.remove('hidden');
+    }
+
+    function closeMedalModal() {
+      document.getElementById('medal-modal').classList.add('hidden');
+    }
+
+    function simulateCameraCapture() {
+      const status = document.getElementById('upload-status');
+      status.classList.remove('hidden');
+      status.innerHTML = `<span class="material-symbols-outlined text-sm text-emerald-600">photo_camera</span> <span>Foto berhasil diambil via kamera HP. Resolusi 1080p tajam (124 KB).</span>`;
+    }
+
+    function submitUpload() {
+      alert("Berkas KTP berhasil dikirim ke Tim Keabsahan PB Porprov Sultra. Status verifikasi diperbarui!");
+      closeUploadSheet();
+    }
+
+    function handleMedalSubmit(e) {
+      e.preventDefault();
+      alert("Medali Emas untuk Siti Rahmawati S. berhasil tercatat di Kontingen Konawe Utara!");
+      closeMedalModal();
+    }
+
+    function approveAthlete() {
+      alert("Berkas atlet telah disetujui secara manual oleh Admin Cabor.");
+      closeDocModal();
+    }
+
+    function showQuickAlert(msg) {
+      alert(msg);
+    }
+
+    function downloadMockPDF() {
+      alert("Mengunduh 'Daftar_Nominatif_Atlet_PODSI_Konawe_Utara_Porprov2026.pdf' (Ukuran A4 Resmi)...");
+    }
+  </script>
+</body></html>

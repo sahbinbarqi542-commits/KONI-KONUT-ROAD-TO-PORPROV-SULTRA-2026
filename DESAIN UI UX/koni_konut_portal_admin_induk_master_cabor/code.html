@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KONI KONAWE UTARA - Master Cabor &amp; Tata Kelola Kredensial Kontingen</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#7d5700",
+            "secondary-fixed": "#ffdeaa",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed": "#410007",
+            "status-verified-text": "#166534",
+            "surface-dim": "#d2d9f4",
+            "on-primary-container": "#ffdad8",
+            "on-surface": "#131b2e",
+            "border-light": "#E2E8F0",
+            "on-tertiary-fixed": "#001c37",
+            "surface-dark": "#1E293B",
+            "on-error-container": "#93000a",
+            "surface-container-highest": "#dae2fd",
+            "error": "#ba1a1a",
+            "surface-container": "#eaedff",
+            "surface": "#faf8ff",
+            "outline": "#906f6e",
+            "on-secondary-fixed-variant": "#5f4100",
+            "secondary-fixed-dim": "#ffba2c",
+            "crimson-dark": "#9E0D24",
+            "tertiary-fixed": "#d2e4ff",
+            "background": "#faf8ff",
+            "tertiary": "#144f84",
+            "tertiary-fixed-dim": "#a0c9ff",
+            "gold-deep": "#D48806",
+            "surface-container-low": "#f2f3ff",
+            "on-tertiary-fixed-variant": "#07497d",
+            "on-background": "#131b2e",
+            "surface-tint": "#bf0229",
+            "inverse-surface": "#283044",
+            "on-primary-fixed-variant": "#92001c",
+            "on-secondary": "#ffffff",
+            "primary-container": "#c8102e",
+            "canvas-light": "#F8FAFC",
+            "surface-light": "#FFFFFF",
+            "status-verified-bg": "#DCFCE7",
+            "primary-fixed": "#ffdad8",
+            "on-tertiary-container": "#d2e4ff",
+            "border-dark": "#334155",
+            "status-rejected-bg": "#FEE2E2",
+            "on-secondary-fixed": "#271900",
+            "inverse-primary": "#ffb3b1",
+            "primary": "#9e001f",
+            "primary-fixed-dim": "#ffb3b1",
+            "status-pending-text": "#854D0E",
+            "konut-teal": "#0D9488",
+            "tertiary-container": "#34679d",
+            "on-tertiary": "#ffffff",
+            "canvas-dark": "#0B1120",
+            "surface-container-high": "#e2e7ff",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "secondary-container": "#feb71a",
+            "on-secondary-container": "#6b4b00",
+            "status-rejected-text": "#991B1B",
+            "surface-variant": "#dae2fd",
+            "outline-variant": "#e5bdbb",
+            "status-pending-bg": "#FEF9C3",
+            "on-primary": "#ffffff",
+            "on-surface-variant": "#5c403f",
+            "inverse-on-surface": "#eef0ff",
+            "surface-bright": "#faf8ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-lg": "2rem",
+            "margin": "1rem",
+            "gutter-md": "1.5rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "space-xs": "0.25rem",
+            "margin-lg": "2.5rem",
+            "space-md": "1rem",
+            "margin-md": "1.5rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "metric-display": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "800" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "metric-display": ["32px", { "lineHeight": "38px", "fontWeight": "800" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "fontWeight": "700" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "800" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-canvas-light text-on-surface font-body-md min-h-screen antialiased flex flex-col selection:bg-primary selection:text-white">
+<!-- TOP NAV BAR (Shared Component: TopNavBar) -->
+<header class="sticky top-0 z-40 flex items-center justify-between px-space-lg w-full h-16 bg-surface-light dark:bg-canvas-dark border-b border-border-light dark:border-border-dark shadow-sm">
+<!-- Brand Anchor & Search Cluster -->
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-white font-headline-md shadow-sm">
+<span class="material-symbols-outlined" data-icon="sports_martial_arts">sports_martial_arts</span>
+</div>
+<div>
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed tracking-tight">KONI KONAWE UTARA</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-konut-teal animate-pulse"></span>
+<span class="text-[11px] font-semibold text-tertiary">SI-PORPROV SULTRA 2026</span>
+</div>
+</div>
+</div>
+<!-- Top Nav Links (Desktop) -->
+<nav class="hidden xl:flex items-center gap-space-md ml-space-md">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150 text-label-md font-label-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150 text-label-md font-label-md" href="#">Verifikasi</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1 text-label-md font-label-md" href="#">Cabor</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150 text-label-md font-label-md" href="#">Klasemen</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150 text-label-md font-label-md" href="#">Cetak PDF</a>
+</nav>
+</div>
+<!-- Live Workspace Status & Trailing Actions -->
+<div class="flex items-center gap-space-md">
+<!-- Sync Status Badge -->
+<div class="hidden md:flex items-center gap-2 px-space-sm py-1 rounded-full bg-status-verified-bg border border-emerald-200">
+<span class="material-symbols-outlined text-status-verified-text text-[16px]" data-icon="cloud_done">cloud_done</span>
+<span class="text-status-verified-text text-[11px] font-semibold">Sinkronisasi Google Workspace</span>
+</div>
+<!-- Authority Role Badge -->
+<div class="hidden sm:flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container border border-border-light">
+<span class="material-symbols-outlined text-primary text-[15px]" data-icon="shield_person">shield_person</span>
+<span class="text-label-sm font-label-sm text-primary uppercase font-bold tracking-wider">Super Admin KONI Induk</span>
+</div>
+<!-- Icon Actions -->
+<div class="flex items-center gap-1">
+<button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150" title="Notifikasi Verifikasi">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-primary text-white text-[9px] font-bold flex items-center justify-center">14</span>
+</button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150" title="Mode Gelap">
+<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+</button>
+</div>
+<!-- User Executive Profile -->
+<div class="flex items-center gap-2 pl-2 border-l border-border-light">
+<div class="w-9 h-9 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-label-md border-2 border-secondary-container shadow-sm overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Official portrait photograph of Drs. H. Ikbal M.Si, General Chairperson of KONI Konawe Utara, wearing formal sports executive attire with official pins. Crisp professional studio lighting against a clean diplomatic backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAJJoBBdoB8X4bz4sAK5qV6C3Tu55Gs0InKMi9mggRe1dAiq5YF3RyGBYck62KSZ2vMXtDGvYPRuNx5jxDwJO9qp0GrmShjU9H5pjOvjunESmsl_0hkvkfKz2TwmN1R0-uruJp-Z_MLLkLP4o4-szYrQ5m0s16uAKSghPN3MEsF2vRam__Fh6GXPwC76xFtBZj4OVL-UdNlHD4LYdRQwHCgHvZtGf3W03p0lasdBg"/>
+</div>
+<div class="hidden lg:block text-left">
+<p class="text-label-md font-label-md text-on-surface font-bold leading-tight">Drs. H. Ikbal, M.Si</p>
+<p class="text-[11px] text-on-surface-variant leading-tight">Ketua Umum KONI Konut</p>
+</div>
+</div>
+</div>
+</header>
+<!-- APP SHELL CONTAINER -->
+<div class="flex flex-1 min-h-[calc(100vh-4rem)]">
+<!-- SIDEBAR NAVIGATION (Shared Component: SideNavBar) -->
+<aside class="hidden lg:flex fixed left-0 top-16 bottom-0 w-64 z-30 flex-col justify-between p-space-md bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark">
+<div class="space-y-space-md">
+<!-- Header Banner Dual Emblem -->
+<div class="p-space-sm rounded-xl bg-surface-container-low border border-border-light">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="flag">flag</span>
+</div>
+<div>
+<h2 class="text-label-md font-label-md font-bold text-primary">ROAD TO PORPROV 2026</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Kabupaten Konawe Utara</p>
+</div>
+</div>
+</div>
+<!-- Primary CTA -->
+<button class="w-full flex items-center justify-center gap-2 px-space-md py-2.5 bg-primary hover:bg-crimson-dark text-white rounded-lg text-label-md font-label-md font-bold shadow-sm transition-all duration-150 active:scale-98" onclick="toggleModal(true)">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+<span>Daftarkan Atlet Baru</span>
+</button>
+<!-- Navigation Tab Group -->
+<nav class="space-y-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-canvas-dark rounded-lg font-medium transition-colors duration-150 text-body-sm font-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span>Dashboard Eksekutif</span>
+</a>
+<a class="flex items-center justify-between px-space-md py-space-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-canvas-dark rounded-lg font-medium transition-colors duration-150 text-body-sm font-body-sm" href="#">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified_user">verified_user</span>
+<span>Pusat Keabsahan Atlet</span>
+</div>
+<span class="px-1.5 py-0.5 rounded-full bg-error-container text-error text-[10px] font-bold">14</span>
+</a>
+<!-- Active Navigation Tab -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm bg-primary-container text-on-primary rounded-lg font-bold text-body-sm font-body-sm shadow-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="sports">sports</span>
+<span>Master Cabor &amp; Kontingen</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-canvas-dark rounded-lg font-medium transition-colors duration-150 text-body-sm font-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="badge">badge</span>
+<span>Portal Admin Cabor</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-canvas-dark rounded-lg font-medium transition-colors duration-150 text-body-sm font-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="emoji_events">emoji_events</span>
+<span>Klasemen Medali</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-canvas-dark rounded-lg font-medium transition-colors duration-150 text-body-sm font-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span>Pengaturan &amp; Branding</span>
+</a>
+</nav>
+</div>
+<!-- Footer Tab Links -->
+<div class="pt-space-md border-t border-border-light dark:border-border-dark space-y-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg text-body-sm font-body-sm transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="help_outline">help_outline</span>
+<span>Bantuan Regulasi</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-error hover:bg-error-container rounded-lg text-body-sm font-body-sm font-semibold transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="logout">logout</span>
+<span>Keluar</span>
+</a>
+</div>
+</aside>
+<!-- MAIN WORKSPACE CONTENT CANVAS -->
+<main class="flex-1 lg:ml-64 p-space-md md:p-space-xl pb-24 lg:pb-12 max-w-[1600px] w-full mx-auto space-y-space-lg">
+<!-- SECTION 1: HEADER SEKSI & ACTION HUB -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md bg-surface-light rounded-xl p-space-lg border border-border-light shadow-sm">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-label-sm font-label-sm uppercase font-bold tracking-wider">MODUL ADMIN INDUK KONI KONUT</span>
+<span class="text-xs text-on-surface-variant">• Otoritas Tunggal Master Data Kontingen</span>
+</div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">Master Cabor &amp; Tata Kelola Kredensial Kontingen</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1 max-w-3xl">
+            Kelola 32 cabang olahraga kontingen Konawe Utara, terbitkan kredensial akun Admin Cabor, monitor kuota atlet dan target medali Porprov 2026.
+          </p>
+</div>
+<!-- Quick Actions Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="flex items-center gap-2 px-space-md py-2.5 bg-primary hover:bg-crimson-dark text-white rounded-lg text-label-md font-label-md font-bold shadow-sm transition-all duration-150" onclick="toggleModal(true)">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_box">add_box</span>
+<span>+ Tambah Cabor &amp; Akun Baru</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-2.5 bg-surface-container-low hover:bg-surface-container text-tertiary border border-border-light rounded-lg text-label-md font-label-md font-semibold transition-all duration-150">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+<span>Ekspor Kredensial (.xlsx)</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-2.5 bg-secondary-container/20 hover:bg-secondary-container/40 text-secondary border border-secondary-container/40 rounded-lg text-label-md font-label-md font-semibold transition-all duration-150">
+<span class="material-symbols-outlined text-[18px] text-secondary" data-icon="tune">tune</span>
+<span>Pengaturan Branding &amp; Google Drive</span>
+</button>
+</div>
+</div>
+<!-- SECTION 2: EXECUTIVE METRICS SUMMARY (Bento Grid) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Metric 1: Total Cabor -->
+<div class="bg-surface-light rounded-xl p-space-md border border-border-light shadow-sm flex items-start justify-between relative overflow-hidden">
+<div class="space-y-1">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Total Cabor Terdaftar</span>
+<div class="text-metric-display font-metric-display text-primary">32</div>
+<p class="text-body-sm font-body-sm text-status-verified-text flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+              Semua Cabang Aktif
+            </p>
+</div>
+<div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]" data-icon="sports_score">sports_score</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-primary"></div>
+</div>
+<!-- Metric 2: Akun Admin Cabor -->
+<div class="bg-surface-light rounded-xl p-space-md border border-border-light shadow-sm flex items-start justify-between relative overflow-hidden">
+<div class="space-y-1">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Akun Admin Cabor</span>
+<div class="text-metric-display font-metric-display text-tertiary">32 / 32</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+<span class="font-bold text-status-verified-text">28 Login</span> • <span class="font-bold text-status-pending-text">4 Belum Aktivasi</span>
+</p>
+</div>
+<div class="w-12 h-12 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]" data-icon="manage_accounts">manage_accounts</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-tertiary"></div>
+</div>
+<!-- Metric 3: Kuota Atlet -->
+<div class="bg-surface-light rounded-xl p-space-md border border-border-light shadow-sm flex items-start justify-between relative overflow-hidden">
+<div class="space-y-1 w-full mr-2">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Total Kuota Atlet Terisi</span>
+<div class="flex items-baseline gap-2">
+<span class="text-metric-display font-metric-display text-on-surface">418</span>
+<span class="text-body-md font-body-md text-on-surface-variant">/ 500 Kuota</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2 mt-2">
+<div class="bg-konut-teal h-2 rounded-full" style="width: 83.6%"></div>
+</div>
+<p class="text-[11px] text-konut-teal font-bold pt-1">83.6% Terverifikasi KONI Induk</p>
+</div>
+<div class="w-12 h-12 rounded-xl bg-konut-teal/10 text-konut-teal flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]" data-icon="groups">groups</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-konut-teal"></div>
+</div>
+<!-- Metric 4: Integrasi Database Google Drive -->
+<div class="bg-surface-light rounded-xl p-space-md border border-border-light shadow-sm flex items-start justify-between relative overflow-hidden border-t-2 border-t-secondary-container">
+<div class="space-y-1">
+<div class="flex items-center gap-1.5">
+<span class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Database Cloud Drive</span>
+<span class="w-2 h-2 rounded-full bg-status-verified-text animate-ping"></span>
+</div>
+<div class="text-headline-md font-headline-md font-bold text-on-surface">Connected</div>
+<p class="text-[11px] font-mono text-tertiary truncate max-w-[190px]">
+              ID: KONI_KONUT_PORPROV_2026
+            </p>
+<p class="text-body-sm font-body-sm text-status-verified-text font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="sync">sync</span>
+              Realtime Auto-Backup Aktif
+            </p>
+</div>
+<div class="w-12 h-12 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]" data-icon="folder_shared">folder_shared</span>
+</div>
+</div>
+</div>
+<!-- SECTION 3: INTERACTIVE HIGH-DENSITY ADMIN TABLE -->
+<div class="bg-surface-light rounded-xl border border-border-light shadow-sm overflow-hidden">
+<!-- Filter, Segmented Tabs & Search Controls -->
+<div class="p-space-md border-b border-border-light bg-surface-container-low/40 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search Bar -->
+<div class="relative flex-1 max-w-md">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="search">search</span>
+</span>
+<input class="w-full pl-9 pr-4 py-2 bg-surface-light border border-border-light rounded-lg text-body-sm font-body-sm focus:outline-none focus:border-primary transition-colors" placeholder="Cari nama cabor, singkatan, ketua, atau nomor WA..." type="text"/>
+</div>
+<!-- Segmented Filter Pills -->
+<div class="flex flex-wrap items-center gap-2">
+<span class="text-label-sm font-label-sm uppercase text-on-surface-variant font-bold">Kategori:</span>
+<div class="inline-flex p-1 bg-surface-container rounded-lg border border-border-light">
+<button class="px-3 py-1 bg-surface-light text-on-surface rounded-md text-label-sm font-label-sm font-bold shadow-xs">Semua (32)</button>
+<button class="px-3 py-1 text-on-surface-variant hover:text-on-surface rounded-md text-label-sm font-label-sm">Beladiri (8)</button>
+<button class="px-3 py-1 text-on-surface-variant hover:text-on-surface rounded-md text-label-sm font-label-sm">Akuatik (4)</button>
+<button class="px-3 py-1 text-on-surface-variant hover:text-on-surface rounded-md text-label-sm font-label-sm">Akurasi (6)</button>
+<button class="px-3 py-1 text-on-surface-variant hover:text-on-surface rounded-md text-label-sm font-label-sm">Permainan (14)</button>
+</div>
+<!-- Status Dropdown Filter -->
+<select class="py-1.5 px-3 bg-surface-light border border-border-light rounded-lg text-label-sm font-label-sm text-on-surface focus:outline-none focus:border-primary">
+<option>Status Akun: Semua</option>
+<option>Aktif &amp; Terverifikasi (28)</option>
+<option>Perlu Reset / Belum Aktivasi (4)</option>
+</select>
+</div>
+</div>
+<!-- High-Density Master Cabor Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant text-label-sm font-label-sm uppercase tracking-wider border-b border-border-light">
+<th class="py-3 px-4 w-12 text-center">No</th>
+<th class="py-3 px-4 min-w-[220px]">Cabang Olahraga (Pengcab)</th>
+<th class="py-3 px-4 min-w-[190px]">Ketua Pengcab &amp; Kontak</th>
+<th class="py-3 px-4 min-w-[150px]">Target Medali</th>
+<th class="py-3 px-4 min-w-[160px]">Kuota &amp; Realisasi</th>
+<th class="py-3 px-4 min-w-[210px]">Kredensial Admin Cabor</th>
+<th class="py-3 px-4 text-center">Status</th>
+<th class="py-3 px-4 text-center min-w-[140px]">Tindakan Kelola</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light text-body-sm font-body-sm">
+<!-- Row 1: PODSI Dayung -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 text-center font-bold text-on-surface-variant">01</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center font-bold text-label-md shrink-0 border border-tertiary/20">
+<span class="material-symbols-outlined text-[20px]" data-icon="kayaking">kayaking</span>
+</div>
+<div>
+<div class="font-bold text-on-surface flex items-center gap-2">
+<span>PODSI (Dayung &amp; Kano)</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] bg-tertiary-fixed text-on-tertiary-fixed font-bold">AKUATIK</span>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">Kode: CABOR_01_PODSI</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">Ir. H. Sudirman, M.T</div>
+<a class="inline-flex items-center gap-1 text-xs text-konut-teal font-semibold hover:underline mt-0.5" href="https://wa.me/6281245678901" target="_blank">
+<span class="material-symbols-outlined text-[13px]" data-icon="chat">chat</span>
+                    0812-4567-8901
+                  </a>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold" title="Target Emas">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> 8E
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 text-[11px] font-bold" title="Target Perak">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span> 4P
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 text-[11px] font-bold" title="Target Perunggu">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span> 6B
+                    </span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center justify-between text-xs mb-1">
+<span class="font-bold text-on-surface">22 / 25 Atlet</span>
+<span class="text-status-verified-text font-bold">88%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 88%"></div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container border border-border-light font-mono text-xs text-tertiary font-bold">admin.podsi_konut</span>
+<button class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container" title="Reset Kata Sandi">
+<span class="material-symbols-outlined text-[15px]" data-icon="lock_reset">lock_reset</span>
+</button>
+</div>
+<p class="text-[11px] text-on-surface-variant">Login: Hari ini, 09:42 WITA</p>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-status-verified-bg text-status-verified-text text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-verified-text"></span>
+                    AKTIF
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container" title="Edit Master Data Cabor">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-tertiary hover:bg-surface-container" title="Kelola Batas Kuota">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-konut-teal hover:bg-surface-container" title="Buka Folder Google Drive Atlet">
+<span class="material-symbols-outlined text-[18px]" data-icon="folder_open">folder_open</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: PASI Atletik -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 text-center font-bold text-on-surface-variant">02</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-label-md shrink-0 border border-primary/20">
+<span class="material-symbols-outlined text-[20px]" data-icon="sprint">sprint</span>
+</div>
+<div>
+<div class="font-bold text-on-surface flex items-center gap-2">
+<span>PASI (Atletik)</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] bg-primary-fixed text-on-primary-fixed font-bold">AKURASI</span>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">Kode: CABOR_02_PASI</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">Dra. Hj. Nurmin, M.Pd</div>
+<a class="inline-flex items-center gap-1 text-xs text-konut-teal font-semibold hover:underline mt-0.5" href="https://wa.me/6282199887766" target="_blank">
+<span class="material-symbols-outlined text-[13px]" data-icon="chat">chat</span>
+                    0821-9988-7766
+                  </a>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> 5E
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span> 7P
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span> 3B
+                    </span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center justify-between text-xs mb-1">
+<span class="font-bold text-on-surface">30 / 30 Atlet</span>
+<span class="text-status-verified-text font-bold">100% (Penuh)</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-status-verified-text h-1.5 rounded-full" style="width: 100%"></div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container border border-border-light font-mono text-xs text-tertiary font-bold">admin.pasi_konut</span>
+<button class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container" title="Reset Kata Sandi">
+<span class="material-symbols-outlined text-[15px]" data-icon="lock_reset">lock_reset</span>
+</button>
+</div>
+<p class="text-[11px] text-on-surface-variant">Login: Kemarin, 16:15 WITA</p>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-status-verified-bg text-status-verified-text text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-verified-text"></span>
+                    AKTIF
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span></button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-tertiary hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span></button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-konut-teal hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="folder_open">folder_open</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3: TI Taekwondo -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 text-center font-bold text-on-surface-variant">03</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-crimson-dark/10 text-crimson-dark flex items-center justify-center font-bold text-label-md shrink-0 border border-crimson-dark/20">
+<span class="material-symbols-outlined text-[20px]" data-icon="sports_kabaddi">sports_kabaddi</span>
+</div>
+<div>
+<div class="font-bold text-on-surface flex items-center gap-2">
+<span>TI (Taekwondo Indonesia)</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] bg-red-100 text-primary font-bold">BELADIRI</span>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">Kode: CABOR_03_TI</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">Sabeum Nim Ardiansyah</div>
+<a class="inline-flex items-center gap-1 text-xs text-konut-teal font-semibold hover:underline mt-0.5" href="https://wa.me/6285211223344" target="_blank">
+<span class="material-symbols-outlined text-[13px]" data-icon="chat">chat</span>
+                    0852-1122-3344
+                  </a>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> 6E
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span> 3P
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span> 5B
+                    </span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center justify-between text-xs mb-1">
+<span class="font-bold text-on-surface">18 / 20 Atlet</span>
+<span class="text-status-verified-text font-bold">90%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 90%"></div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container border border-border-light font-mono text-xs text-tertiary font-bold">admin.ti_konut</span>
+<button class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container" title="Reset Kata Sandi">
+<span class="material-symbols-outlined text-[15px]" data-icon="lock_reset">lock_reset</span>
+</button>
+</div>
+<p class="text-[11px] text-on-surface-variant">Login: Hari ini, 07:11 WITA</p>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-status-verified-bg text-status-verified-text text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-verified-text"></span>
+                    AKTIF
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span></button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-tertiary hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span></button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-konut-teal hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="folder_open">folder_open</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 4: IPSI Pencak Silat -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 text-center font-bold text-on-surface-variant">04</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-gold-deep/10 text-gold-deep flex items-center justify-center font-bold text-label-md shrink-0 border border-gold-deep/20">
+<span class="material-symbols-outlined text-[20px]" data-icon="sports_martial_arts">sports_martial_arts</span>
+</div>
+<div>
+<div class="font-bold text-on-surface flex items-center gap-2">
+<span>IPSI (Pencak Silat)</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] bg-red-100 text-primary font-bold">BELADIRI</span>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">Kode: CABOR_04_IPSI</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">M. Kasim Saranani, S.Sos</div>
+<a class="inline-flex items-center gap-1 text-xs text-konut-teal font-semibold hover:underline mt-0.5" href="https://wa.me/6281355443322" target="_blank">
+<span class="material-symbols-outlined text-[13px]" data-icon="chat">chat</span>
+                    0813-5544-3322
+                  </a>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> 7E
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span> 5P
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span> 4B
+                    </span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center justify-between text-xs mb-1">
+<span class="font-bold text-on-surface">24 / 26 Atlet</span>
+<span class="text-status-verified-text font-bold">92%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 92%"></div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container border border-border-light font-mono text-xs text-tertiary font-bold">admin.ipsi_konut</span>
+<button class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container" title="Reset Kata Sandi">
+<span class="material-symbols-outlined text-[15px]" data-icon="lock_reset">lock_reset</span>
+</button>
+</div>
+<p class="text-[11px] text-on-surface-variant">Login: 3 jam yang lalu</p>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-status-verified-bg text-status-verified-text text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-verified-text"></span>
+                    AKTIF
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span></button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-tertiary hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span></button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-konut-teal hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="folder_open">folder_open</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 5: PSTI Sepak Takraw (Status Pending Activation) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors bg-status-pending-bg/10">
+<td class="py-3.5 px-4 text-center font-bold text-on-surface-variant">05</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 text-secondary flex items-center justify-center font-bold text-label-md shrink-0 border border-secondary-container/30">
+<span class="material-symbols-outlined text-[20px]" data-icon="sports_volleyball">sports_volleyball</span>
+</div>
+<div>
+<div class="font-bold text-on-surface flex items-center gap-2">
+<span>PSTI (Sepak Takraw)</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] bg-secondary-fixed text-on-secondary-fixed font-bold">PERMAINAN</span>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">Kode: CABOR_05_PSTI</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">Bahrun Lamuse, S.Pd</div>
+<a class="inline-flex items-center gap-1 text-xs text-konut-teal font-semibold hover:underline mt-0.5" href="https://wa.me/6285398765432" target="_blank">
+<span class="material-symbols-outlined text-[13px]" data-icon="chat">chat</span>
+                    0853-9876-5432
+                  </a>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> 3E
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span> 2P
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span> 2B
+                    </span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center justify-between text-xs mb-1">
+<span class="font-bold text-on-surface">12 / 16 Atlet</span>
+<span class="text-status-pending-text font-bold">75%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-secondary-container h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container border border-border-light font-mono text-xs text-tertiary font-bold">admin.psti_konut</span>
+<button class="px-1.5 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-900 rounded hover:bg-amber-200 transition-colors flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]" data-icon="send">send</span> Kirim WA
+                      </button>
+</div>
+<p class="text-[11px] text-error font-semibold">Belum pernah login</p>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-status-pending-bg text-status-pending-text text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-pending-text"></span>
+                    PERLU AKTIVASI
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span></button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-tertiary hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span></button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-konut-teal hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="folder_open">folder_open</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 6: PBSI Bulutangkis -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 text-center font-bold text-on-surface-variant">06</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-konut-teal/10 text-konut-teal flex items-center justify-center font-bold text-label-md shrink-0 border border-konut-teal/20">
+<span class="material-symbols-outlined text-[20px]" data-icon="sports_tennis">sports_tennis</span>
+</div>
+<div>
+<div class="font-bold text-on-surface flex items-center gap-2">
+<span>PBSI (Bulutangkis)</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] bg-secondary-fixed text-on-secondary-fixed font-bold">PERMAINAN</span>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">Kode: CABOR_06_PBSI</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-medium text-on-surface">Dr. Hendra Wijaya, Sp.A</div>
+<a class="inline-flex items-center gap-1 text-xs text-konut-teal font-semibold hover:underline mt-0.5" href="https://wa.me/628114002991" target="_blank">
+<span class="material-symbols-outlined text-[13px]" data-icon="chat">chat</span>
+                    0811-400-2991
+                  </a>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> 4E
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span> 2P
+                    </span>
+<span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-orange-100 text-orange-800 text-[11px] font-bold">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span> 3B
+                    </span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center justify-between text-xs mb-1">
+<span class="font-bold text-on-surface">16 / 16 Atlet</span>
+<span class="text-status-verified-text font-bold">100% (Penuh)</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-status-verified-text h-1.5 rounded-full" style="width: 100%"></div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="space-y-1">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container border border-border-light font-mono text-xs text-tertiary font-bold">admin.pbsi_konut</span>
+<button class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container" title="Reset Kata Sandi">
+<span class="material-symbols-outlined text-[15px]" data-icon="lock_reset">lock_reset</span>
+</button>
+</div>
+<p class="text-[11px] text-on-surface-variant">Login: 1 hari yang lalu</p>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-status-verified-bg text-status-verified-text text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-verified-text"></span>
+                    AKTIF
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span></button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-tertiary hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span></button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-konut-teal hover:bg-surface-container"><span class="material-symbols-outlined text-[18px]" data-icon="folder_open">folder_open</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="p-space-md border-t border-border-light flex flex-col sm:flex-row items-center justify-between gap-space-sm bg-surface-light">
+<div class="text-body-sm font-body-sm text-on-surface-variant">
+            Menampilkan <span class="font-bold text-on-surface">1 - 6</span> dari <span class="font-bold text-on-surface">32</span> cabang olahraga
+          </div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg border border-border-light text-on-surface-variant hover:bg-surface-container-low text-label-sm font-label-sm font-semibold disabled:opacity-50" disabled="">Sebelumnya</button>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-primary text-white text-label-sm font-label-sm font-bold flex items-center justify-center shadow-xs">1</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface text-label-sm font-label-sm font-semibold flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface text-label-sm font-label-sm font-semibold flex items-center justify-center">3</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface text-label-sm font-label-sm font-semibold flex items-center justify-center">4</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface text-label-sm font-label-sm font-semibold flex items-center justify-center">5</button>
+</div>
+<button class="px-3 py-1.5 rounded-lg border border-border-light text-on-surface-variant hover:bg-surface-container-low text-label-sm font-label-sm font-semibold">Selanjutnya</button>
+</div>
+</div>
+</div>
+<!-- SECTION 5: WIDGET KONFIGURASI CEPAT SISTEM & BRANDING KONI -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Branding Asset Status Card -->
+<div class="bg-surface-light rounded-xl p-space-md border border-border-light shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Identitas &amp; Branding Porprov</h3>
+<span class="px-2 py-0.5 rounded-full bg-status-verified-bg text-status-verified-text text-[10px] font-bold">TERKUNCI</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+              Konfigurasi logo resmi pemerintah daerah dan atribut lambang kontingen untuk kartu akreditasi dan berkas resmi.
+            </p>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 rounded-lg border border-border-light bg-surface-container-low flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-2 font-bold">
+<span class="material-symbols-outlined text-[24px]" data-icon="verified">verified</span>
+</div>
+<span class="text-xs font-bold text-on-surface">Logo KONI Konut</span>
+<span class="text-[10px] text-status-verified-text font-bold">Aktif (.SVG Vector)</span>
+</div>
+<div class="p-3 rounded-lg border border-border-light bg-surface-container-low flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center mb-2 font-bold">
+<span class="material-symbols-outlined text-[24px]" data-icon="account_balance">account_balance</span>
+</div>
+<span class="text-xs font-bold text-on-surface">Pemkab Konawe Utara</span>
+<span class="text-[10px] text-status-verified-text font-bold">Aktif (.SVG Vector)</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-2 border border-border-light rounded-lg text-label-sm font-label-sm font-bold text-on-surface hover:bg-surface-container transition-colors">
+            Kelola Logo &amp; Watermark Sertifikat
+          </button>
+</div>
+<!-- Google Drive Storage Usage Card -->
+<div class="bg-surface-light rounded-xl p-space-md border border-border-light shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Kapasitas Google Drive Cloud</h3>
+<span class="px-2 py-0.5 rounded-full bg-blue-100 text-tertiary text-[10px] font-bold">WORKSPACE</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-2">
+              Penyimpanan cloud berkas keabsahan KTP, KK, &amp; Ijazah atlet dari 32 Cabor kontingen.
+            </p>
+<div class="space-y-2 mt-4">
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="font-bold text-on-surface">14.8 GB Terpakai</span>
+<span class="text-on-surface-variant font-semibold">100 GB Tersedia</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2.5">
+<div class="bg-tertiary h-2.5 rounded-full" style="width: 14.8%"></div>
+</div>
+<p class="text-[11px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-status-verified-text" data-icon="check">check</span>
+                Kapasitas sangat aman (Sisa 85.2 GB)
+              </p>
+</div>
+</div>
+<button class="w-full mt-4 py-2 border border-border-light rounded-lg text-label-sm font-label-sm font-bold text-tertiary hover:bg-tertiary-fixed transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="open_in_new">open_in_new</span>
+            Buka Console Google Workspace
+          </button>
+</div>
+<!-- System Governance & Freeze Entry Card -->
+<div class="bg-surface-light rounded-xl p-space-md border border-border-light shadow-sm flex flex-col justify-between border-l-4 border-l-primary">
+<div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm text-on-surface font-bold">Kunci Pendaftaran Atlet</h3>
+<span class="px-2 py-0.5 rounded-full bg-status-verified-bg text-status-verified-text text-[10px] font-bold">PORTAL OPEN</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-3">
+              Kunci akses entri data mandiri bagi seluruh Admin Cabor saat masa verifikasi berkas resmi ditutup oleh KONI Induk.
+            </p>
+<div class="p-3 rounded-lg bg-surface-container-low border border-border-light">
+<div class="flex items-center justify-between">
+<div>
+<div class="text-xs font-bold text-on-surface">Freeze Entry Atlet</div>
+<div class="text-[11px] text-on-surface-variant">Batas: 15 Juli 2026 23:59 WITA</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-2 bg-error hover:bg-crimson-dark text-white rounded-lg text-label-sm font-label-sm font-bold shadow-xs transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="lock">lock</span>
+            Eksekusi Kunci Global Sekarang
+          </button>
+</div>
+</div>
+</main>
+</div>
+<!-- SECTION 4: MODAL SLIDE PANEL "TAMBAH CABOR & BUAT AKUN ADMIN BARU" -->
+<div class="fixed inset-0 z-50 flex items-center justify-end bg-black/40 backdrop-blur-xs transition-opacity duration-300 hidden" id="modalTambahCabor">
+<!-- Backdrop dismiss area -->
+<div class="absolute inset-0" onclick="toggleModal(false)"></div>
+<!-- Modal Content Slide Panel -->
+<div class="relative w-full max-w-xl h-full bg-surface-light border-l border-border-light shadow-2xl flex flex-col justify-between overflow-y-auto z-10 animate-slide-left">
+<!-- Modal Header -->
+<div class="p-space-lg border-b border-border-light bg-surface-light sticky top-0 z-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary text-white flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[22px]" data-icon="add_circle">add_circle</span>
+</div>
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface font-bold">Tambah Cabor &amp; Terbitkan Akun</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Konfigurasi Pengcab baru dan generate akun portal mandiri</p>
+</div>
+</div>
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" onclick="toggleModal(false)">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body Form -->
+<div class="p-space-lg space-y-space-lg flex-1">
+<!-- SECTION A: DETAIL CABANG OLAHRAGA -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 pb-2 border-b border-border-light">
+<span class="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center">A</span>
+<h3 class="text-label-lg font-label-lg text-on-surface font-bold">Detail Cabang Olahraga (Pengcab)</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="sm:col-span-2">
+<label class="block text-label-sm font-label-sm uppercase font-bold text-on-surface-variant mb-1">Nama Cabor &amp; Singkatan Resmi</label>
+<input class="w-full px-3 py-2 border border-border-light rounded-lg text-body-sm font-body-sm focus:border-primary focus:outline-none" placeholder="Contoh: PERTINA (Tinju Amatir)" type="text"/>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm uppercase font-bold text-on-surface-variant mb-1">Kategori Olahraga</label>
+<select class="w-full px-3 py-2 border border-border-light rounded-lg text-body-sm font-body-sm focus:border-primary focus:outline-none">
+<option value="beladiri">Beladiri</option>
+<option value="akuatik">Akuatik</option>
+<option value="akurasi">Akurasi</option>
+<option value="permainan">Permainan</option>
+<option value="terukur">Terukur</option>
+</select>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm uppercase font-bold text-on-surface-variant mb-1">Batas Kuota Atlet (Maks)</label>
+<input class="w-full px-3 py-2 border border-border-light rounded-lg text-body-sm font-body-sm focus:border-primary focus:outline-none" placeholder="Contoh: 18" type="number"/>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm uppercase font-bold text-on-surface-variant mb-1">Nama Ketua Pengcab</label>
+<input class="w-full px-3 py-2 border border-border-light rounded-lg text-body-sm font-body-sm focus:border-primary focus:outline-none" placeholder="Nama Lengkap &amp; Gelar" type="text"/>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm uppercase font-bold text-on-surface-variant mb-1">Nomor WhatsApp Aktif</label>
+<input class="w-full px-3 py-2 border border-border-light rounded-lg text-body-sm font-body-sm focus:border-primary focus:outline-none" placeholder="08xxxxxxxxxx" type="text"/>
+</div>
+<!-- Target Medali 3 Kolom -->
+<div class="sm:col-span-2">
+<label class="block text-label-sm font-label-sm uppercase font-bold text-on-surface-variant mb-1">Target Komitmen Medali Porprov 2026</label>
+<div class="grid grid-cols-3 gap-3">
+<div class="p-2.5 rounded-lg border border-amber-200 bg-amber-50/50">
+<span class="text-xs font-bold text-amber-800 block">Emas</span>
+<input class="w-full mt-1 px-2 py-1 border border-amber-200 rounded text-center font-bold text-amber-900 bg-white" type="number" value="3"/>
+</div>
+<div class="p-2.5 rounded-lg border border-slate-300 bg-slate-50">
+<span class="text-xs font-bold text-slate-700 block">Perak</span>
+<input class="w-full mt-1 px-2 py-1 border border-slate-300 rounded text-center font-bold text-slate-800 bg-white" type="number" value="2"/>
+</div>
+<div class="p-2.5 rounded-lg border border-orange-200 bg-orange-50/50">
+<span class="text-xs font-bold text-orange-800 block">Perunggu</span>
+<input class="w-full mt-1 px-2 py-1 border border-orange-200 rounded text-center font-bold text-orange-900 bg-white" type="number" value="4"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION B: KREDENSIAL AKSES AKUN ADMIN CABOR -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 pb-2 border-b border-border-light">
+<span class="w-6 h-6 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold flex items-center justify-center">B</span>
+<h3 class="text-label-lg font-label-lg text-on-surface font-bold">Kredensial Akses Akun Admin Cabor</h3>
+</div>
+<div class="space-y-3">
+<div>
+<label class="block text-label-sm font-label-sm uppercase font-bold text-on-surface-variant mb-1">Username Admin Cabor (Auto-Generated)</label>
+<div class="relative">
+<input class="w-full px-3 py-2 bg-surface-container font-mono text-tertiary font-bold border border-border-light rounded-lg text-body-sm" readonly="" type="text" value="admin.pertina_konut"/>
+<span class="absolute inset-y-0 right-0 flex items-center pr-3 text-status-verified-text">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+</span>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm uppercase font-bold text-on-surface-variant mb-1">Password Awal Terenkripsi</label>
+<div class="flex gap-2">
+<input class="flex-1 px-3 py-2 bg-surface-container font-mono text-on-surface font-bold border border-border-light rounded-lg text-body-sm" readonly="" type="text" value="KONUT-PORPROV#2026-X9A"/>
+<button class="px-3 py-2 border border-border-light rounded-lg hover:bg-surface-container text-xs font-bold flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="shuffle">shuffle</span> Acak Ulang
+                </button>
+</div>
+<span class="text-[11px] text-on-surface-variant mt-1 block">Password wajib diganti pada saat Admin Cabor pertama kali login.</span>
+</div>
+<!-- Sinkronisasi Google Drive Automatic Hook -->
+<div class="p-3 rounded-lg border border-emerald-200 bg-emerald-50/50 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-status-verified-text text-[20px] mt-0.5" data-icon="cloud_sync">cloud_sync</span>
+<div>
+<span class="text-xs font-bold text-status-verified-text block">Sinkronisasi Google Drive Otomatis</span>
+<span class="text-[11px] text-on-surface-variant">Sistem otomatis membuat sub-folder: <code class="bg-white px-1 py-0.5 rounded border border-emerald-200 font-mono text-xs">Root/Berkas_Atlet/[CABOR_33] PERTINA</code>.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Actions Footer -->
+<div class="p-space-lg border-t border-border-light bg-surface-light sticky bottom-0 z-20 flex flex-col sm:flex-row items-center justify-between gap-3">
+<button class="w-full sm:w-auto px-4 py-2.5 rounded-lg border border-border-light text-on-surface hover:bg-surface-container text-label-md font-label-md font-semibold" onclick="toggleModal(false)">
+          Batal
+        </button>
+<div class="flex items-center gap-2 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-4 py-2.5 rounded-lg bg-konut-teal hover:bg-teal-700 text-white text-label-md font-label-md font-bold flex items-center justify-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="send">send</span>
+            Kirim Kredensial via WA
+          </button>
+<button class="flex-1 sm:flex-none px-5 py-2.5 rounded-lg bg-primary hover:bg-crimson-dark text-white text-label-md font-label-md font-bold flex items-center justify-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="save">save</span>
+            Simpan Cabor &amp; Akun
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- BOTTOM NAVIGATION (Shared Component: BottomNavBar - Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex md:hidden justify-around items-center px-space-sm py-space-xs pb-safe bg-surface-light dark:bg-surface-dark border-t border-border-light dark:border-border-dark shadow-md">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="text-label-sm font-label-sm mt-0.5">Eksekutif</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
+<span class="text-label-sm font-label-sm mt-0.5">Keabsahan</span>
+</a>
+<!-- Active Mobile Tab: Cabor -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary rounded-full px-space-md py-space-xs font-bold" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="sports_handball">sports_handball</span>
+<span class="text-label-sm font-label-sm mt-0.5">Cabor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="military_tech">military_tech</span>
+<span class="text-label-sm font-label-sm mt-0.5">Medali</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="manage_accounts">manage_accounts</span>
+<span class="text-label-sm font-label-sm mt-0.5">Akun</span>
+</a>
+</nav>
+<!-- Interactive JavaScript -->
+<script>
+    function toggleModal(open) {
+      const modal = document.getElementById('modalTambahCabor');
+      if (open) {
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      } else {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+    }
+  </script>
+</body></html>

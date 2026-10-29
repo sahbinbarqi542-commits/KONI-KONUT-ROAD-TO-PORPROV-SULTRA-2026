@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portal Pengurus Cabor - KONI Konawe Utara</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Plus Jakarta Sans Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with CDN Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration Injection -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#d2e4ff",
+            "primary": "#9e001f",
+            "on-secondary-fixed": "#271900",
+            "canvas-light": "#F8FAFC",
+            "border-light": "#E2E8F0",
+            "status-rejected-bg": "#FEE2E2",
+            "on-error-container": "#93000a",
+            "primary-container": "#c8102e",
+            "on-primary-container": "#ffdad8",
+            "secondary-fixed-dim": "#ffba2c",
+            "outline-variant": "#e5bdbb",
+            "on-surface-variant": "#5c403f",
+            "error-container": "#ffdad6",
+            "surface-container": "#eaedff",
+            "on-tertiary-fixed": "#001c37",
+            "surface-bright": "#faf8ff",
+            "on-primary-fixed-variant": "#92001c",
+            "error": "#ba1a1a",
+            "surface-container-highest": "#dae2fd",
+            "tertiary-container": "#34679d",
+            "status-pending-bg": "#FEF9C3",
+            "tertiary-fixed": "#d2e4ff",
+            "inverse-surface": "#283044",
+            "status-pending-text": "#854D0E",
+            "surface": "#faf8ff",
+            "on-tertiary-fixed-variant": "#07497d",
+            "secondary": "#7d5700",
+            "primary-fixed": "#ffdad8",
+            "on-secondary": "#ffffff",
+            "surface-light": "#FFFFFF",
+            "surface-container-low": "#f2f3ff",
+            "canvas-dark": "#0B1120",
+            "secondary-fixed": "#ffdeaa",
+            "inverse-on-surface": "#eef0ff",
+            "surface-dim": "#d2d9f4",
+            "surface-container-high": "#e2e7ff",
+            "on-secondary-fixed-variant": "#5f4100",
+            "konut-teal": "#0D9488",
+            "status-verified-bg": "#DCFCE7",
+            "on-surface": "#131b2e",
+            "secondary-container": "#feb71a",
+            "crimson-dark": "#9E0D24",
+            "status-rejected-text": "#991B1B",
+            "tertiary-fixed-dim": "#a0c9ff",
+            "border-dark": "#334155",
+            "on-primary": "#ffffff",
+            "tertiary": "#144f84",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#906f6e",
+            "surface-dark": "#1E293B",
+            "surface-variant": "#dae2fd",
+            "on-tertiary": "#ffffff",
+            "on-background": "#131b2e",
+            "background": "#faf8ff",
+            "primary-fixed-dim": "#ffb3b1",
+            "gold-deep": "#D48806",
+            "on-primary-fixed": "#410007",
+            "inverse-primary": "#ffb3b1",
+            "on-secondary-container": "#6b4b00",
+            "on-error": "#ffffff",
+            "surface-tint": "#bf0229",
+            "status-verified-text": "#166534"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "margin": "1rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "margin-md": "1.5rem",
+            "space-xs": "0.25rem",
+            "gutter-md": "1.5rem",
+            "margin-lg": "2.5rem",
+            "space-sm": "0.5rem",
+            "gutter-lg": "2rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "metric-display": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "metric-display": ["32px", { "lineHeight": "38px", "fontWeight": "800" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "800" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "800" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #CBD5E1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-canvas-light text-on-surface antialiased min-h-screen font-body-md text-body-md overflow-x-hidden">
+<!-- ================= TOP APP BAR (Shared Components JSON) ================= -->
+<header class="sticky top-0 z-40 flex items-center justify-between px-space-lg w-full h-16 bg-surface-light shadow-sm">
+<!-- Brand Anchor & Search -->
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary font-headline-md text-headline-md font-bold shadow-sm">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">sports_kabaddi</span>
+</div>
+<div>
+<span class="text-headline-sm font-headline-sm font-bold text-primary tracking-tight block">KONI KONAWE UTARA</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant block -mt-1 tracking-wider uppercase">Road to Porprov Sultra 2026</span>
+</div>
+</div>
+<!-- Quick Search Bar (Shared JSON spec: on_left) -->
+<div class="hidden lg:flex items-center relative w-72">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-lg">search</span>
+<input class="w-full pl-9 pr-4 py-1.5 bg-canvas-light border border-border-light rounded-lg text-body-sm font-body-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors" placeholder="Cari atlet, nomor tanding, NIK..." type="text"/>
+</div>
+</div>
+<!-- Navigation Links Cluster (Desktop) -->
+<nav class="hidden md:flex items-center gap-space-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 text-label-lg font-label-lg" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 text-label-lg font-label-lg" href="#">Verifikasi</a>
+<!-- Active Link according to Page Intent: Cabor -->
+<a class="text-primary font-bold border-b-2 border-primary pb-1 text-label-lg font-label-lg" href="#">Cabor</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 text-label-lg font-label-lg" href="#">Klasemen</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 text-label-lg font-label-lg" href="#">Cetak PDF</a>
+</nav>
+<!-- Trailing Actions & User Badge -->
+<div class="flex items-center gap-space-sm">
+<button class="hidden xl:inline-flex items-center gap-space-xs px-space-md py-1.5 bg-surface-container-low hover:bg-surface-container text-tertiary rounded-lg text-label-sm font-label-lg border border-border-light transition-colors">
+<span class="material-symbols-outlined text-sm text-konut-teal">sync</span>
+        Sinkronisasi Google Workspace
+      </button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors relative" title="Notifikasi">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-primary-container rounded-full border-2 border-surface-light"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" title="Mode Gelap">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<div class="h-6 w-px bg-border-light mx-1 hidden sm:block"></div>
+<!-- User Role Indicator -->
+<div class="flex items-center gap-space-sm pl-1">
+<img class="w-8 h-8 rounded-full border border-border-light object-cover" data-alt="Official portrait avatar of the sports branch administrator for Konawe Utara, dressed in a professional athletic federation blazer against a clean studio gradient background, soft institutional lighting, high fidelity sports management branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOXLdEA1eECx5P1XCDurxE5a9ik8UtBd4ezdpcLmlAoKHfsvqei5I_QiyWWizAcwVNJJvBQbDRtUe3QPgvx6qp34L1AtqvIo21DXf5Rn-phZkGNin1YsaW8MGpFXlwbR76e_8-188vFI6nkm8bHehM_L-Eg0D64-82MRfP7FA4gPYceVNK_NwIsSmamyeKDyBBxoTJgqv5EyRXXKcLbxtGYoTA4s15oKbWIvpgVjA"/>
+<div class="hidden sm:block text-left">
+<span class="text-label-md font-label-md text-on-surface block leading-tight">Admin PODSI</span>
+<span class="text-label-sm font-label-sm text-konut-teal font-medium block">Manager/Pelatih</span>
+</div>
+</div>
+</div>
+</header>
+<!-- ================= MAIN APP WRAPPER ================= -->
+<div class="flex w-full min-h-[calc(100vh-4rem)]">
+<!-- ================= SIDE NAV BAR (Shared Components JSON) ================= -->
+<aside class="hidden xl:flex fixed left-0 top-16 bottom-0 w-64 z-30 flex-col justify-between p-space-md bg-surface-light border-r border-border-light">
+<div>
+<!-- Side Nav Header -->
+<div class="flex items-center gap-space-sm mb-space-lg px-space-xs">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-primary font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md font-bold text-primary tracking-tight leading-tight">ROAD TO PORPROV 2026</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[11px]">Kabupaten Konawe Utara</p>
+</div>
+</div>
+<!-- CTA Button from JSON -->
+<button class="w-full mb-space-lg flex items-center justify-center gap-space-xs px-space-md py-space-sm bg-primary-container text-on-primary rounded-lg font-headline-sm text-label-lg font-bold shadow-sm hover:bg-crimson-dark transition-all duration-150" id="openDrawerFromNav">
+<span class="material-symbols-outlined text-lg">person_add</span>
+          Daftarkan Atlet Baru
+        </button>
+<!-- Navigation Tab Items -->
+<div class="space-y-1">
+<!-- Inactive Tab -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg font-medium transition-colors duration-150 text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+            Dashboard Eksekutif
+          </a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg font-medium transition-colors duration-150 text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+            Pusat Keabsahan Atlet
+          </a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg font-medium transition-colors duration-150 text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined text-xl">sports</span>
+            Master Cabor &amp; Kontingen
+          </a>
+<!-- ACTIVE TAB for this Screen: Portal Admin Cabor -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm bg-primary-container text-on-primary rounded-lg font-bold text-label-md font-label-md shadow-sm" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">badge</span>
+            Portal Admin Cabor
+          </a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg font-medium transition-colors duration-150 text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined text-xl">emoji_events</span>
+            Klasemen Medali
+          </a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg font-medium transition-colors duration-150 text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+            Pengaturan &amp; Branding
+          </a>
+</div>
+</div>
+<!-- Footer Side Nav Tabs -->
+<div class="border-t border-border-light pt-space-sm space-y-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg font-medium transition-colors duration-150 text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined text-xl">help_outline</span>
+          Bantuan Regulasi
+        </a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-error hover:bg-error-container rounded-lg font-medium transition-colors duration-150 text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined text-xl">logout</span>
+          Keluar
+        </a>
+</div>
+</aside>
+<!-- ================= CONTENT CANVAS ================= -->
+<main class="flex-1 xl:ml-64 p-space-md md:p-space-lg lg:p-space-xl pb-28 md:pb-space-xl max-w-7xl mx-auto w-full transition-all">
+<!-- ================= 1. CABOR CONTEXT HEADER ================= -->
+<section class="mb-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md bg-surface-light border border-border-light rounded-xl p-space-lg shadow-sm">
+<div class="flex items-start md:items-center gap-space-md">
+<div class="w-14 h-14 rounded-xl bg-tertiary-container text-on-tertiary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-3xl">kayaking</span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-space-xs mb-1">
+<span class="px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-tertiary-fixed text-on-tertiary-fixed font-bold tracking-wider uppercase">
+                  CABOR PRIORITAS UNGGULAN
+                </span>
+<span class="px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-status-verified-bg text-status-verified-text font-bold">
+                  SK KONI: AKTIF 2024-2027
+                </span>
+</div>
+<h1 class="text-headline-md md:text-headline-lg font-headline-lg font-bold text-on-surface tracking-tight">
+                Portal Pengurus Cabor: Persatuan Olahraga Dayung Seluruh Indonesia (PODSI) - Kab. Konawe Utara
+              </h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm text-konut-teal">person_pin</span>
+                Hak Akses Aktif: <strong class="font-semibold text-on-surface">Admin Cabor (Manager/Pelatih)</strong> • Terakhir Diperbarui: Hari ini, 09:42 WITA
+              </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm self-stretch md:self-auto shrink-0">
+<button class="flex-1 md:flex-initial inline-flex items-center justify-center gap-1.5 px-space-md py-2.5 border border-border-light rounded-lg text-label-md font-label-md font-semibold text-on-surface hover:bg-canvas-light transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+              Unduh Rekap Form A1
+            </button>
+<button class="flex-1 md:flex-initial inline-flex items-center justify-center gap-1.5 px-space-md py-2.5 bg-primary-container text-on-primary rounded-lg text-label-md font-label-md font-bold shadow-sm hover:bg-crimson-dark transition-all" onclick="toggleDrawer()">
+<span class="material-symbols-outlined text-lg">add</span>
+              + Daftarkan Atlet Baru
+            </button>
+</div>
+</div>
+</section>
+<!-- ================= 2. PRIORITY CONDITIONAL REJECTION ALERT BANNER ================= -->
+<section class="mb-space-lg">
+<div class="bg-status-rejected-bg border-l-4 border-error border-y border-r border-error-container rounded-xl p-space-md md:p-space-lg shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-error text-white flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-xl">warning</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-headline-sm font-headline-sm font-bold text-status-rejected-text">
+                  Perhatian: Tindakan Mendesak Diperlukan
+                </h3>
+<span class="px-2 py-0.5 bg-error text-white rounded text-[10px] font-bold uppercase tracking-wider">Prioritas 1</span>
+</div>
+<p class="text-body-md font-body-md text-status-rejected-text mt-1 leading-snug">
+                Berkas Atlet <strong>'La Ode Rudi'</strong> <strong>DITOLAK</strong> oleh Verifikator KONI (Catatan: <em>KTP buram dan tidak terbaca</em>). Harap perbaiki sebelum batas akhir <strong>15 November 2026</strong>!
+              </p>
+</div>
+</div>
+<div class="shrink-0 w-full md:w-auto">
+<button class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-space-lg py-2.5 bg-error hover:bg-crimson-dark text-white rounded-lg font-headline-sm text-label-md font-bold shadow transition-all duration-150" onclick="triggerCorrectionModal('La Ode Rudi')">
+<span class="material-symbols-outlined text-lg">edit_document</span>
+              Perbaiki Berkas Sekarang
+            </button>
+</div>
+</div>
+</section>
+<!-- ================= 3. CABOR METRICS ROW (Bento Architecture) ================= -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-space-md lg:gap-space-lg mb-space-lg">
+<!-- Metric 1: Kuota Atlet -->
+<div class="bg-surface-light border border-border-light rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="text-label-md font-label-md text-on-surface-variant font-semibold">Kuota Atlet Terdaftar</span>
+<div class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">group</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="text-metric-display font-metric-display text-on-surface">22</span>
+<span class="text-headline-sm font-headline-sm text-on-surface-variant">/ 25 Atlet</span>
+<span class="ml-auto text-label-md font-label-md font-bold text-konut-teal bg-status-verified-bg px-2 py-0.5 rounded-full">
+              88% Kuota
+            </span>
+</div>
+<div class="w-full bg-border-light rounded-full h-2.5 overflow-hidden">
+<div class="bg-konut-teal h-2.5 rounded-full" style="width: 88%"></div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2 text-xs">
+            Sisa 3 slot kuota kontingen Porprov sebelum penguncian sistem.
+          </p>
+</div>
+<!-- Metric 2: Status Berkas Roster -->
+<div class="bg-surface-light border border-border-light rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="text-label-md font-label-md text-on-surface-variant font-semibold">Status Berkas Keabsahan</span>
+<div class="w-9 h-9 rounded-lg bg-status-verified-bg text-status-verified-text flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">fact_check</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 text-center my-2">
+<div class="bg-status-verified-bg rounded-lg p-2">
+<div class="text-headline-md font-headline-md font-bold text-status-verified-text">18</div>
+<div class="text-[11px] font-label-sm font-bold text-status-verified-text uppercase">Diterima</div>
+</div>
+<div class="bg-status-pending-bg rounded-lg p-2">
+<div class="text-headline-md font-headline-md font-bold text-status-pending-text">3</div>
+<div class="text-[11px] font-label-sm font-bold text-status-pending-text uppercase">Menunggu</div>
+</div>
+<div class="bg-status-rejected-bg rounded-lg p-2 border border-error-container">
+<div class="text-headline-md font-headline-md font-bold text-status-rejected-text">1</div>
+<div class="text-[11px] font-label-sm font-bold text-status-rejected-text uppercase">Ditolak</div>
+</div>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-xs">
+            1 dokumen memerlukan perbaikan segera untuk verifikasi final.
+          </p>
+</div>
+<!-- Metric 3: Target & Realisasi Medali Cabor (Medal Card Special Distinction) -->
+<div class="bg-surface-light border-t-2 border-t-[#FFB81C] border-x border-b border-border-light rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-1.5">
+<span class="text-label-md font-label-md text-on-surface-variant font-semibold">Target &amp; Realisasi Medali</span>
+<span class="material-symbols-outlined text-gold-deep text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div class="w-9 h-9 rounded-lg bg-[#FEF3C7] text-gold-deep flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+</div>
+<div class="space-y-2 mb-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant text-xs">Target Porprov:</span>
+<div class="flex items-center gap-2 font-bold text-xs">
+<span class="text-gold-deep font-semibold">8 Emas</span> • 
+                <span class="text-slate-500 font-semibold">4 Perak</span> • 
+                <span class="text-amber-700 font-semibold">2 Perunggu</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm pt-1 border-t border-border-light">
+<span class="text-primary font-bold text-xs uppercase tracking-wide">Realisasi Sesi:</span>
+<div class="flex items-center gap-2 text-xs">
+<span class="px-2 py-0.5 rounded bg-amber-100 text-gold-deep font-extrabold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">workspace_premium</span> 3 Emas
+                </span>
+<span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-extrabold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">workspace_premium</span> 1 Perak
+                </span>
+</div>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-[11px] text-on-surface-variant bg-canvas-light p-1.5 rounded">
+<span>Progress Target Emas:</span>
+<span class="font-bold text-primary">37.5% Tercapai</span>
+</div>
+</div>
+</section>
+<!-- ================= 6. LIVE PORPROV MEDAL TALLY RIBBON & ENTRY BAR ================= -->
+<section class="mb-space-lg bg-surface-light border border-border-light rounded-xl p-space-md shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Medal Standing Preview -->
+<div class="flex items-center gap-space-md overflow-x-auto custom-scrollbar pb-1 lg:pb-0">
+<div class="flex items-center gap-2 shrink-0 pr-space-md border-r border-border-light">
+<div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-sm">
+                #1
+              </div>
+<div>
+<div class="flex items-center gap-1">
+<span class="text-label-md font-label-md font-extrabold text-primary">KONAWE UTARA</span>
+<span class="text-[10px] bg-primary text-white px-1.5 py-0.2 rounded font-bold">PEMUNCAK</span>
+</div>
+<span class="text-[11px] text-on-surface-variant block">Klasemen Sementara Porprov Sultra</span>
+</div>
+</div>
+<!-- Medals Counts -->
+<div class="flex items-center gap-3 shrink-0">
+<!-- Gold -->
+<div class="flex items-center gap-1.5 px-3 py-1 bg-amber-50 border border-amber-200 rounded-lg">
+<span class="w-5 h-5 rounded-full bg-amber-400 text-amber-950 flex items-center justify-center text-xs font-bold shadow-xs">E</span>
+<div>
+<span class="text-headline-sm font-headline-sm font-extrabold text-amber-900 leading-none">12</span>
+<span class="text-[10px] text-amber-800 font-semibold block uppercase">Emas</span>
+</div>
+</div>
+<!-- Silver -->
+<div class="flex items-center gap-1.5 px-3 py-1 bg-slate-100 border border-slate-200 rounded-lg">
+<span class="w-5 h-5 rounded-full bg-slate-300 text-slate-800 flex items-center justify-center text-xs font-bold">P</span>
+<div>
+<span class="text-headline-sm font-headline-sm font-extrabold text-slate-800 leading-none">8</span>
+<span class="text-[10px] text-slate-600 font-semibold block uppercase">Perak</span>
+</div>
+</div>
+<!-- Bronze -->
+<div class="flex items-center gap-1.5 px-3 py-1 bg-amber-900/10 border border-amber-800/20 rounded-lg">
+<span class="w-5 h-5 rounded-full bg-amber-700 text-white flex items-center justify-center text-xs font-bold">B</span>
+<div>
+<span class="text-headline-sm font-headline-sm font-extrabold text-amber-900 leading-none">14</span>
+<span class="text-[10px] text-amber-800 font-semibold block uppercase">Perunggu</span>
+</div>
+</div>
+<!-- Total -->
+<div class="px-3 py-1 bg-surface-container-high rounded-lg text-center">
+<span class="text-headline-sm font-headline-sm font-extrabold text-on-surface leading-none">34</span>
+<span class="text-[10px] text-on-surface-variant font-bold block uppercase">Total Medali</span>
+</div>
+</div>
+</div>
+<!-- Action Button for Entry -->
+<div class="shrink-0 flex items-center gap-2">
+<button class="w-full lg:w-auto inline-flex items-center justify-center gap-1.5 px-space-md py-2 bg-secondary-fixed-dim hover:bg-secondary-container text-on-secondary-fixed rounded-lg text-label-md font-label-md font-bold shadow-sm transition-all" onclick="alert('Formulir Pencatatan Hasil Pertandingan PODSI Dibuka')">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+              + Catat Hasil Pertandingan / Medali Cabor
+            </button>
+</div>
+</div>
+</section>
+<!-- ================= 4. ATHLETE ROSTER MANAGEMENT TABLE ================= -->
+<section class="bg-surface-light border border-border-light rounded-xl shadow-sm overflow-hidden mb-space-lg">
+<!-- Table Action Bar -->
+<div class="p-space-md md:p-space-lg border-b border-border-light flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div>
+<h2 class="text-headline-sm font-headline-sm font-bold text-on-surface">
+              Daftar Nominatif Roster Atlet PODSI
+            </h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Kelola data keabsahan, berkas digital, dan nomor tanding atlet Porprov 2026.
+            </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Search Filter -->
+<div class="relative flex-1 sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-base">search</span>
+<input class="w-full pl-9 pr-3 py-2 bg-canvas-light border border-border-light rounded-lg text-body-sm font-body-sm focus:border-primary-container outline-none" placeholder="Filter nama / NIK..." type="text"/>
+</div>
+<!-- Status Dropdown Filter -->
+<select class="px-space-md py-2 bg-canvas-light border border-border-light rounded-lg text-body-sm font-body-sm text-on-surface outline-none focus:border-primary-container">
+<option value="all">Semua Status (22)</option>
+<option value="verified">Diterima (18)</option>
+<option value="pending">Menunggu (3)</option>
+<option value="rejected">Ditolak (1)</option>
+</select>
+<!-- Prominent Daftarkan Button -->
+<button class="inline-flex items-center gap-1.5 px-space-md py-2 bg-primary-container hover:bg-crimson-dark text-on-primary rounded-lg text-label-md font-label-md font-bold shadow-sm transition-all" onclick="toggleDrawer()">
+<span class="material-symbols-outlined text-lg">person_add</span>
+              + Daftarkan Atlet Baru
+            </button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-border-light text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">
+<th class="py-3 px-4">Pas Foto 3x4</th>
+<th class="py-3 px-4">NIK</th>
+<th class="py-3 px-4">Nama Lengkap Atlet</th>
+<th class="py-3 px-4">Jenis Kelamin</th>
+<th class="py-3 px-4">Nomor Tanding</th>
+<th class="py-3 px-4">Berkas Diunggah</th>
+<th class="py-3 px-4">Status Keabsahan</th>
+<th class="py-3 px-4 text-center">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light text-body-sm font-body-sm">
+<!-- Row 1: Rejected Athlete (Highlighted) -->
+<tr class="bg-status-rejected-bg/30 hover:bg-status-rejected-bg/50 transition-colors">
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="w-10 h-13 bg-slate-200 rounded border-2 border-error overflow-hidden shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Official 3 by 4 Indonesian regional athletic federation athlete ID photograph of La Ode Rudi, young male rower from Konawe Utara with serious sporting expression in athlete jersey with red background standard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEnueJH6PvNlvh-ncpaGDke2rRE5nO9dNB_HB4nVce_fWxoqsfFlufnkg_a8jVexEkBSE9BOPY935-LjZ2gBis39vcA38jls1IEorm07cpH6wyg8svQKmMdeQuHzyIb-VdOGOKKHajnjgirUITuuLXGhnw6rKy-uE_JbzLS3ACmfDt5_2-4l5Kp8VJkcsne1jdilDVhJklXEpQxEzDjmvtAwqNcQ2EOIcmC3-9fs4"/>
+</div>
+</td>
+<td class="py-3 px-4 font-mono font-medium text-xs text-on-surface whitespace-nowrap">
+                  7409011804990001
+                </td>
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="font-bold text-on-surface">La Ode Rudi</div>
+<span class="text-[11px] text-error font-medium flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">cancel</span> KTP Buram / Tidak Terbaca
+                  </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">Laki-laki</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface rounded text-xs font-semibold">
+                    Canoe Single (C1) 1000m
+                  </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-status-verified-text" title="Pas Foto Ada">image</span>
+<span class="material-symbols-outlined text-base text-error" title="KTP Masalah">badge</span>
+<span class="material-symbols-outlined text-base text-status-verified-text" title="Rekomendasi Ada">description</span>
+</div>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-status-rejected-bg text-status-rejected-text text-label-sm font-label-sm uppercase font-bold border border-error-container">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                    Ditolak
+                  </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap text-center">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1 bg-error hover:bg-crimson-dark text-white rounded text-xs font-bold inline-flex items-center gap-1 shadow-xs transition-colors" onclick="triggerCorrectionModal('La Ode Rudi')">
+<span class="material-symbols-outlined text-xs">upload</span> Upload Ulang
+                    </button>
+<button class="p-1 hover:bg-surface-container-high rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Verified Athlete -->
+<tr class="hover:bg-canvas-light transition-colors">
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="w-10 h-13 bg-slate-200 rounded border border-border-light overflow-hidden shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Official 3 by 4 Indonesian sports delegation pass photo of Wa Ode Sitti, female Indonesian athlete wearing red and white jersey, crisp passport photo style studio lighting on deep blue background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAymBu2BoAogloRNaEd2gQ22niXhRp2OaNeMGBXb-_ysVLXcOfann2Jw5dnmeTVAR_yV1D9XGxMVqCDAEIHgRJmYWqbrsHjuIANsKAvZi3tGZYfmCFmEsQSFgA63Bm4GRSjnZuX7AmmdKrd4_t2rnvUATpTwIiWw-SZ8kGogV7HJr3xvAAVHqXfk9cb7zwqv6fvq7xeLaRHXADRxsYpWTCjpnFGdm1H8Lty9VVvIR0"/>
+</div>
+</td>
+<td class="py-3 px-4 font-mono font-medium text-xs text-on-surface whitespace-nowrap">
+                  7409025203020003
+                </td>
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="font-bold text-on-surface">Wa Ode Sitti Aminah</div>
+<span class="text-[11px] text-konut-teal font-medium">Verified ID: KONUT-PODSI-002</span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">Perempuan</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface rounded text-xs font-semibold">
+                    Kayak Single (K1) 500m Putri
+                  </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-status-verified-text" title="Pas Foto Lengkap">image</span>
+<span class="material-symbols-outlined text-base text-status-verified-text" title="KTP Terverifikasi">badge</span>
+<span class="material-symbols-outlined text-base text-status-verified-text" title="Rekomendasi Lengkap">description</span>
+</div>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-status-verified-bg text-status-verified-text text-label-sm font-label-sm uppercase font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-verified-text"></span>
+                    Diterima
+                  </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap text-center">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1 bg-surface-container hover:bg-surface-container-high text-on-surface rounded text-xs font-medium inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">visibility</span> Lihat
+                    </button>
+<button class="p-1 hover:bg-surface-container-high rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Pending Athlete -->
+<tr class="hover:bg-canvas-light transition-colors">
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="w-10 h-13 bg-slate-200 rounded border border-border-light overflow-hidden shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Official 3 by 4 Indonesian Porprov athletic identification portrait of Muhammad Arifin, male sprint rower with disciplined look, red sports singlet against bright cyan solid background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa0ZjvhzRSR_e2wqidI30agPqkm87sh9cJCT9cKX-lJASSg2o0d34xXajm2NyNBLPtr--8tTqw6sayF_f06hB53th5fsSkXPrVllMiGX6NwRw0s3Ox--YIQ9-G4ck414tygfPxwK6aZnLwg_9C1MycLbQc3a5G4BdzukIhYuFUDpG62ZXCvadViVuiorygYHQAmu3bzhzzdV96LFWILlnauPfGVd7o0HGp5GkklqY"/>
+</div>
+</td>
+<td class="py-3 px-4 font-mono font-medium text-xs text-on-surface whitespace-nowrap">
+                  7409012408010002
+                </td>
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="font-bold text-on-surface">Muhammad Arifin</div>
+<span class="text-[11px] text-on-surface-variant font-medium">Antrean Verifikasi #14</span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">Laki-laki</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface rounded text-xs font-semibold">
+                    Dragon Boat 12 Crew Putra
+                  </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-status-verified-text">image</span>
+<span class="material-symbols-outlined text-base text-status-verified-text">badge</span>
+<span class="material-symbols-outlined text-base text-status-verified-text">description</span>
+</div>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-status-pending-bg text-status-pending-text text-label-sm font-label-sm uppercase font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-pending-text"></span>
+                    Menunggu
+                  </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap text-center">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1 bg-surface-container hover:bg-surface-container-high text-on-surface rounded text-xs font-medium inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">visibility</span> Lihat
+                    </button>
+<button class="p-1 hover:bg-surface-container-high rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Verified Athlete -->
+<tr class="hover:bg-canvas-light transition-colors">
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="w-10 h-13 bg-slate-200 rounded border border-border-light overflow-hidden shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Official 3 by 4 Indonesian athlete registration pass photo of Hendra Saputra, competitive rowing athlete from South East Sulawesi, athletic physique in official Konawe Utara track jersey, neutral bright light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9ZKKGCq9iiZJiSv5ag_9P_pqn8DAVVonEx3a7na75yrbqn23aTRO-JNiUL6QKk0KfnM-xN-A-joPLCwi_t-oouu28YXwFe-H8ZPJjEIGpnOkdkpCbHze8N13cdClATmWZRLPd3zTFIUR7F95E_2e5KzLQJSewmMDgNFxrCFIIuTr4V3lFJIShoyjd8CGU1p5Jz9zEy67LoYRrD-9_0dcipXHv7TKpNNA2HgOrG70"/>
+</div>
+</td>
+<td class="py-3 px-4 font-mono font-medium text-xs text-on-surface whitespace-nowrap">
+                  7409031109980004
+                </td>
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="font-bold text-on-surface">Hendra Saputra</div>
+<span class="text-[11px] text-konut-teal font-medium">Verified ID: KONUT-PODSI-004</span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">Laki-laki</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface rounded text-xs font-semibold">
+                    Kayak Double (K2) 1000m Putra
+                  </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-status-verified-text">image</span>
+<span class="material-symbols-outlined text-base text-status-verified-text">badge</span>
+<span class="material-symbols-outlined text-base text-status-verified-text">description</span>
+</div>
+</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-status-verified-bg text-status-verified-text text-label-sm font-label-sm uppercase font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-verified-text"></span>
+                    Diterima
+                  </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap text-center">
+<div class="inline-flex items-center gap-1">
+<button class="px-2.5 py-1 bg-surface-container hover:bg-surface-container-high text-on-surface rounded text-xs font-medium inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">visibility</span> Lihat
+                    </button>
+<button class="p-1 hover:bg-surface-container-high rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination Footer -->
+<div class="p-space-md border-t border-border-light flex flex-col sm:flex-row items-center justify-between gap-space-sm bg-canvas-light text-body-sm font-body-sm text-on-surface-variant">
+<div>
+            Menampilkan <strong class="text-on-surface font-semibold">1-4</strong> dari <strong class="text-on-surface font-semibold">22</strong> Total Roster Atlet Terdaftar
+          </div>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1.5 border border-border-light rounded bg-surface-light text-on-surface disabled:opacity-50 text-xs font-medium" disabled="">Sebelumnya</button>
+<button class="px-3 py-1.5 bg-primary-container text-white rounded text-xs font-bold">1</button>
+<button class="px-3 py-1.5 border border-border-light rounded bg-surface-light text-on-surface hover:bg-surface-container text-xs font-medium">2</button>
+<button class="px-3 py-1.5 border border-border-light rounded bg-surface-light text-on-surface hover:bg-surface-container text-xs font-medium">Selanjutnya</button>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- ================= 5. SLIDE-OVER REGISTRATION & UPLOAD DRAWER ================= -->
+<!-- Scrim Backdrop -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 transition-opacity duration-300 opacity-0 pointer-events-none" id="drawerOverlay" onclick="toggleDrawer()"></div>
+<!-- Drawer Container (Right Side Panel) -->
+<div class="fixed top-0 right-0 bottom-0 w-full max-w-2xl bg-surface-light z-50 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out" id="registrationDrawer">
+<!-- Drawer Header -->
+<div class="p-space-lg border-b border-border-light flex items-center justify-between bg-surface-light shrink-0">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-white flex items-center justify-center font-bold">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface" id="drawerTitle">
+            Registrasi &amp; Keabsahan Atlet Baru
+          </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+            PODSI • Porprov Sultra 2026 Kab. Konawe Utara
+          </p>
+</div>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors" onclick="toggleDrawer()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Rejection Context Callout if opened for correction -->
+<div class="hidden p-space-md bg-status-rejected-bg border-b border-error-container" id="drawerRejectionContext">
+<div class="flex items-start gap-2 text-xs text-status-rejected-text">
+<span class="material-symbols-outlined text-base mt-0.5 text-error">info</span>
+<div>
+<strong class="font-bold">Mode Perbaikan Berkas Atlet: La Ode Rudi</strong>
+<p>Verifikator menolak foto KTP sebelumnya karena tidak terbaca. Harap unggah scan KTP beresolusi tinggi (min 300 DPI) atau foto jelas tanpa pantulan kilau.</p>
+</div>
+</div>
+</div>
+<!-- Drawer Scrollable Form Body -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-space-lg space-y-space-xl">
+<!-- STEP 1: Biodata Atlet -->
+<section>
+<div class="flex items-center gap-2 mb-space-md pb-2 border-b border-border-light">
+<span class="w-6 h-6 rounded-full bg-primary-container text-white flex items-center justify-center text-xs font-bold">1</span>
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface uppercase tracking-wide">
+            Biodata Lengkap Atlet
+          </h4>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- NIK Field -->
+<div class="sm:col-span-2">
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+              Nomor Induk Kependudukan (NIK 16 Digit) <span class="text-error">*</span>
+</label>
+<input class="w-full px-space-md py-2.5 bg-canvas-light border border-border-light rounded-lg text-body-md font-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none font-mono" id="inputNik" maxlength="16" placeholder="Contoh: 7409011804990001" type="text" value="7409011804990001"/>
+<span class="text-[11px] text-on-surface-variant block mt-1">Sesuai KTP / KK domisili resmi Kabupaten Konawe Utara.</span>
+</div>
+<!-- Nama Lengkap -->
+<div class="sm:col-span-2">
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+              Nama Lengkap Atlet (Tanpa Gelar) <span class="text-error">*</span>
+</label>
+<input class="w-full px-space-md py-2.5 bg-canvas-light border border-border-light rounded-lg text-body-md font-body-md focus:border-primary-container outline-none" id="inputNama" placeholder="Masukkan nama lengkap atlet" type="text" value="La Ode Rudi"/>
+</div>
+<!-- TTL -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+              Tempat Lahir <span class="text-error">*</span>
+</label>
+<input class="w-full px-space-md py-2.5 bg-canvas-light border border-border-light rounded-lg text-body-md font-body-md focus:border-primary-container outline-none" placeholder="Wanggudu" type="text" value="Wanggudu"/>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+              Tanggal Lahir <span class="text-error">*</span>
+</label>
+<input class="w-full px-space-md py-2.5 bg-canvas-light border border-border-light rounded-lg text-body-md font-body-md focus:border-primary-container outline-none" type="date" value="1999-04-18"/>
+</div>
+<!-- Alamat Domisili Konut -->
+<div class="sm:col-span-2">
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+              Alamat Domisili Konawe Utara <span class="text-error">*</span>
+</label>
+<textarea class="w-full px-space-md py-2.5 bg-canvas-light border border-border-light rounded-lg text-body-md font-body-md focus:border-primary-container outline-none" placeholder="Jl. Poros Trans Sulawesi, Desa/Kelurahan..." rows="2">Desa Lahimbua, Kec. Andowia, Kab. Konawe Utara</textarea>
+</div>
+<!-- WhatsApp No -->
+<div class="sm:col-span-2">
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+              Nomor WhatsApp Aktif Atlet / Wali <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="absolute left-3 top-2.5 text-on-surface-variant font-mono text-sm font-semibold">+62</span>
+<input class="w-full pl-12 pr-space-md py-2.5 bg-canvas-light border border-border-light rounded-lg text-body-md font-body-md focus:border-primary-container outline-none font-mono" placeholder="812-3456-7890" type="tel" value="81245678901"/>
+</div>
+</div>
+</div>
+</section>
+<!-- STEP 2: Nomor / Kelas Tanding -->
+<section>
+<div class="flex items-center gap-2 mb-space-md pb-2 border-b border-border-light">
+<span class="w-6 h-6 rounded-full bg-primary-container text-white flex items-center justify-center text-xs font-bold">2</span>
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface uppercase tracking-wide">
+            Nomor &amp; Kategori Tanding
+          </h4>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Kategori Gender -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+              Kategori Kontingen <span class="text-error">*</span>
+</label>
+<select class="w-full px-space-md py-2.5 bg-canvas-light border border-border-light rounded-lg text-body-md font-body-md focus:border-primary-container outline-none">
+<option selected="">Putra (Senior)</option>
+<option>Putri (Senior)</option>
+<option>Campuran (Mix)</option>
+</select>
+</div>
+<!-- Disiplin / Nomor Tanding -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+              Disiplin / Nomor Pertandingan <span class="text-error">*</span>
+</label>
+<select class="w-full px-space-md py-2.5 bg-canvas-light border border-border-light rounded-lg text-body-md font-body-md focus:border-primary-container outline-none">
+<option selected="">Canoeing - C1 1000m Putra</option>
+<option>Kayaking - K1 500m Putra</option>
+<option>Kayaking - K2 1000m Putra</option>
+<option>TBR / Dragon Boat 12 Crew Putra</option>
+<option>Rowing - Single Sculls (M1X)</option>
+</select>
+</div>
+</div>
+</section>
+<!-- STEP 3: Drag & Drop Dropzone Berkas -->
+<section>
+<div class="flex items-center gap-2 mb-space-md pb-2 border-b border-border-light">
+<span class="w-6 h-6 rounded-full bg-primary-container text-white flex items-center justify-center text-xs font-bold">3</span>
+<h4 class="text-label-lg font-label-lg font-bold text-on-surface uppercase tracking-wide">
+            Unggah Berkas Persyaratan (Mandatori)
+          </h4>
+</div>
+<div class="space-y-space-md">
+<!-- Dropzone 1: Pas Foto 3x4 (Aspect Ratio Frame 3:4) -->
+<div class="p-space-md bg-canvas-light rounded-xl border border-border-light">
+<div class="flex items-center justify-between mb-2">
+<label class="text-label-md font-label-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-konut-teal text-base">portrait</span>
+                Dropzone 1: Pas Foto Resmi 3x4 (Latar Merah)
+              </label>
+<span class="text-[11px] font-bold text-status-verified-text bg-status-verified-bg px-2 py-0.5 rounded">Sudah Terisi</span>
+</div>
+<div class="flex items-center gap-space-md">
+<!-- Aspect Ratio 3x4 frame preview -->
+<div class="w-20 h-28 bg-slate-200 rounded-lg border-2 border-dashed border-konut-teal flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Official 3 by 4 athlete ID photo preview showing clean red background, cropped shoulder portrait of male rower with sharp focus, realistic camera flash passport texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrrxB0y60AAUUNlC9BiPQkPLZ9mmM5yXzT6EreiiYHkXn77XzSkk78smHFoAGEyF5aI-w6OvzqexNID5_WeODnAdQXnqP3PxkFVQYsUErpEk79GjsbmG9EdjNipBNfHePIK91ltz8YvSrmKv-2wwePYfC0SqkhrB4Hupzy5JeODwM6_BC23XxeigBgcPh1qwS5vqa5ByjO3po-LPHUUojHWpmPc_uib97L7rj3IK0"/>
+</div>
+<div class="flex-1">
+<p class="text-xs text-on-surface-variant mb-2">
+                  Format JPG/PNG, ukuran maks 2 MB. Wajib menggunakan jersey cabor atau seragam atletik resmi.
+                </p>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 bg-surface-light border border-border-light rounded-lg text-xs font-semibold hover:bg-surface-container flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">cached</span> Ganti Foto
+                  </button>
+<span class="text-[11px] text-on-surface-variant self-center">foto_la_ode_rudi_3x4.jpg (420 KB)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dropzone 2: KTP / KIA (Aspect Ratio 16:9 Frame) - Needs Re-upload highlight -->
+<div class="p-space-md bg-status-rejected-bg/40 rounded-xl border-2 border-dashed border-error">
+<div class="flex items-center justify-between mb-2">
+<label class="text-label-md font-label-md text-status-rejected-text font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-error text-base">credit_card</span>
+                Dropzone 2: E-KTP / KIA Domisili Konawe Utara (Wajib 16:9)
+              </label>
+<span class="text-[11px] font-bold text-error bg-white px-2 py-0.5 rounded border border-error">Wajib Diganti</span>
+</div>
+<!-- Upload Area -->
+<div class="w-full aspect-[16/9] max-h-40 rounded-lg bg-surface-light border border-error/30 flex flex-col items-center justify-center p-4 text-center cursor-pointer hover:bg-error-container/20 transition-colors">
+<div class="w-10 h-10 rounded-full bg-error-container text-error flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-xl">cloud_upload</span>
+</div>
+<span class="text-label-md font-label-md font-bold text-error">Klik atau Tarik Berkas Scan KTP Baru ke Sini</span>
+<p class="text-[11px] text-on-surface-variant mt-0.5">Pastikan NIK, Foto, dan Alamat terbaca jelas tanpa pantulan flash.</p>
+<span class="text-[10px] text-on-surface-variant font-mono mt-1">PNG, JPG, PDF (Maksimal 5 MB)</span>
+</div>
+</div>
+<!-- Dropzone 3: Dokumen Pendukung PDF -->
+<div class="p-space-md bg-canvas-light rounded-xl border border-border-light">
+<div class="flex items-center justify-between mb-2">
+<label class="text-label-md font-label-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base">description</span>
+                Dropzone 3: Surat Rekomendasi Pengcab &amp; Kartu Keluarga (PDF Gabungan)
+              </label>
+<span class="text-[11px] font-bold text-status-verified-text bg-status-verified-bg px-2 py-0.5 rounded">Tervalidasi</span>
+</div>
+<div class="border-2 border-dashed border-border-light hover:border-primary-container rounded-lg p-3 flex items-center justify-between bg-surface-light">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-red-100 text-red-700 flex items-center justify-center font-bold text-xs">
+                  PDF
+                </div>
+<div>
+<span class="text-xs font-bold text-on-surface block">Rekomendasi_PODSI_KK_Rudi.pdf</span>
+<span class="text-[10px] text-on-surface-variant">1.4 MB • Diunggah 10 Nov 2026</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary p-1">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Drawer Sticky Footer -->
+<div class="p-space-md md:p-space-lg border-t border-border-light bg-surface-light shrink-0 flex items-center justify-end gap-space-sm">
+<button class="px-space-lg py-2.5 border border-border-light rounded-lg text-label-md font-label-md font-semibold text-on-surface hover:bg-canvas-light transition-colors" onclick="toggleDrawer()">
+        Batal
+      </button>
+<button class="px-space-xl py-2.5 bg-primary-container hover:bg-crimson-dark text-on-primary rounded-lg text-label-md font-label-md font-bold shadow-md transition-all flex items-center gap-2" onclick="submitAthleteForm()">
+<span class="material-symbols-outlined text-lg">send</span>
+        Simpan &amp; Kirim ke Tim Verifikator KONI
+      </button>
+</div>
+</div>
+<!-- ================= BOTTOM NAV BAR (Shared Components JSON for Mobile) ================= -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex md:hidden justify-around items-center px-space-sm py-space-xs pb-safe bg-surface-light border-t border-border-light shadow-md">
+<!-- Tab 1 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-label-sm font-label-sm">Eksekutif</span>
+</a>
+<!-- Tab 2 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-xl">verified</span>
+<span class="text-label-sm font-label-sm">Keabsahan</span>
+</a>
+<!-- Tab 3: ACTIVE TAB (Cabor) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary rounded-full px-space-md py-space-xs font-bold" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">sports_handball</span>
+<span class="text-label-sm font-label-sm">Cabor</span>
+</a>
+<!-- Tab 4 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-xl">military_tech</span>
+<span class="text-label-sm font-label-sm">Medali</span>
+</a>
+<!-- Tab 5 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-space-xs font-normal" href="#">
+<span class="material-symbols-outlined text-xl">manage_accounts</span>
+<span class="text-label-sm font-label-sm">Akun</span>
+</a>
+</nav>
+<!-- ================= INLINE SCRIPT FOR INTERACTION ================= -->
+<script>
+    const drawer = document.getElementById('registrationDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    const rejectionContext = document.getElementById('drawerRejectionContext');
+    const drawerTitle = document.getElementById('drawerTitle');
+
+    function toggleDrawer(isCorrection = false) {
+      const isOpen = !drawer.classList.contains('translate-x-full');
+      
+      if (isOpen) {
+        // Close Drawer
+        drawer.classList.add('translate-x-full');
+        overlay.classList.add('opacity-0', 'pointer-events-none');
+        overlay.classList.remove('opacity-100');
+        rejectionContext.classList.add('hidden');
+      } else {
+        // Open Drawer
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+        overlay.classList.add('opacity-100');
+        
+        if (isCorrection) {
+          rejectionContext.classList.remove('hidden');
+          drawerTitle.textContent = "Perbaikan Berkas Atlet (KONI Notice)";
+        } else {
+          rejectionContext.classList.add('hidden');
+          drawerTitle.textContent = "Registrasi & Keabsahan Atlet Baru";
+        }
+      }
+    }
+
+    function triggerCorrectionModal(athleteName) {
+      toggleDrawer(true);
+    }
+
+    function submitAthleteForm() {
+      alert("Berkas Atlet La Ode Rudi berhasil diperbarui dan dikirim ulang ke Tim Verifikator Keabsahan KONI Konawe Utara!");
+      toggleDrawer();
+    }
+
+    // Attach button click from left side nav
+    document.getElementById('openDrawerFromNav').addEventListener('click', () => {
+      toggleDrawer(false);
+    });
+  </script>
+</body></html>
