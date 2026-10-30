@@ -52,7 +52,7 @@ const SEED_DATA = {
     logoKoniUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Logo_KONI.svg/300px-Logo_KONI.svg.png',
     logoKonutUrl: '',
     bannerUrl: '',
-    ketuaKoni: 'Ketua Umum KONI Kabupaten Konawe Utara',
+    ketuaKoni: 'H. Abuhaera, S.Sos., M.Si.',
     kontakBantuan: '0812-4567-8901'
   },
   cabor: [
@@ -1699,19 +1699,60 @@ async function renderPrintView() {
   const validAthletes = athletes.filter(a => a.statusVerifikasi === 'DITERIMA');
 
   const container = document.getElementById('print-roster-body');
-  if (!container) return;
+  if (container) {
+    if (validAthletes.length === 0) {
+      container.innerHTML = `
+        <tr>
+          <td colspan="7" class="text-center py-6 text-slate-400 italic">
+            Belum ada atlet yang berstatus LOLOS VERIFIKASI untuk kontingen resmi.
+          </td>
+        </tr>
+      `;
+    } else {
+      container.innerHTML = validAthletes.map((a, i) => `
+        <tr>
+          <td class="text-center font-bold">${i + 1}</td>
+          <td class="font-bold">${a.namaLengkap}</td>
+          <td class="font-mono text-xs">${a.nik}</td>
+          <td>${a.namaCabor}</td>
+          <td>${a.kelasTanding}</td>
+          <td class="text-center">${a.jenisKelamin === 'L' ? 'Laki-Laki' : 'Perempuan'}</td>
+          <td class="text-center font-bold text-emerald-700">LOLOS VERIFIKASI</td>
+        </tr>
+      `).join('');
+    }
+  }
 
-  container.innerHTML = validAthletes.map((a, i) => `
-    <tr>
-      <td class="text-center font-bold">${i + 1}</td>
-      <td class="font-bold">${a.namaLengkap}</td>
-      <td class="font-mono text-xs">${a.nik}</td>
-      <td>${a.namaCabor}</td>
-      <td>${a.kelasTanding}</td>
-      <td class="text-center">${a.jenisKelamin === 'L' ? 'Laki-Laki' : 'Perempuan'}</td>
-      <td class="text-center font-bold text-emerald-700">LOLOS VERIFIKASI</td>
-    </tr>
-  `).join('');
+  // Sinkronisasi Nama Ketua Umum KONI Konawe Utara
+  const elKetua = document.getElementById('print-doc-ketua-koni');
+  if (elKetua) {
+    const namaKetua = (AppState.publicData && AppState.publicData.settings && AppState.publicData.settings.ketuaKoni)
+      ? AppState.publicData.settings.ketuaKoni
+      : 'H. Abuhaera, S.Sos., M.Si.';
+    elKetua.textContent = namaKetua.toUpperCase();
+  }
+}
+
+function updatePrintDate(val) {
+  const el = document.getElementById('print-doc-date');
+  if (!el) return;
+  if (!val) {
+    el.innerHTML = 'Wanggudu, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2026';
+    return;
+  }
+  const d = new Date(val);
+  if (isNaN(d.getTime())) return;
+  const namaBulan = [
+    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+  ];
+  el.textContent = `Wanggudu, ${d.getDate()} ${namaBulan[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function resetPrintDate() {
+  const inp = document.getElementById('print-date-input');
+  if (inp) inp.value = '';
+  updatePrintDate('');
 }
 
 function exportToExcel() {

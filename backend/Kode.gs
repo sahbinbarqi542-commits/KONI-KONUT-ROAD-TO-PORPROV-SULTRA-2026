@@ -492,7 +492,7 @@ function getPublicLandingData() {
       logoKoniUrl: settings.LOGO_KONI_URL || '',
       logoKonutUrl: settings.LOGO_KONUT_URL || '',
       bannerUrl: settings.BANNER_URL || '',
-      ketuaKoni: settings.KETUA_KONI || 'Ketua Umum KONI Kabupaten Konawe Utara',
+      ketuaKoni: settings.KETUA_KONI || 'H. Abuhaera, S.Sos., M.Si.',
       kontakBantuan: settings.KONTAK_BANTUAN || '0812-3456-7890'
     },
     metrics: {
@@ -1351,7 +1351,7 @@ function setupAppEnvironment() {
   shPengaturan.appendRow(['LOGO_KONI_URL', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Logo_KONI.svg/1200px-Logo_KONI.svg.png', 'Logo KONI']);
   shPengaturan.appendRow(['LOGO_KONUT_URL', '', 'Logo Pemkab Konawe Utara']);
   shPengaturan.appendRow(['BANNER_URL', '', 'Banner Porprov Sultra']);
-  shPengaturan.appendRow(['KETUA_KONI', 'Ketua Umum KONI Kabupaten Konawe Utara', 'Nama Pimpinan']);
+  shPengaturan.appendRow(['KETUA_KONI', 'H. Abuhaera, S.Sos., M.Si.', 'Nama Pimpinan']);
   shPengaturan.appendRow(['KONTAK_BANTUAN', '0812-4567-8901', 'Nomor Helpdesk']);
 
   // Sheet TB_Pengguna
