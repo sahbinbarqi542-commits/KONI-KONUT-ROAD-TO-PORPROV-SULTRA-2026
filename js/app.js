@@ -43,7 +43,7 @@ const AppState = {
 };
 
 // =========================================================================
-// 2. SEED DATA UNTUK DEMO & OFFLINE FALLBACK
+// 2. SEED DATA AWAL (SEMUA TARGET, TOTAL ATLET & MEDALI DIMULAI DARI NOL)
 // =========================================================================
 const SEED_DATA = {
   settings: {
@@ -56,135 +56,32 @@ const SEED_DATA = {
     kontakBantuan: '0812-4567-8901'
   },
   cabor: [
-    { idCabor: 'CAB_DAYUNG', namaCabor: 'Dayung (PODSI)', ketuaCabor: 'Hendra Kurniawan', nomorKontak: '0852-1111-2222', targetEmas: 8, targetPerak: 4, targetPerunggu: 2, totalAtlet: 22, realEmas: 4, realPerak: 2, realPerunggu: 1, totalMedali: 7 },
-    { idCabor: 'CAB_ATLETIK', namaCabor: 'Atletik (PASI)', ketuaCabor: 'Ruslan, S.Pd', nomorKontak: '0812-2222-3333', targetEmas: 6, targetPerak: 5, targetPerunggu: 4, totalAtlet: 28, realEmas: 3, realPerak: 1, realPerunggu: 3, totalMedali: 7 },
-    { idCabor: 'CAB_TAEKWONDO', namaCabor: 'Taekwondo (TI)', ketuaCabor: 'Fitriani, M.Si', nomorKontak: '0821-3333-4444', targetEmas: 4, targetPerak: 3, targetPerunggu: 3, totalAtlet: 15, realEmas: 2, realPerak: 1, realPerunggu: 2, totalMedali: 5 },
-    { idCabor: 'CAB_TAKRAW', namaCabor: 'Sepak Takraw (PSTI)', ketuaCabor: 'Jumardin', nomorKontak: '0853-4444-5555', targetEmas: 3, targetPerak: 2, targetPerunggu: 2, totalAtlet: 12, realEmas: 1, realPerak: 1, realPerunggu: 2, totalMedali: 4 },
-    { idCabor: 'CAB_KARATE', namaCabor: 'Karate (FORKI)', ketuaCabor: 'Irwan Sahputra', nomorKontak: '0813-5555-6666', targetEmas: 4, targetPerak: 3, targetPerunggu: 4, totalAtlet: 16, realEmas: 1, realPerak: 2, realPerunggu: 3, totalMedali: 6 },
-    { idCabor: 'CAB_PANAHAN', namaCabor: 'Panahan (PERPANI)', ketuaCabor: 'dr. Wahyudi', nomorKontak: '0822-6666-7777', targetEmas: 3, targetPerak: 2, targetPerunggu: 3, totalAtlet: 10, realEmas: 1, realPerak: 1, realPerunggu: 1, totalMedali: 3 },
-    { idCabor: 'CAB_SILAT', namaCabor: 'Pencak Silat (IPSI)', ketuaCabor: 'Bahrun', nomorKontak: '0851-7777-8888', targetEmas: 4, targetPerak: 3, targetPerunggu: 4, totalAtlet: 18, realEmas: 0, realPerak: 0, realPerunggu: 2, totalMedali: 2 },
-    { idCabor: 'CAB_CATUR', namaCabor: 'Catur (PERCASI)', ketuaCabor: 'Mansyur, SE', nomorKontak: '0852-8888-9999', targetEmas: 2, targetPerak: 2, targetPerunggu: 2, totalAtlet: 8, realEmas: 0, realPerak: 0, realPerunggu: 0, totalMedali: 0 }
+    { idCabor: 'CAB_DAYUNG', namaCabor: 'Dayung (PODSI)', ketuaCabor: 'Hendra Kurniawan', nomorKontak: '0852-1111-2222', targetEmas: 0, targetPerak: 0, targetPerunggu: 0, totalAtlet: 0, realEmas: 0, realPerak: 0, realPerunggu: 0, totalMedali: 0 },
+    { idCabor: 'CAB_ATLETIK', namaCabor: 'Atletik (PASI)', ketuaCabor: 'Ruslan, S.Pd', nomorKontak: '0812-2222-3333', targetEmas: 0, targetPerak: 0, targetPerunggu: 0, totalAtlet: 0, realEmas: 0, realPerak: 0, realPerunggu: 0, totalMedali: 0 },
+    { idCabor: 'CAB_TAEKWONDO', namaCabor: 'Taekwondo (TI)', ketuaCabor: 'Fitriani, M.Si', nomorKontak: '0821-3333-4444', targetEmas: 0, targetPerak: 0, targetPerunggu: 0, totalAtlet: 0, realEmas: 0, realPerak: 0, realPerunggu: 0, totalMedali: 0 },
+    { idCabor: 'CAB_TAKRAW', namaCabor: 'Sepak Takraw (PSTI)', ketuaCabor: 'Jumardin', nomorKontak: '0853-4444-5555', targetEmas: 0, targetPerak: 0, targetPerunggu: 0, totalAtlet: 0, realEmas: 0, realPerak: 0, realPerunggu: 0, totalMedali: 0 },
+    { idCabor: 'CAB_KARATE', namaCabor: 'Karate (FORKI)', ketuaCabor: 'Irwan Sahputra', nomorKontak: '0813-5555-6666', targetEmas: 0, targetPerak: 0, targetPerunggu: 0, totalAtlet: 0, realEmas: 0, realPerak: 0, realPerunggu: 0, totalMedali: 0 },
+    { idCabor: 'CAB_PANAHAN', namaCabor: 'Panahan (PERPANI)', ketuaCabor: 'dr. Wahyudi', nomorKontak: '0822-6666-7777', targetEmas: 0, targetPerak: 0, targetPerunggu: 0, totalAtlet: 0, realEmas: 0, realPerak: 0, realPerunggu: 0, totalMedali: 0 },
+    { idCabor: 'CAB_SILAT', namaCabor: 'Pencak Silat (IPSI)', ketuaCabor: 'Bahrun', nomorKontak: '0851-7777-8888', targetEmas: 0, targetPerak: 0, targetPerunggu: 0, totalAtlet: 0, realEmas: 0, realPerak: 0, realPerunggu: 0, totalMedali: 0 },
+    { idCabor: 'CAB_CATUR', namaCabor: 'Catur (PERCASI)', ketuaCabor: 'Mansyur, SE', nomorKontak: '0852-8888-9999', targetEmas: 0, targetPerak: 0, targetPerunggu: 0, totalAtlet: 0, realEmas: 0, realPerak: 0, realPerunggu: 0, totalMedali: 0 }
   ],
-  athletes: [
-    {
-      idAtlet: 'ATL_001',
-      idCabor: 'CAB_DAYUNG',
-      namaCabor: 'Dayung (PODSI)',
-      nik: '7408011204020001',
-      namaLengkap: 'La Ode Muhammad Arfan',
-      tempatLahir: 'Wanggudu',
-      tglLahir: '2002-04-12',
-      jenisKelamin: 'L',
-      kelasTanding: 'Kayak 1 (K-1) 1000m Putra',
-      alamat: 'Kec. Lasolo, Kab. Konawe Utara',
-      noHp: '082199887766',
-      statusVerifikasi: 'PENDING',
-      catatanVerifikasi: '',
-      diverifikasiOleh: '',
-      tglVerifikasi: '',
-      berkas: [
-        { jenis: 'FOTO_3X4', viewUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80', namaFile: 'Pas_Foto_Arfan.jpg' },
-        { jenis: 'KTP', viewUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80', namaFile: 'Scan_KTP_Arfan.jpg' }
-      ]
-    },
-    {
-      idAtlet: 'ATL_002',
-      idCabor: 'CAB_DAYUNG',
-      namaCabor: 'Dayung (PODSI)',
-      nik: '7408021508030002',
-      namaLengkap: 'Herman Syahputra',
-      tempatLahir: 'Asera',
-      tglLahir: '2003-08-15',
-      jenisKelamin: 'L',
-      kelasTanding: 'Canoe 1 (C-1) 500m Putra',
-      alamat: 'Kec. Asera, Kab. Konawe Utara',
-      noHp: '085288776655',
-      statusVerifikasi: 'DITERIMA',
-      catatanVerifikasi: 'Dokumen lengkap dan absah sesuai regulasi Porprov.',
-      diverifikasiOleh: 'Admin Induk KONI',
-      tglVerifikasi: '2026-03-10T10:00:00Z',
-      berkas: [
-        { jenis: 'FOTO_3X4', viewUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80', namaFile: 'Foto_Herman.jpg' },
-        { jenis: 'KTP', viewUrl: 'https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=800&q=80', namaFile: 'KTP_Herman.jpg' }
-      ]
-    },
-    {
-      idAtlet: 'ATL_003',
-      idCabor: 'CAB_DAYUNG',
-      namaCabor: 'Dayung (PODSI)',
-      nik: '7408032009010003',
-      namaLengkap: 'Rudi Haryanto',
-      tempatLahir: 'Lembo',
-      tglLahir: '2001-09-20',
-      jenisKelamin: 'L',
-      kelasTanding: 'Kayak 2 (K-2) 1000m Putra',
-      alamat: 'Kec. Lembo, Kab. Konawe Utara',
-      noHp: '081277665544',
-      statusVerifikasi: 'DITOLAK',
-      catatanVerifikasi: 'Foto KTP buram dan NIK tidak terbaca dengan jelas. Harap unggah ulang dokumen asli.',
-      diverifikasiOleh: 'Admin Induk KONI',
-      tglVerifikasi: '2026-03-10T11:00:00Z',
-      berkas: [
-        { jenis: 'FOTO_3X4', viewUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80', namaFile: 'Foto_Rudi.jpg' },
-        { jenis: 'KTP', viewUrl: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=800&q=80', namaFile: 'KTP_Buram.jpg' }
-      ]
-    },
-    {
-      idAtlet: 'ATL_004',
-      idCabor: 'CAB_TAEKWONDO',
-      namaCabor: 'Taekwondo (TI)',
-      nik: '7408015502040004',
-      namaLengkap: 'Siti Rahmawati',
-      tempatLahir: 'Wanggudu',
-      tglLahir: '2004-02-15',
-      jenisKelamin: 'P',
-      kelasTanding: 'Kyorugi Under 49kg Putri',
-      alamat: 'Kec. Oheo, Kab. Konawe Utara',
-      noHp: '085311223344',
-      statusVerifikasi: 'DITERIMA',
-      catatanVerifikasi: 'Berkas lolos verifikasi.',
-      diverifikasiOleh: 'Admin Induk KONI',
-      tglVerifikasi: '2026-03-11T09:00:00Z',
-      berkas: [
-        { jenis: 'FOTO_3X4', viewUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80', namaFile: 'Foto_Siti.jpg' },
-        { jenis: 'KTP', viewUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80', namaFile: 'KTP_Siti.jpg' }
-      ]
-    },
-    {
-      idAtlet: 'ATL_005',
-      idCabor: 'CAB_ATLETIK',
-      namaCabor: 'Atletik (PASI)',
-      nik: '7408021010020005',
-      namaLengkap: 'Budi Santoso',
-      tempatLahir: 'Lasolo',
-      tglLahir: '2002-10-10',
-      jenisKelamin: 'L',
-      kelasTanding: 'Lari 100m & 200m Putra',
-      alamat: 'Kec. Lasolo, Kab. Konawe Utara',
-      noHp: '081388776611',
-      statusVerifikasi: 'PENDING',
-      catatanVerifikasi: '',
-      diverifikasiOleh: '',
-      tglVerifikasi: '',
-      berkas: [
-        { jenis: 'FOTO_3X4', viewUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80', namaFile: 'Foto_Budi.jpg' },
-        { jenis: 'KTP', viewUrl: 'https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=800&q=80', namaFile: 'KTP_Budi.jpg' }
-      ]
-    }
-  ]
+  athletes: []
 };
 
 // Inisialisasi local database
 function getLocalDb() {
+  const DB_VERSION = 'v2_zero_start';
+  const storedVer = localStorage.getItem('koni_db_version');
   const stored = localStorage.getItem('koni_local_db');
-  if (!stored) {
+  if (!stored || storedVer !== DB_VERSION) {
+    localStorage.setItem('koni_db_version', DB_VERSION);
     localStorage.setItem('koni_local_db', JSON.stringify(SEED_DATA));
-    return SEED_DATA;
+    return JSON.parse(JSON.stringify(SEED_DATA));
   }
   try {
     return JSON.parse(stored);
   } catch (e) {
-    return SEED_DATA;
+    return JSON.parse(JSON.stringify(SEED_DATA));
   }
 }
 
@@ -369,6 +266,9 @@ function handleMockApi(action, payload) {
             berkas: payload.berkas || []
           };
           db.athletes.unshift(newAthlete);
+          if (caborObj && caborObj.idCabor) {
+            caborObj.totalAtlet = (caborObj.totalAtlet || 0) + 1;
+          }
           saveLocalDb(db);
           resolve({ success: true, message: 'Atlet berhasil didaftarkan!', idAtlet: id });
           break;
@@ -430,18 +330,51 @@ function handleMockApi(action, payload) {
         }
 
         case 'recordMedal': {
-          const cabor = db.cabor.find(c => c.idCabor === payload.idCabor);
+          const cId = (AppState.currentUser && AppState.currentUser.role === 'ADMIN_CABOR') ? AppState.currentUser.caborId : payload.idCabor;
+          const cabor = db.cabor.find(c => c.idCabor === cId);
           if (cabor) {
             const kat = String(payload.kategori).toUpperCase();
             if (kat === 'EMAS') cabor.realEmas = (cabor.realEmas || 0) + 1;
             else if (kat === 'PERAK') cabor.realPerak = (cabor.realPerak || 0) + 1;
             else if (kat === 'PERUNGGU') cabor.realPerunggu = (cabor.realPerunggu || 0) + 1;
-            cabor.totalMedali = cabor.realEmas + cabor.realPerak + cabor.realPerunggu;
+            cabor.totalMedali = (cabor.realEmas || 0) + (cabor.realPerak || 0) + (cabor.realPerunggu || 0);
             saveLocalDb(db);
             resolve({ success: true, message: 'Medali ' + kat + ' berhasil dicatat untuk cabor ' + cabor.namaCabor + '!' });
           } else {
             resolve({ success: false, message: 'Cabor tidak ditemukan.' });
           }
+          break;
+        }
+
+        case 'updateCaborTarget': {
+          const cId = (AppState.currentUser && AppState.currentUser.role === 'ADMIN_CABOR') ? AppState.currentUser.caborId : (payload.idCabor || (AppState.currentUser ? AppState.currentUser.caborId : ''));
+          const cabor = db.cabor.find(c => c.idCabor === cId);
+          if (cabor) {
+            if (payload.targetEmas !== undefined) cabor.targetEmas = Number(payload.targetEmas) || 0;
+            if (payload.targetPerak !== undefined) cabor.targetPerak = Number(payload.targetPerak) || 0;
+            if (payload.targetPerunggu !== undefined) cabor.targetPerunggu = Number(payload.targetPerunggu) || 0;
+            saveLocalDb(db);
+            resolve({ success: true, message: 'Target medali cabor berhasil disimpan dan otomatis terbarui di halaman utama web!' });
+          } else {
+            resolve({ success: false, message: 'Cabang Olahraga tidak ditemukan.' });
+          }
+          break;
+        }
+
+        case 'resetInitialDataToZero': {
+          db.cabor.forEach(c => {
+            c.targetEmas = 0;
+            c.targetPerak = 0;
+            c.targetPerunggu = 0;
+            c.totalAtlet = 0;
+            c.realEmas = 0;
+            c.realPerak = 0;
+            c.realPerunggu = 0;
+            c.totalMedali = 0;
+          });
+          db.athletes = [];
+          saveLocalDb(db);
+          resolve({ success: true, message: 'Seluruh data awal berhasil dikosongkan (Total Atlet: 0, Target Emas: 0, Raihan Emas: 0)!' });
           break;
         }
 
@@ -609,13 +542,17 @@ async function loadPublicLanding() {
   const elRealEmas = document.getElementById('pub-stat-real-emas');
   const elVerifiedPercent = document.getElementById('pub-stat-verified-percent');
 
-  if (elTotalCabor) elTotalCabor.innerText = d.metrics.totalCabor;
-  if (elTotalAtlet) elTotalAtlet.innerText = d.metrics.totalAtlet;
-  if (elTargetEmas) elTargetEmas.innerText = d.metrics.targetEmas;
-  if (elRealEmas) elRealEmas.innerText = d.metrics.realEmas;
-  if (elVerifiedPercent && d.metrics.totalAtlet > 0) {
-    const p = Math.round((d.metrics.atletVerified / d.metrics.totalAtlet) * 100);
-    elVerifiedPercent.innerText = p + '% Terverifikasi';
+  if (elTotalCabor) elTotalCabor.innerText = d.metrics.totalCabor || 0;
+  if (elTotalAtlet) elTotalAtlet.innerText = d.metrics.totalAtlet || 0;
+  if (elTargetEmas) elTargetEmas.innerText = d.metrics.targetEmas || 0;
+  if (elRealEmas) elRealEmas.innerText = d.metrics.realEmas || 0;
+  if (elVerifiedPercent) {
+    if (d.metrics.totalAtlet > 0) {
+      const p = Math.round((d.metrics.atletVerified / d.metrics.totalAtlet) * 100);
+      elVerifiedPercent.innerText = p + '% Terverifikasi';
+    } else {
+      elVerifiedPercent.innerText = '0% Terverifikasi';
+    }
   }
 
   // Render Podium Medali Teratas
@@ -1322,10 +1259,19 @@ async function loadMedalStandings() {
 
 function openRecordMedalModal(caborId) {
   const selCabor = document.getElementById('medal-modal-cabor');
+  const list = (AppState.caborList && AppState.caborList.length > 0)
+    ? AppState.caborList
+    : ((AppState.publicData && AppState.publicData.caborStandings) || getLocalDb().cabor || []);
+
+  const user = AppState.currentUser;
+  const isCaborAdmin = user && user.role === 'ADMIN_CABOR';
+  const targetId = isCaborAdmin ? user.caborId : (caborId || (list[0] ? list[0].idCabor : ''));
+
   if (selCabor) {
-    selCabor.innerHTML = AppState.caborList.map(c => `
-      <option value="${c.idCabor}" ${c.idCabor === caborId ? 'selected' : ''}>${c.namaCabor}</option>
+    selCabor.innerHTML = list.map(c => `
+      <option value="${c.idCabor}" ${c.idCabor === targetId ? 'selected' : ''}>${c.namaCabor}</option>
     `).join('');
+    selCabor.disabled = isCaborAdmin;
   }
   document.getElementById('modal-record-medal').classList.remove('hidden');
 }
@@ -1354,7 +1300,12 @@ async function submitRecordMedal(e) {
   if (res.success) {
     showToast(res.message, 'success');
     closeRecordMedalModal();
-    loadMedalStandings();
+    await loadPublicLanding();
+    if (AppState.currentView === 'portal-cabor') {
+      loadCaborPortal();
+    } else {
+      loadMedalStandings();
+    }
   } else {
     showToast(res.message, 'error');
   }
@@ -1384,6 +1335,30 @@ async function loadCaborPortal() {
   setTxt('cabor-portal-verified', verified);
   setTxt('cabor-portal-pending', pending);
   setTxt('cabor-portal-rejected', rejected);
+
+  // Ambil data cabor untuk target & raihan medali
+  let caborObj = null;
+  if (AppState.publicData && AppState.publicData.caborStandings) {
+    caborObj = AppState.publicData.caborStandings.find(c => String(c.idCabor) === String(caborId));
+  }
+  if (!caborObj) {
+    const db = getLocalDb();
+    caborObj = db.cabor.find(c => String(c.idCabor) === String(caborId));
+  }
+
+  const targetEmas = caborObj ? (Number(caborObj.targetEmas) || 0) : 0;
+  const targetPerak = caborObj ? (Number(caborObj.targetPerak) || 0) : 0;
+  const targetPerunggu = caborObj ? (Number(caborObj.targetPerunggu) || 0) : 0;
+  const realEmas = caborObj ? (Number(caborObj.realEmas) || 0) : 0;
+  const realPerak = caborObj ? (Number(caborObj.realPerak) || 0) : 0;
+  const realPerunggu = caborObj ? (Number(caborObj.realPerunggu) || 0) : 0;
+
+  setTxt('cabor-portal-target-emas', targetEmas);
+  setTxt('cabor-portal-target-perak', targetPerak);
+  setTxt('cabor-portal-target-perunggu', targetPerunggu);
+  setTxt('cabor-portal-real-emas', realEmas);
+  setTxt('cabor-portal-real-perak', realPerak);
+  setTxt('cabor-portal-real-perunggu', realPerunggu);
 
   // Tampilkan Kartu Peringatan Darurat jika ada berkas ditolak
   const alertCard = document.getElementById('cabor-urgent-rejected-card');
@@ -1539,10 +1514,105 @@ async function submitAthleteRegistration(e) {
   if (res.success) {
     showToast(res.message, 'success');
     closeAthleteDrawer();
+    await loadPublicLanding();
     loadCaborPortal();
   } else {
     showToast(res.message, 'error');
   }
+}
+
+// =========================================================================
+// PENGATURAN TARGET & RAIHAN MEDALI CABOR
+// =========================================================================
+function openCaborTargetModal() {
+  const caborId = (AppState.currentUser && AppState.currentUser.caborId) ? AppState.currentUser.caborId : '';
+  let caborObj = null;
+  if (AppState.publicData && AppState.publicData.caborStandings) {
+    caborObj = AppState.publicData.caborStandings.find(c => String(c.idCabor) === String(caborId));
+  }
+  if (!caborObj) {
+    const db = getLocalDb();
+    caborObj = db.cabor.find(c => String(c.idCabor) === String(caborId));
+  }
+
+  document.getElementById('cabor-target-input-emas').value = caborObj ? (caborObj.targetEmas || 0) : 0;
+  document.getElementById('cabor-target-input-perak').value = caborObj ? (caborObj.targetPerak || 0) : 0;
+  document.getElementById('cabor-target-input-perunggu').value = caborObj ? (caborObj.targetPerunggu || 0) : 0;
+
+  document.getElementById('modal-cabor-target').classList.remove('hidden');
+}
+
+function closeCaborTargetModal() {
+  document.getElementById('modal-cabor-target').classList.add('hidden');
+}
+
+async function submitCaborTarget(e) {
+  if (e) e.preventDefault();
+  const caborId = (AppState.currentUser && AppState.currentUser.caborId) ? AppState.currentUser.caborId : '';
+  const emas = Number(document.getElementById('cabor-target-input-emas').value) || 0;
+  const perak = Number(document.getElementById('cabor-target-input-perak').value) || 0;
+  const perunggu = Number(document.getElementById('cabor-target-input-perunggu').value) || 0;
+
+  const btn = document.getElementById('btn-save-cabor-target');
+  const originalHtml = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined text-xs animate-spin">progress_activity</span> Menyimpan...';
+  }
+
+  try {
+    const res = await apiCall('updateCaborTarget', {
+      idCabor: caborId,
+      targetEmas: emas,
+      targetPerak: perak,
+      targetPerunggu: perunggu
+    }, true);
+
+    if (res && res.success) {
+      showToast('Target medali cabor berhasil disimpan! Tampilan web awal langsung terbarui.', 'success');
+      closeCaborTargetModal();
+      await loadPublicLanding();
+      loadCaborPortal();
+    } else {
+      showToast((res && res.message) ? res.message : 'Gagal menyimpan target.', 'error');
+    }
+  } catch (err) {
+    showToast('Terjadi kesalahan: ' + err.message, 'error');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+    }
+  }
+}
+
+function openCaborRecordMedalModal() {
+  const caborId = (AppState.currentUser && AppState.currentUser.caborId) ? AppState.currentUser.caborId : '';
+  openRecordMedalModal(caborId);
+}
+
+async function resetDataAwalToZero() {
+  if (!confirm('PERINGATAN: Apakah Anda yakin ingin mengosongkan seluruh data awal (Total Atlet, Target Emas, dan Raihan Medali menjadi 0)?')) {
+    return;
+  }
+
+  try {
+    const res = await apiCall('resetInitialDataToZero', {}, true);
+    if (res && res.success) {
+      showToast(res.message, 'success');
+      await loadPublicLanding();
+      if (AppState.currentUser && AppState.currentUser.role === 'ADMIN_CABOR') {
+        loadCaborPortal();
+      } else if (AppState.currentUser && AppState.currentUser.role === 'ADMIN_INDUK') {
+        loadExecutiveDashboard();
+      }
+    } else {
+      showToast((res && res.message) ? res.message : 'Gagal mengosongkan data.', 'error');
+    }
+  } catch (err) {
+    showToast('Terjadi kesalahan: ' + err.message, 'error');
+  }
+}
 }
 
 // =========================================================================

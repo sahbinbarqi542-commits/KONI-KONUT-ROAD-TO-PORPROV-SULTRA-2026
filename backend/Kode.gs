@@ -273,6 +273,8 @@ function routePost_(action, body) {
       return getAthletesList(user, d.caborId || '', d.status || '');
     case 'recordMedal':
       return recordMedal(user, d);
+    case 'updateCaborTarget':
+      return updateCaborTarget(user, d);
     case 'getMedalTally':
       return getMedalTally();
     case 'changePassword':
@@ -301,6 +303,9 @@ function routePost_(action, body) {
     case 'resetUserPassword':
       if (user.role !== 'ADMIN_INDUK') return rbacDenied_();
       return resetUserPassword(d);
+    case 'resetInitialDataToZero':
+      if (user.role !== 'ADMIN_INDUK') return rbacDenied_();
+      return resetInitialDataToZero(user);
 
     // ----------------------------------------------------
     // Modul Admin Cabor & Pendaftaran Atlet
@@ -831,6 +836,97 @@ function recordMedal(user, data) {
 }
 
 /**
+ * Atur Target Medali Cabang Olahraga oleh Admin Cabor / Admin Induk
+ * Otomatis terakumulasi di tampilan depan website (Landing Page)
+ */
+function updateCaborTarget(user, data) {
+  const idCabor = (user.role === 'ADMIN_CABOR') ? user.caborId : (data.idCabor || user.caborId);
+  if (!idCabor) return { success: false, message: 'ID Cabang Olahraga tidak ditemukan.' };
+
+  const ss = getSpreadsheet_();
+  const sh = ss.getSheetByName('TB_Cabor');
+  const values = sh.getDataRange().getValues();
+  const h = values[0].map(String);
+  const idxId = h.indexOf('id_cabor');
+  const idxEmas = h.indexOf('target_emas');
+  const idxPerak = h.indexOf('target_perak');
+  const idxPerunggu = h.indexOf('target_perunggu');
+
+  let found = false;
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][idxId]) === String(idCabor)) {
+      if (idxEmas >= 0 && data.targetEmas !== undefined) sh.getRange(i + 1, idxEmas + 1).setValue(Number(data.targetEmas) || 0);
+      if (idxPerak >= 0 && data.targetPerak !== undefined) sh.getRange(i + 1, idxPerak + 1).setValue(Number(data.targetPerak) || 0);
+      if (idxPerunggu >= 0 && data.targetPerunggu !== undefined) sh.getRange(i + 1, idxPerunggu + 1).setValue(Number(data.targetPerunggu) || 0);
+      found = true;
+      break;
+    }
+  }
+
+  if (found) {
+    bump('global');
+    catatLog_(user.userId, user.role, 'UPDATE_TARGET_CABOR', 'Update target medali untuk Cabor ' + idCabor + ': Emas=' + data.targetEmas + ', Perak=' + data.targetPerak + ', Perunggu=' + data.targetPerunggu);
+    return { success: true, message: 'Target medali cabor berhasil disimpan dan otomatis terbarui di halaman utama web!' };
+  }
+  return { success: false, message: 'Data Cabang Olahraga tidak ditemukan di database spreadsheet.' };
+}
+
+/**
+ * Utilitas Reset / Pengosongan Data Awal Menjadi Nol
+ * Total Atlet = 0, Target Emas = 0, Raihan Emas = 0
+ * Memberi kesempatan kepada Admin Cabor untuk menginput semuanya secara mandiri.
+ */
+function resetInitialDataToZero(user) {
+  if (user && user.role !== 'ADMIN_INDUK') return rbacDenied_();
+
+  const ss = getSpreadsheet_();
+
+  // 1. Reset seluruh kolom target dan total atlet di TB_Cabor menjadi 0
+  const shCabor = ss.getSheetByName('TB_Cabor');
+  if (shCabor) {
+    const data = shCabor.getDataRange().getValues();
+    const h = data[0].map(String);
+    const idxEmas = h.indexOf('target_emas');
+    const idxPerak = h.indexOf('target_perak');
+    const idxPerunggu = h.indexOf('target_perunggu');
+    const idxTotal = h.indexOf('total_atlet');
+
+    for (let r = 2; r <= data.length; r++) {
+      if (idxEmas >= 0) shCabor.getRange(r, idxEmas + 1).setValue(0);
+      if (idxPerak >= 0) shCabor.getRange(r, idxPerak + 1).setValue(0);
+      if (idxPerunggu >= 0) shCabor.getRange(r, idxPerunggu + 1).setValue(0);
+      if (idxTotal >= 0) shCabor.getRange(r, idxTotal + 1).setValue(0);
+    }
+  }
+
+  // 2. Kosongkan TB_Atlet (sisakan baris header)
+  const shAtlet = ss.getSheetByName('TB_Atlet');
+  if (shAtlet && shAtlet.getLastRow() > 1) {
+    shAtlet.deleteRows(2, shAtlet.getLastRow() - 1);
+  }
+
+  // 3. Kosongkan TB_Berkas (sisakan baris header)
+  const shBerkas = ss.getSheetByName('TB_Berkas');
+  if (shBerkas && shBerkas.getLastRow() > 1) {
+    shBerkas.deleteRows(2, shBerkas.getLastRow() - 1);
+  }
+
+  // 4. Kosongkan TB_Medali (sisakan baris header)
+  const shMedali = ss.getSheetByName('TB_Medali');
+  if (shMedali && shMedali.getLastRow() > 1) {
+    shMedali.deleteRows(2, shMedali.getLastRow() - 1);
+  }
+
+  // 5. Bust Cache
+  bump('global');
+  if (user) {
+    catatLog_(user.userId, user.role, 'RESET_DATA_AWAL', 'Mereset data awal atlet, target, dan raihan medali menjadi nol.');
+  }
+
+  return { success: true, message: 'Data awal berhasil dikosongkan (Total Atlet: 0, Target Emas: 0, Raihan Emas: 0). Cabor kini dapat mengisi data dari awal!' };
+}
+
+/**
  * Tambah / Perbarui Data Cabang Olahraga
  */
 function saveCabor(data) {
@@ -1257,18 +1353,18 @@ function setupAppEnvironment() {
   shPengguna.appendRow(['USR_SUPERADMIN', 'admin_koni', adminHash, 'Admin Induk KONI Konut', 'ADMIN_INDUK', '', '081234567890', 'AKTIF', '']);
   setProp_('SALT_USR_SUPERADMIN', adminSalt);
 
-  // Sheet TB_Cabor
+  // Sheet TB_Cabor (Inisialisasi Target Emas, Perak, Perunggu, dan Total Atlet Mulai dari 0)
   const shCabor = ss.insertSheet('TB_Cabor');
   shCabor.appendRow(['id_cabor', 'nama_cabor', 'ketua_cabor', 'nomor_kontak', 'target_emas', 'target_perak', 'target_perunggu', 'total_atlet', 'keterangan']);
   const sampleCabor = [
-    ['CAB_DAYUNG', 'Dayung (PODSI)', 'Hendra Kurniawan', '0852xxxx11', 8, 4, 2, 22, 'Cabor unggulan maritim'],
-    ['CAB_ATLETIK', 'Atletik (PASI)', 'Ruslan, S.Pd', '0812xxxx22', 6, 5, 4, 28, 'Lari jarak pendek & lompat'],
-    ['CAB_TAEKWONDO', 'Taekwondo (TI)', 'Fitriani, M.Si', '0821xxxx33', 4, 3, 3, 15, 'Kyorugi & Poomsae'],
-    ['CAB_TAKRAW', 'Sepak Takraw (PSTI)', 'Jumardin', '0853xxxx44', 3, 2, 2, 12, 'Inter regu putra & putri'],
-    ['CAB_KARATE', 'Karate (FORKI)', 'Irwan Sahputra', '0813xxxx55', 4, 3, 4, 16, 'Kumite & Kata'],
-    ['CAB_PANAHAN', 'Panahan (PERPANI)', 'dr. Wahyudi', '0822xxxx66', 3, 2, 3, 10, 'Divisi Recurve & Compound'],
-    ['CAB_SILAT', 'Pencak Silat (IPSI)', 'Bahrun', '0851xxxx77', 4, 3, 4, 18, 'Tanding putra/putri'],
-    ['CAB_CATUR', 'Catur (PERCASI)', 'Mansyur, SE', '0852xxxx88', 2, 2, 2, 8, 'Catur cepat & standar']
+    ['CAB_DAYUNG', 'Dayung (PODSI)', 'Hendra Kurniawan', '0852xxxx11', 0, 0, 0, 0, 'Cabor unggulan maritim'],
+    ['CAB_ATLETIK', 'Atletik (PASI)', 'Ruslan, S.Pd', '0812xxxx22', 0, 0, 0, 0, 'Lari jarak pendek & lompat'],
+    ['CAB_TAEKWONDO', 'Taekwondo (TI)', 'Fitriani, M.Si', '0821xxxx33', 0, 0, 0, 0, 'Kyorugi & Poomsae'],
+    ['CAB_TAKRAW', 'Sepak Takraw (PSTI)', 'Jumardin', '0853xxxx44', 0, 0, 0, 0, 'Inter regu putra & putri'],
+    ['CAB_KARATE', 'Karate (FORKI)', 'Irwan Sahputra', '0813xxxx55', 0, 0, 0, 0, 'Kumite & Kata'],
+    ['CAB_PANAHAN', 'Panahan (PERPANI)', 'dr. Wahyudi', '0822xxxx66', 0, 0, 0, 0, 'Divisi Recurve & Compound'],
+    ['CAB_SILAT', 'Pencak Silat (IPSI)', 'Bahrun', '0851xxxx77', 0, 0, 0, 0, 'Tanding putra/putri'],
+    ['CAB_CATUR', 'Catur (PERCASI)', 'Mansyur, SE', '0852xxxx88', 0, 0, 0, 0, 'Catur cepat & standar']
   ];
   sampleCabor.forEach(c => shCabor.appendRow(c));
 
@@ -1278,21 +1374,17 @@ function setupAppEnvironment() {
   shPengguna.appendRow(['USR_DAYUNG', 'cabor_dayung', dayungHash, 'Admin Cabor Dayung (PODSI)', 'ADMIN_CABOR', 'CAB_DAYUNG', '0852xxxx11', 'AKTIF', '']);
   setProp_('SALT_USR_DAYUNG', dayungSalt);
 
-  // Sheet TB_Atlet
+  // Sheet TB_Atlet (Awal Kosong - Menunggu Diisi Admin Cabor)
   const shAtlet = ss.insertSheet('TB_Atlet');
   shAtlet.appendRow(['id_atlet', 'id_cabor', 'nik', 'nama_lengkap', 'tempat_lahir', 'tgl_lahir', 'jenis_kelamin', 'kelas_nomor_tanding', 'alamat_domisili', 'no_hp', 'status_verifikasi', 'catatan_verifikasi', 'diverifikasi_oleh', 'tgl_verifikasi']);
-  shAtlet.appendRow(['ATL_001', 'CAB_DAYUNG', '7408011204020001', 'La Ode Muhammad Arfan', 'Wanggudu', '2002-04-12', 'L', 'Kayak 1 (K-1) 1000m Putra', 'Kec. Lasolo, Kab. Konawe Utara', '082199887766', 'PENDING', '', '', '']);
-  shAtlet.appendRow(['ATL_002', 'CAB_DAYUNG', '7408021508030002', 'Herman Syahputra', 'Asera', '2003-08-15', 'L', 'Canoe 1 (C-1) 500m Putra', 'Kec. Asera, Kab. Konawe Utara', '085288776655', 'DITERIMA', 'Berkas lengkap dan sesuai regulasi', 'Admin Induk KONI', '2026-03-10T10:00:00Z']);
-  shAtlet.appendRow(['ATL_003', 'CAB_DAYUNG', '7408032009010003', 'Rudi Haryanto', 'Lembo', '2001-09-20', 'L', 'Kayak 2 (K-2) 1000m Putra', 'Kec. Lembo, Kab. Konawe Utara', '081277665544', 'DITOLAK', 'Foto KTP buram / tidak terbaca NIK-nya', 'Admin Induk KONI', '2026-03-10T11:00:00Z']);
 
-  // Sheet TB_Berkas
+  // Sheet TB_Berkas (Awal Kosong)
   const shBerkas = ss.insertSheet('TB_Berkas');
   shBerkas.appendRow(['id_berkas', 'id_atlet', 'jenis_dokumen', 'drive_file_id', 'drive_view_url', 'drive_download_url', 'nama_file_asli', 'tgl_unggah']);
 
-  // Sheet TB_Medali
+  // Sheet TB_Medali (Awal Kosong - Menunggu Diisi Admin Cabor / Induk)
   const shMedali = ss.insertSheet('TB_Medali');
   shMedali.appendRow(['id_medali', 'id_cabor', 'id_atlet', 'kelas_nomor', 'kategori_medali', 'tgl_perolehan', 'lokasi_venue', 'keterangan', 'dicatat_oleh']);
-  shMedali.appendRow(['MED_001', 'CAB_DAYUNG', 'ATL_002', 'Canoe 1 (C-1) 500m Putra', 'EMAS', '2026-11-20', 'Danau Telaga Biru', 'Juara 1 Porprov Sultra', 'Admin Cabor Dayung']);
 
   // Sheet TB_LogAudit
   const shLog = ss.insertSheet('TB_LogAudit');
