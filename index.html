@@ -712,6 +712,19 @@
           </div>
         </div>
 
+        <!-- SUPER ADMIN CABOR SELECTOR BAR -->
+        <div id="cabor-portal-admin-switch" class="hidden p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-amber-600">manage_accounts</span>
+            <span class="text-xs font-bold text-amber-900 dark:text-amber-200">Mode Super Admin: Kelola Cabor</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="text-[11px] font-semibold text-slate-500">Pilih Cabor:</label>
+            <select id="cabor-portal-admin-select" onchange="changeAdminCaborView(this.value)" class="text-xs p-2 bg-white dark:bg-slate-800 border rounded-lg font-bold text-slate-900 dark:text-white">
+            </select>
+          </div>
+        </div>
+
         <!-- URGENT CONDITIONAL REJECTION ALERT -->
         <div id="cabor-urgent-rejected-card" class="hidden p-4 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 flex items-start gap-3">
           <span class="material-symbols-outlined text-red-600 text-2xl shrink-0 mt-0.5">warning</span>
@@ -1314,6 +1327,11 @@
         </div>
 
         <form id="form-athlete-reg" onsubmit="submitAthleteRegistration(event)" class="space-y-3.5">
+          <div id="reg-cabor-container" class="hidden">
+            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Cabang Olahraga Atlet</label>
+            <select id="reg-cabor-select" class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border rounded-xl font-bold text-slate-900 dark:text-white">
+            </select>
+          </div>
           <div>
             <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nomor Induk Kependudukan (NIK)</label>
             <input type="text" id="reg-nik" required maxlength="16" placeholder="16 digit angka NIK..."

@@ -191,7 +191,7 @@ function handleMockApi(action, payload) {
         case 'login': {
           const u = String(payload.username || '').toLowerCase();
           const p = String(payload.password || '');
-          if (u === 'admin_koni' && p === 'KoniKonut2026!') {
+          if (u === 'admin_koni' && (p === '@KoniKonut2026!' || p === 'KoniKonut2026!')) {
             resolve({
               success: true,
               message: 'Login Admin Induk Berhasil!',
@@ -1312,15 +1312,42 @@ async function submitRecordMedal(e) {
 }
 
 // =========================================================================
-// 11. CABOR PORTAL & PENDAFTARAN ATLET (ADMIN CABOR)
+// 11. CABOR PORTAL & PENDAFTARAN ATLET (ADMIN CABOR & ADMIN INDUK)
 // =========================================================================
 async function loadCaborPortal() {
   if (!AppState.currentUser) {
-    navigateTo('public-landing');
+    showToast('Silakan masuk ke sistem terlebih dahulu untuk mengakses Portal Cabor.', 'warning');
+    openLoginModal();
     return;
   }
 
-  const caborId = AppState.currentUser.caborId || 'CAB_DAYUNG';
+  const user = AppState.currentUser;
+  const isSuperAdmin = user.role === 'ADMIN_INDUK';
+  const allCabors = (AppState.publicData && AppState.publicData.caborStandings && AppState.publicData.caborStandings.length > 0)
+    ? AppState.publicData.caborStandings
+    : (getLocalDb().cabor || []);
+
+  const switchContainer = document.getElementById('cabor-portal-admin-switch');
+  const adminSelect = document.getElementById('cabor-portal-admin-select');
+
+  let caborId = '';
+  if (isSuperAdmin) {
+    if (switchContainer) switchContainer.classList.remove('hidden');
+    if (!AppState.selectedCaborPortalId && allCabors.length > 0) {
+      AppState.selectedCaborPortalId = allCabors[0].idCabor;
+    }
+    caborId = AppState.selectedCaborPortalId || (allCabors[0] ? allCabors[0].idCabor : '');
+
+    if (adminSelect && allCabors.length > 0) {
+      adminSelect.innerHTML = allCabors.map(c => `
+        <option value="${c.idCabor}" ${c.idCabor === caborId ? 'selected' : ''}>${c.namaCabor}</option>
+      `).join('');
+    }
+  } else {
+    if (switchContainer) switchContainer.classList.add('hidden');
+    caborId = user.caborId || (allCabors[0] ? allCabors[0].idCabor : '');
+  }
+
   const res = await apiCall('getAthletesList', { caborId: caborId });
   const athletes = res.data || [];
 
@@ -1337,10 +1364,7 @@ async function loadCaborPortal() {
   setTxt('cabor-portal-rejected', rejected);
 
   // Ambil data cabor untuk target & raihan medali
-  let caborObj = null;
-  if (AppState.publicData && AppState.publicData.caborStandings) {
-    caborObj = AppState.publicData.caborStandings.find(c => String(c.idCabor) === String(caborId));
-  }
+  let caborObj = allCabors.find(c => String(c.idCabor) === String(caborId));
   if (!caborObj) {
     const db = getLocalDb();
     caborObj = db.cabor.find(c => String(c.idCabor) === String(caborId));
@@ -1376,31 +1400,47 @@ async function loadCaborPortal() {
   // Render Tabel Atlet Cabor
   const tbody = document.getElementById('cabor-athletes-table-body');
   if (tbody) {
-    tbody.innerHTML = athletes.map((a, i) => {
-      let bClass = 'bg-amber-100 text-amber-800';
-      if (a.statusVerifikasi === 'DITERIMA') bClass = 'bg-emerald-100 text-emerald-800';
-      if (a.statusVerifikasi === 'DITOLAK') bClass = 'bg-red-100 text-red-800';
-
-      return `
-        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 border-b border-border-light dark:border-border-dark transition">
-          <td class="py-3 px-4 text-center font-bold text-slate-500">${i + 1}</td>
-          <td class="py-3 px-4">
-            <span class="font-bold text-slate-900 dark:text-white block">${a.namaLengkap}</span>
-            <span class="text-xs font-mono text-slate-500">${a.nik}</span>
-          </td>
-          <td class="py-3 px-4 text-xs font-semibold text-slate-700 dark:text-slate-300">${a.kelasTanding}</td>
-          <td class="py-3 px-4 text-center">
-            <span class="px-2 py-0.5 text-[10px] font-bold rounded-full ${bClass}">
-              ${a.statusVerifikasi}
-            </span>
-          </td>
-          <td class="py-3 px-4 text-xs text-red-600 dark:text-red-400 italic">
-            ${a.catatanVerifikasi || '-'}
+    if (athletes.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5" class="py-8 text-center text-slate-400 text-xs italic">
+            Belum ada atlet yang didaftarkan untuk cabang olahraga ini.<br/>
+            Klik tombol <strong>+ Daftarkan Atlet</strong> di atas untuk menambahkan atlet baru.
           </td>
         </tr>
       `;
-    }).join('');
+    } else {
+      tbody.innerHTML = athletes.map((a, i) => {
+        let bClass = 'bg-amber-100 text-amber-800';
+        if (a.statusVerifikasi === 'DITERIMA') bClass = 'bg-emerald-100 text-emerald-800';
+        if (a.statusVerifikasi === 'DITOLAK') bClass = 'bg-red-100 text-red-800';
+
+        return `
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 border-b border-border-light dark:border-border-dark transition">
+            <td class="py-3 px-4 text-center font-bold text-slate-500">${i + 1}</td>
+            <td class="py-3 px-4">
+              <span class="font-bold text-slate-900 dark:text-white block">${a.namaLengkap}</span>
+              <span class="text-xs font-mono text-slate-500">${a.nik}</span>
+            </td>
+            <td class="py-3 px-4 text-xs font-semibold text-slate-700 dark:text-slate-300">${a.kelasTanding}</td>
+            <td class="py-3 px-4 text-center">
+              <span class="px-2 py-0.5 text-[10px] font-bold rounded-full ${bClass}">
+                ${a.statusVerifikasi}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-xs text-red-600 dark:text-red-400 italic">
+              ${a.catatanVerifikasi || '-'}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
   }
+}
+
+function changeAdminCaborView(newCaborId) {
+  AppState.selectedCaborPortalId = newCaborId;
+  loadCaborPortal();
 }
 
 function openAthleteDrawer() {
@@ -1411,6 +1451,23 @@ function openAthleteDrawer() {
   document.getElementById('reg-kelas-tanding').value = '';
   document.getElementById('reg-alamat').value = '';
   document.getElementById('reg-hp').value = '';
+
+  const user = AppState.currentUser;
+  const isSuperAdmin = user && user.role === 'ADMIN_INDUK';
+  const caborContainer = document.getElementById('reg-cabor-container');
+  const caborSelect = document.getElementById('reg-cabor-select');
+  const allCabors = (AppState.publicData && AppState.publicData.caborStandings) || (getLocalDb().cabor || []);
+
+  if (isSuperAdmin && caborContainer && caborSelect) {
+    caborContainer.classList.remove('hidden');
+    const activeCaborId = AppState.selectedCaborPortalId || (allCabors[0] ? allCabors[0].idCabor : '');
+    caborSelect.innerHTML = allCabors.map(c => `
+      <option value="${c.idCabor}" ${c.idCabor === activeCaborId ? 'selected' : ''}>${c.namaCabor}</option>
+    `).join('');
+  } else if (caborContainer) {
+    caborContainer.classList.add('hidden');
+  }
+
   document.getElementById('drawer-athlete-registration').classList.remove('hidden');
 }
 
@@ -1496,7 +1553,12 @@ async function submitAthleteRegistration(e) {
     console.warn('Gagal kompresi gambar, melanjutkan tanpa berkas:', err);
   }
 
-  const caborId = AppState.currentUser ? AppState.currentUser.caborId : 'CAB_DAYUNG';
+  const user = AppState.currentUser;
+  const isSuperAdmin = user && user.role === 'ADMIN_INDUK';
+  const allCabors = (AppState.publicData && AppState.publicData.caborStandings) || (getLocalDb().cabor || []);
+  const caborId = isSuperAdmin
+    ? (document.getElementById('reg-cabor-select')?.value || AppState.selectedCaborPortalId || (allCabors[0] ? allCabors[0].idCabor : ''))
+    : (user ? user.caborId : (allCabors[0] ? allCabors[0].idCabor : ''));
 
   const res = await apiCall('registerAthlete', {
     idCabor: caborId,
@@ -1525,11 +1587,14 @@ async function submitAthleteRegistration(e) {
 // PENGATURAN TARGET & RAIHAN MEDALI CABOR
 // =========================================================================
 function openCaborTargetModal() {
-  const caborId = (AppState.currentUser && AppState.currentUser.caborId) ? AppState.currentUser.caborId : '';
-  let caborObj = null;
-  if (AppState.publicData && AppState.publicData.caborStandings) {
-    caborObj = AppState.publicData.caborStandings.find(c => String(c.idCabor) === String(caborId));
-  }
+  const user = AppState.currentUser;
+  const isSuperAdmin = user && user.role === 'ADMIN_INDUK';
+  const allCabors = (AppState.publicData && AppState.publicData.caborStandings) || (getLocalDb().cabor || []);
+  const caborId = isSuperAdmin
+    ? (AppState.selectedCaborPortalId || (allCabors[0] ? allCabors[0].idCabor : ''))
+    : (user ? user.caborId : (allCabors[0] ? allCabors[0].idCabor : ''));
+
+  let caborObj = allCabors.find(c => String(c.idCabor) === String(caborId));
   if (!caborObj) {
     const db = getLocalDb();
     caborObj = db.cabor.find(c => String(c.idCabor) === String(caborId));
@@ -1548,7 +1613,13 @@ function closeCaborTargetModal() {
 
 async function submitCaborTarget(e) {
   if (e) e.preventDefault();
-  const caborId = (AppState.currentUser && AppState.currentUser.caborId) ? AppState.currentUser.caborId : '';
+  const user = AppState.currentUser;
+  const isSuperAdmin = user && user.role === 'ADMIN_INDUK';
+  const allCabors = (AppState.publicData && AppState.publicData.caborStandings) || (getLocalDb().cabor || []);
+  const caborId = isSuperAdmin
+    ? (AppState.selectedCaborPortalId || (allCabors[0] ? allCabors[0].idCabor : ''))
+    : (user ? user.caborId : (allCabors[0] ? allCabors[0].idCabor : ''));
+
   const emas = Number(document.getElementById('cabor-target-input-emas').value) || 0;
   const perak = Number(document.getElementById('cabor-target-input-perak').value) || 0;
   const perunggu = Number(document.getElementById('cabor-target-input-perunggu').value) || 0;
@@ -1587,7 +1658,12 @@ async function submitCaborTarget(e) {
 }
 
 function openCaborRecordMedalModal() {
-  const caborId = (AppState.currentUser && AppState.currentUser.caborId) ? AppState.currentUser.caborId : '';
+  const user = AppState.currentUser;
+  const isSuperAdmin = user && user.role === 'ADMIN_INDUK';
+  const allCabors = (AppState.publicData && AppState.publicData.caborStandings) || (getLocalDb().cabor || []);
+  const caborId = isSuperAdmin
+    ? (AppState.selectedCaborPortalId || (allCabors[0] ? allCabors[0].idCabor : ''))
+    : (user ? user.caborId : (allCabors[0] ? allCabors[0].idCabor : ''));
   openRecordMedalModal(caborId);
 }
 
@@ -1612,7 +1688,6 @@ async function resetDataAwalToZero() {
   } catch (err) {
     showToast('Terjadi kesalahan: ' + err.message, 'error');
   }
-}
 }
 
 // =========================================================================
@@ -1799,7 +1874,7 @@ function updateAuthUI() {
       else el.classList.add('hidden');
     });
     document.querySelectorAll('.admin-cabor-only').forEach(el => {
-      if (user.role === 'ADMIN_CABOR') el.classList.remove('hidden');
+      if (user.role === 'ADMIN_CABOR' || user.role === 'ADMIN_INDUK') el.classList.remove('hidden');
       else el.classList.add('hidden');
     });
   } else {
@@ -2125,9 +2200,14 @@ function showToast(message, type = 'info') {
 function autofillDemo(role) {
   if (role === 'admin') {
     document.getElementById('login-username').value = 'admin_koni';
-    document.getElementById('login-password').value = 'KoniKonut2026!';
+    document.getElementById('login-password').value = '@KoniKonut2026!';
   } else if (role === 'cabor') {
-    document.getElementById('login-username').value = 'cabor_dayung';
+    const list = (AppState.publicData && AppState.publicData.caborStandings) || [];
+    if (list.length > 0) {
+      document.getElementById('login-username').value = 'cabor_' + list[0].idCabor.toLowerCase().replace(/[^a-z0-9]/g, '');
+    } else {
+      document.getElementById('login-username').value = 'cabor_kickboxingkbi';
+    }
     document.getElementById('login-password').value = 'dayung123';
   }
 }

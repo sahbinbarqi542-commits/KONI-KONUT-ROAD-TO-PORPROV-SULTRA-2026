@@ -365,9 +365,19 @@ function handleLogin(data) {
 
   // Verifikasi Password Hash + Salt
   const salt = user.salt || prop_('SALT_' + user.id_user) || 'KONI_KONUT_SALT_2026';
-  const computedHash = hashPass_(password, salt);
+  let computedHash = hashPass_(password, salt);
 
-  if (!samaAman_(computedHash, user.password_hash)) {
+  let isMatch = samaAman_(computedHash, user.password_hash);
+  // Toleransi jika password diawali atau tanpa '@' untuk admin_koni
+  if (!isMatch && (user.username.toLowerCase() === 'admin_koni')) {
+    const altPassword = password.startsWith('@') ? password.substring(1) : ('@' + password);
+    const altHash = hashPass_(altPassword, salt);
+    if (samaAman_(altHash, user.password_hash)) {
+      isMatch = true;
+    }
+  }
+
+  if (!isMatch) {
     catatPercobaanGagal_(username);
     return { success: false, message: 'Username atau password salah.' };
   }
