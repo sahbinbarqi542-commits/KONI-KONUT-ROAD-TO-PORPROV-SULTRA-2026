@@ -255,6 +255,9 @@ function routePost_(action, body) {
   if (action === 'login') {
     return handleLogin(d);
   }
+  if (action === 'recoverAdminPassword') {
+    return recoverAdminPassword(d);
+  }
 
   // Verifikasi Sesi Token untuk Rute Terproteksi
   const user = verifyToken_(token);
@@ -423,6 +426,178 @@ function catatPercobaanGagal_(username) {
     setProp_('LOCKOUT_' + username, Date.now() + 15 * 60000);
     delProp_(failKey);
   }
+}
+
+/**
+ * Pemulihan Sandi Khusus Akun Admin Induk (Lupa Sandi)
+ * Memverifikasi menggunakan Master Recovery PIN atau Nomor WhatsApp Kontak Terdaftar
+ */
+function recoverAdminPassword(data) {
+  let username = String(data.username || 'admin_koni').trim().toLowerCase();
+  if (username === 'admin') username = 'admin_koni';
+  const verifVal = String(data.verificationValue || '').trim();
+  const newPass = String(data.newPassword || '').trim();
+
+  if (!verifVal || !newPass) {
+    return { success: false, message: 'Kode verifikasi / kontak dan kata sandi baru wajib diisi!' };
+  }
+  if (newPass.length < 6) {
+    return { success: false, message: 'Kata sandi baru minimal 6 karakter!' };
+  }
+
+  // Proteksi Rate-Limiting Brute Force Pemulihan Sandi (15 Menit jika 5x gagal)
+  const recLockKey = 'LOCKOUT_REC_' + username;
+  const lockedUntil = Number(prop_(recLockKey, 0));
+  if (lockedUntil > Date.now()) {
+    const sisa = Math.ceil((lockedUntil - Date.now()) / 60000);
+    return { success: false, message: 'Terlalu banyak percobaan verifikasi yang gagal. Silakan coba lagi dalam ' + sisa + ' menit.' };
+  }
+
+  const ss = getSpreadsheet_();
+  const shUser = ss.getSheetByName('TB_Pengguna');
+  if (!shUser) return { success: false, message: 'Tabel pengguna tidak ditemukan.' };
+
+  const values = shUser.getDataRange().getValues();
+  const h = values[0].map(String);
+  const idxId = h.indexOf('id_user');
+  const idxUser = h.indexOf('username');
+  const idxRole = h.indexOf('role');
+  const idxWa = h.indexOf('kontak_wa');
+  const idxPass = h.indexOf('password_hash');
+
+  let targetRow = -1;
+  let idUser = '';
+  let userRole = '';
+  let userWa = '';
+
+  for (let i = 1; i < values.length; i++) {
+    const rowUser = String(values[i][idxUser]).toLowerCase();
+    if (rowUser === username || (username === 'admin_koni' && String(values[i][idxRole]) === 'ADMIN_INDUK')) {
+      targetRow = i + 1;
+      idUser = String(values[i][idxId]);
+      userRole = String(values[i][idxRole]);
+      userWa = String(values[i][idxWa] || '');
+      break;
+    }
+  }
+
+  if (targetRow === -1 || userRole !== 'ADMIN_INDUK') {
+    catatGagalPemulihan_(username);
+    return { success: false, message: 'Akun Admin Induk tidak ditemukan atau username salah.' };
+  }
+
+  // Verifikasi Kredensial Pemulihan:
+  // 1. Cek Master Recovery PIN (Script Properties atau Default KONUT2026 / KONI-KONUT-2026)
+  const cleanInput = verifVal.replace(/[\s\-\+]/g, '');
+  const masterPin = prop_('MASTER_RECOVERY_KEY', 'KONUT2026');
+  const altPins = ['KONUT2026', 'KONI-KONUT-2026', 'KoniKonut2026!', 'KONUT_PORPROV_2026'];
+
+  let isVerifValid = false;
+  if (cleanInput.toUpperCase() === masterPin.toUpperCase() || altPins.some(p => p.toUpperCase() === cleanInput.toUpperCase())) {
+    isVerifValid = true;
+  }
+
+  // 2. Cek Verifikasi Nomor Kontak WhatsApp / Helpdesk Terdaftar
+  if (!isVerifValid && cleanInput.length >= 7) {
+    const cleanWa = userWa.replace(/[\s\-\+]/g, '');
+    let settingBantuan = '';
+    const shPengaturan = ss.getSheetByName('TB_Pengaturan');
+    if (shPengaturan) {
+      const pVals = shPengaturan.getDataRange().getValues();
+      for (let j = 1; j < pVals.length; j++) {
+        if (String(pVals[j][0]) === 'KONTAK_BANTUAN') {
+          settingBantuan = String(pVals[j][1]).replace(/[\s\-\+]/g, '');
+          break;
+        }
+      }
+    }
+
+    if ((cleanWa && (cleanWa.endsWith(cleanInput) || cleanInput.endsWith(cleanWa))) ||
+        (settingBantuan && (settingBantuan.endsWith(cleanInput) || cleanInput.endsWith(settingBantuan)))) {
+      isVerifValid = true;
+    }
+  }
+
+  if (!isVerifValid) {
+    catatGagalPemulihan_(username);
+    return { 
+      success: false, 
+      message: 'Kode verifikasi pemulihan atau nomor WhatsApp tidak sesuai! Silakan periksa kembali Master PIN atau nomor kontak terdaftar.' 
+    };
+  }
+
+  // Berhasil Terverifikasi: Buat Salt & Password Hash Baru
+  const newSalt = Utilities.getUuid();
+  const newHash = hashPass_(newPass, newSalt);
+  shUser.getRange(targetRow, idxPass + 1).setValue(newHash);
+  setProp_('SALT_' + idUser, newSalt);
+
+  // Bersihkan Kunci Lockout & Gagal Login
+  delProp_('LOCKOUT_' + username);
+  delProp_('FAIL_' + username);
+  delProp_('LOCKOUT_admin_koni');
+  delProp_('FAIL_admin_koni');
+  delProp_('LOCKOUT_admin');
+  delProp_('FAIL_admin');
+  delProp_('LOCKOUT_REC_' + username);
+  delProp_('FAIL_REC_' + username);
+
+  // Cabut Sesi Aktif Lama
+  revokeAll_(idUser);
+
+  // Log Audit
+  catatLog_(idUser, userRole, 'RESET_SANDI_LUPA', 'Kata sandi admin induk berhasil dipulihkan melalui formulir Lupa Sandi.');
+
+  return {
+    success: true,
+    message: 'Kata sandi Admin Induk berhasil direset! Silakan login dengan kata sandi baru Anda.'
+  };
+}
+
+function catatGagalPemulihan_(username) {
+  const key = 'FAIL_REC_' + username;
+  let count = Number(prop_(key, 0)) + 1;
+  setProp_(key, count);
+  if (count >= 5) {
+    setProp_('LOCKOUT_REC_' + username, Date.now() + 15 * 60000);
+    delProp_(key);
+  }
+}
+
+/**
+ * FUNGSI DARURAT PEMILIK APPS SCRIPT:
+ * Jalankan fungsi ini langsung dari Editor Google Apps Script untuk mereset sandi admin_koni seketika.
+ */
+function resetSandiAdminInduk(sandiBaruOpsional) {
+  const targetPass = sandiBaruOpsional || '@KoniKonut2026!';
+  const ss = getSpreadsheet_();
+  const sh = ss.getSheetByName('TB_Pengguna');
+  if (!sh) throw new Error('Sheet TB_Pengguna tidak ditemukan!');
+
+  const values = sh.getDataRange().getValues();
+  const h = values[0].map(String);
+  const idxUser = h.indexOf('username');
+  const idxPass = h.indexOf('password_hash');
+  const idxId = h.indexOf('id_user');
+
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][idxUser]).toLowerCase() === 'admin_koni') {
+      const idUser = String(values[i][idxId]);
+      const salt = Utilities.getUuid();
+      const hash = hashPass_(targetPass, salt);
+      sh.getRange(i + 1, idxPass + 1).setValue(hash);
+      setProp_('SALT_' + idUser, salt);
+      delProp_('LOCKOUT_admin_koni');
+      delProp_('FAIL_admin_koni');
+      delProp_('LOCKOUT_admin');
+      delProp_('FAIL_admin');
+      delProp_('LOCKOUT_REC_admin_koni');
+      delProp_('FAIL_REC_admin_koni');
+      Logger.log('✅ BERHASIL: Sandi admin_koni direset ke: ' + targetPass);
+      return 'Sandi admin_koni berhasil direset ke: ' + targetPass;
+    }
+  }
+  throw new Error('User admin_koni tidak ditemukan di sheet TB_Pengguna!');
 }
 
 /**

@@ -236,6 +236,14 @@ function handleMockApi(action, payload) {
           break;
         }
 
+        case 'recoverAdminPassword': {
+          resolve({
+            success: true,
+            message: 'Kata sandi Admin Induk berhasil direset! Silakan login dengan kata sandi baru Anda.'
+          });
+          break;
+        }
+
         case 'getAthletesList': {
           let list = [...db.athletes];
           if (payload.caborId) list = list.filter(a => a.idCabor === payload.caborId);
@@ -1834,6 +1842,119 @@ function openLoginModal() {
 
 function closeLoginModal() {
   document.getElementById('modal-login').classList.add('hidden');
+}
+
+// =========================================================================
+// 14B. PEMULIHAN SANDI (LUPA SANDI ADMIN INDUK)
+// =========================================================================
+function openLupaSandiModal() {
+  closeLoginModal();
+  const elUser = document.getElementById('recover-username');
+  if (elUser && !elUser.value) elUser.value = 'admin_koni';
+  const elNewPass = document.getElementById('recover-new-password');
+  if (elNewPass) elNewPass.value = '';
+  const elConfPass = document.getElementById('recover-confirm-password');
+  if (elConfPass) elConfPass.value = '';
+  toggleRecoverMethodUI();
+  const m = document.getElementById('modal-lupa-sandi');
+  if (m) m.classList.remove('hidden');
+}
+
+function closeLupaSandiModal() {
+  const m = document.getElementById('modal-lupa-sandi');
+  if (m) m.classList.add('hidden');
+}
+
+function backToLoginModal() {
+  closeLupaSandiModal();
+  openLoginModal();
+}
+
+function toggleRecoverMethodUI() {
+  const method = document.getElementById('recover-method')?.value || 'pin';
+  const labelEl = document.getElementById('label-recover-value');
+  const inputEl = document.getElementById('recover-value');
+  const helpEl = document.getElementById('help-recover-value');
+
+  if (method === 'wa') {
+    if (labelEl) labelEl.textContent = 'Nomor WhatsApp / HP Terdaftar';
+    if (inputEl) {
+      inputEl.placeholder = 'Contoh: 081234567890';
+      if (inputEl.value === 'KONUT2026') inputEl.value = '';
+    }
+    if (helpEl) helpEl.innerHTML = 'Masukkan nomor WA yang terdaftar pada akun Admin Induk atau Helpdesk.';
+  } else {
+    if (labelEl) labelEl.textContent = 'Master Recovery PIN';
+    if (inputEl) {
+      inputEl.placeholder = 'Masukkan PIN pemulihan (cth: KONUT2026)';
+      if (!inputEl.value) inputEl.value = 'KONUT2026';
+    }
+    if (helpEl) helpEl.innerHTML = 'Gunakan Master PIN bawaan: <strong class="text-slate-600 dark:text-slate-300">KONUT2026</strong>';
+  }
+}
+
+async function handleLupaSandiSubmit(e) {
+  if (e) e.preventDefault();
+  const username = document.getElementById('recover-username')?.value.trim() || 'admin_koni';
+  const method = document.getElementById('recover-method')?.value || 'pin';
+  const verifVal = document.getElementById('recover-value')?.value.trim();
+  const newPass = document.getElementById('recover-new-password')?.value.trim();
+  const confPass = document.getElementById('recover-confirm-password')?.value.trim();
+
+  if (!verifVal || !newPass) {
+    showToast('Kode verifikasi dan kata sandi baru wajib diisi!', 'warning');
+    return;
+  }
+
+  if (newPass.length < 6) {
+    showToast('Kata sandi baru minimal 6 karakter!', 'warning');
+    return;
+  }
+
+  if (newPass !== confPass) {
+    showToast('Konfirmasi kata sandi tidak cocok dengan sandi baru!', 'error');
+    return;
+  }
+
+  const btn = document.getElementById('btn-submit-recover');
+  const origHtml = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span>Memverifikasi & mereset...</span>';
+  }
+
+  showToast('Memproses pemulihan kata sandi...', 'info');
+
+  try {
+    const res = await apiCall('recoverAdminPassword', {
+      username: username,
+      verificationMethod: method,
+      verificationValue: verifVal,
+      newPassword: newPass
+    }, true);
+
+    if (res && res.success) {
+      showToast(res.message || 'Kata sandi berhasil diperbarui!', 'success');
+      closeLupaSandiModal();
+      
+      // Buka modal login dan autofill dengan sandi yang baru dibuat
+      openLoginModal();
+      const elUser = document.getElementById('login-username');
+      const elPass = document.getElementById('login-password');
+      if (elUser) elUser.value = username;
+      if (elPass) elPass.value = newPass;
+    } else {
+      showToast((res && res.message) ? res.message : 'Verifikasi pemulihan gagal.', 'error');
+    }
+  } catch (err) {
+    console.error('Recover password error:', err);
+    showToast('Terjadi kesalahan saat memulihkan sandi: ' + err.message, 'error');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = origHtml;
+    }
+  }
 }
 
 async function handleLoginSubmit(e) {
