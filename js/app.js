@@ -452,6 +452,21 @@ function handleMockApi(action, payload) {
           break;
         }
 
+        case 'changePassword': {
+          resolve({ success: true, message: 'Password berhasil diubah!' });
+          break;
+        }
+
+        case 'updateUserProfile': {
+          if (AppState.currentUser) {
+            AppState.currentUser.nama = payload.nama || AppState.currentUser.nama;
+            AppState.currentUser.kontakWa = payload.kontakWa || '';
+            localStorage.setItem('koni_session_user', JSON.stringify(AppState.currentUser));
+          }
+          resolve({ success: true, message: 'Profil pengguna berhasil diperbarui!' });
+          break;
+        }
+
         default:
           resolve({ success: true, message: 'Mock action executed: ' + action });
       }
@@ -518,6 +533,9 @@ function navigateTo(viewId) {
     case 'dokumen-nominatif-print':
       renderPrintView();
       break;
+    case 'profil-pengguna':
+      loadUserProfile();
+      break;
   }
 }
 
@@ -527,6 +545,12 @@ function navigateTo(viewId) {
 async function initApp() {
   // 1. Terapkan Tema (Dark / Light)
   applyTheme(AppState.theme);
+
+  // Terapkan Logo Custom Tersimpan
+  const cachedLogo = localStorage.getItem('koni_custom_logo_url');
+  if (cachedLogo) {
+    updateBrandLogoUI({ logoKoniUrl: cachedLogo });
+  }
 
   // 2. Periksa Token Sesi Tersimpan
   const savedUser = localStorage.getItem('koni_session_user');
@@ -572,6 +596,11 @@ async function loadPublicLanding() {
 
   AppState.publicData = res.data;
   const d = res.data;
+
+  // Update Brand Logo Dinamis
+  if (d.settings) {
+    updateBrandLogoUI(d.settings);
+  }
 
   // Render Metrik Publik
   const elTotalCabor = document.getElementById('pub-stat-cabor');
@@ -1690,10 +1719,11 @@ function updateAuthUI() {
   if (isLogged) {
     if (btnLogin) btnLogin.classList.add('hidden');
     if (userProfileChip) userProfileChip.classList.remove('hidden');
-    if (userNameEl) userNameEl.innerText = user.nama;
-    if (userRoleEl) userRoleEl.innerText = user.role === 'ADMIN_INDUK' ? 'Admin Induk KONI' : 'Admin Cabor';
+    if (userNameEl) userNameEl.innerText = user.nama || user.username || 'Pengguna';
+    if (userRoleEl) userRoleEl.innerText = user.role === 'ADMIN_INDUK' ? 'Admin Induk KONI' : ('Pengurus ' + (user.caborId || 'Cabor'));
 
-    // Tampilkan menu sidebar sesuai role
+    // Tampilkan menu sidebar khusus pengguna terotentikasi
+    document.querySelectorAll('.user-logged-in-only').forEach(el => el.classList.remove('hidden'));
     document.querySelectorAll('.admin-induk-only').forEach(el => {
       if (user.role === 'ADMIN_INDUK') el.classList.remove('hidden');
       else el.classList.add('hidden');
@@ -1705,9 +1735,288 @@ function updateAuthUI() {
   } else {
     if (btnLogin) btnLogin.classList.remove('hidden');
     if (userProfileChip) userProfileChip.classList.add('hidden');
+    document.querySelectorAll('.user-logged-in-only').forEach(el => el.classList.add('hidden'));
     document.querySelectorAll('.admin-induk-only').forEach(el => el.classList.add('hidden'));
     document.querySelectorAll('.admin-cabor-only').forEach(el => el.classList.add('hidden'));
   }
+}
+
+// =========================================================================
+// 15. BRAND LOGO DYNAMIC HANDLER
+// =========================================================================
+function updateBrandLogoUI(settings) {
+  const container = document.getElementById('brand-logo-img-container');
+  if (!container) return;
+
+  const logoUrl = (settings && settings.logoKoniUrl) ? settings.logoKoniUrl : (localStorage.getItem('koni_custom_logo_url') || '');
+
+  if (logoUrl) {
+    container.className = "flex items-center justify-center";
+    container.innerHTML = `<img src="${logoUrl}" alt="Logo KONI" class="h-8 w-auto max-w-[38px] object-contain transition-transform hover:scale-105" onerror="this.onerror=null;resetBrandLogoToDefault();" />`;
+  } else {
+    resetBrandLogoToDefault();
+  }
+}
+
+function resetBrandLogoToDefault() {
+  const container = document.getElementById('brand-logo-img-container');
+  if (!container) return;
+  container.className = "flex items-center -space-x-1.5";
+  container.innerHTML = `
+    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-black border-2 border-white dark:border-surface-dark shadow-sm">
+      K
+    </div>
+    <div class="w-8 h-8 rounded-full bg-tertiary flex items-center justify-center text-white text-[10px] font-black border-2 border-white dark:border-surface-dark shadow-sm">
+      KU
+    </div>
+  `;
+}
+
+// =========================================================================
+// 16. PENGATURAN PROFIL, UBAH PASSWORD & KUSTOMISASI LOGO
+// =========================================================================
+let currentUploadedLogoBase64 = '';
+
+function loadUserProfile() {
+  const user = AppState.currentUser;
+  if (!user) {
+    showToast('Silakan login terlebih dahulu untuk mengakses profil.', 'warning');
+    openLoginModal();
+    return;
+  }
+
+  // Tampilkan data user pada kartu profil
+  const dispName = document.getElementById('prof-display-name');
+  const dispRole = document.getElementById('prof-display-role');
+  const inputUser = document.getElementById('prof-input-username');
+  const inputNama = document.getElementById('prof-input-nama');
+  const inputWa = document.getElementById('prof-input-wa');
+
+  if (dispName) dispName.innerText = user.nama || user.username || 'Pengguna';
+  if (dispRole) dispRole.innerText = user.role === 'ADMIN_INDUK' ? 'Admin Induk KONI' : ('Pengurus ' + (user.caborId || 'Cabor'));
+  if (inputUser) inputUser.value = user.username || '';
+  if (inputNama) inputNama.value = user.nama || '';
+  if (inputWa) inputWa.value = user.kontakWa || user.nomorKontak || '';
+
+  // Kosongkan form ubah password
+  const pOld = document.getElementById('pass-old');
+  const pNew = document.getElementById('pass-new');
+  const pConf = document.getElementById('pass-confirm');
+  if (pOld) pOld.value = '';
+  if (pNew) pNew.value = '';
+  if (pConf) pConf.value = '';
+
+  // Tampilkan pratinjau logo saat ini
+  const logoUrl = (AppState.publicData && AppState.publicData.settings && AppState.publicData.settings.logoKoniUrl)
+    ? AppState.publicData.settings.logoKoniUrl
+    : (localStorage.getItem('koni_custom_logo_url') || '');
+
+  const inputLogoUrl = document.getElementById('prof-input-logo-url');
+  if (inputLogoUrl) inputLogoUrl.value = logoUrl;
+  previewUrlLogo(logoUrl);
+}
+
+async function submitUserProfileForm(e) {
+  if (e) e.preventDefault();
+  const nama = document.getElementById('prof-input-nama')?.value.trim();
+  const kontakWa = document.getElementById('prof-input-wa')?.value.trim();
+
+  if (!nama) {
+    showToast('Nama lengkap wajib diisi!', 'warning');
+    return;
+  }
+
+  const btn = document.getElementById('btn-save-profile');
+  const originalHtml = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined text-xs animate-spin">progress_activity</span> Menyimpan...';
+  }
+
+  try {
+    const res = await apiCall('updateUserProfile', { nama: nama, kontakWa: kontakWa }, true);
+    if (res && res.success) {
+      if (AppState.currentUser) {
+        AppState.currentUser.nama = nama;
+        AppState.currentUser.kontakWa = kontakWa;
+        localStorage.setItem('koni_session_user', JSON.stringify(AppState.currentUser));
+      }
+      updateAuthUI();
+      const dispName = document.getElementById('prof-display-name');
+      if (dispName) dispName.innerText = nama;
+      showToast('Profil pengguna berhasil diperbarui!', 'success');
+    } else {
+      showToast((res && res.message) ? res.message : 'Gagal memperbarui profil.', 'error');
+    }
+  } catch (err) {
+    console.error('Update profile error:', err);
+    showToast('Terjadi gangguan koneksi: ' + err.message, 'error');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+    }
+  }
+}
+
+async function submitChangePasswordForm(e) {
+  if (e) e.preventDefault();
+  const oldPass = document.getElementById('pass-old')?.value;
+  const newPass = document.getElementById('pass-new')?.value;
+  const confPass = document.getElementById('pass-confirm')?.value;
+
+  if (!oldPass || !newPass || !confPass) {
+    showToast('Semua kolom password wajib diisi!', 'warning');
+    return;
+  }
+
+  if (newPass.length < 6) {
+    showToast('Password baru minimal harus 6 karakter!', 'warning');
+    return;
+  }
+
+  if (newPass !== confPass) {
+    showToast('Konfirmasi password tidak cocok dengan password baru!', 'warning');
+    return;
+  }
+
+  const btn = document.getElementById('btn-save-password');
+  const originalHtml = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined text-xs animate-spin">progress_activity</span> Memproses...';
+  }
+
+  try {
+    const res = await apiCall('changePassword', { oldPassword: oldPass, newPassword: newPass }, true);
+    if (res && res.success) {
+      showToast('Password Anda berhasil diperbarui!', 'success');
+      document.getElementById('pass-old').value = '';
+      document.getElementById('pass-new').value = '';
+      document.getElementById('pass-confirm').value = '';
+    } else {
+      showToast((res && res.message) ? res.message : 'Gagal mengubah password.', 'error');
+    }
+  } catch (err) {
+    console.error('Change password error:', err);
+    showToast('Terjadi kendala saat mengubah password: ' + err.message, 'error');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+    }
+  }
+}
+
+function previewUploadedLogo(input) {
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    if (file.size > 2 * 1024 * 1024) {
+      showToast('Ukuran gambar logo maksimal 2 MB!', 'warning');
+      input.value = '';
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      currentUploadedLogoBase64 = e.target.result;
+      showPreviewLogoImage(currentUploadedLogoBase64);
+      const urlInput = document.getElementById('prof-input-logo-url');
+      if (urlInput) urlInput.value = '';
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function previewUrlLogo(url) {
+  currentUploadedLogoBase64 = '';
+  if (url && url.trim().length > 5) {
+    showPreviewLogoImage(url.trim());
+  } else {
+    showPreviewLogoImage('');
+  }
+}
+
+function showPreviewLogoImage(src) {
+  const img = document.getElementById('prof-logo-preview-img');
+  const def = document.getElementById('prof-logo-preview-default');
+  if (!img || !def) return;
+
+  if (src) {
+    img.src = src;
+    img.classList.remove('hidden');
+    def.classList.add('hidden');
+  } else {
+    img.src = '';
+    img.classList.add('hidden');
+    def.classList.remove('hidden');
+  }
+}
+
+async function applyLogoSettings() {
+  const urlVal = document.getElementById('prof-input-logo-url')?.value.trim();
+  const fileVal = currentUploadedLogoBase64;
+
+  if (!urlVal && !fileVal) {
+    showToast('Pilih file gambar logo atau masukkan URL logo terlebih dahulu!', 'warning');
+    return;
+  }
+
+  const btn = document.getElementById('btn-apply-logo');
+  const originalHtml = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined text-xs animate-spin">progress_activity</span> Menyimpan...';
+  }
+
+  try {
+    const payload = {
+      LOGO_KONI_URL: urlVal || '',
+      logoKoniBase64: fileVal || ''
+    };
+
+    const res = await apiCall('updateSystemSettings', payload, true);
+    if (res && res.success) {
+      const finalUrl = res.logoUrl || urlVal || fileVal;
+      localStorage.setItem('koni_custom_logo_url', finalUrl);
+      if (AppState.publicData && AppState.publicData.settings) {
+        AppState.publicData.settings.logoKoniUrl = finalUrl;
+      }
+      updateBrandLogoUI({ logoKoniUrl: finalUrl });
+      showToast('Logo berhasil diterapkan ke seluruh aplikasi!', 'success');
+    } else {
+      showToast((res && res.message) ? res.message : 'Gagal menerapkan logo.', 'error');
+    }
+  } catch (err) {
+    console.error('Apply logo error:', err);
+    showToast('Terjadi kesalahan: ' + err.message, 'error');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+    }
+  }
+}
+
+async function resetToDefaultLogo() {
+  if (!confirm('Kembalikan logo samping tulisan KONI KONAWE UTARA ke logo default awal?')) return;
+
+  localStorage.removeItem('koni_custom_logo_url');
+  const inputUrl = document.getElementById('prof-input-logo-url');
+  const inputFile = document.getElementById('prof-file-logo');
+  if (inputUrl) inputUrl.value = '';
+  if (inputFile) inputFile.value = '';
+  currentUploadedLogoBase64 = '';
+  showPreviewLogoImage('');
+
+  const res = await apiCall('updateSystemSettings', { LOGO_KONI_URL: '' }, true);
+  if (res && res.success) {
+    if (AppState.publicData && AppState.publicData.settings) {
+      AppState.publicData.settings.logoKoniUrl = '';
+    }
+  }
+  resetBrandLogoToDefault();
+  showToast('Logo berhasil dikembalikan ke tampilan default.', 'info');
 }
 
 // =========================================================================

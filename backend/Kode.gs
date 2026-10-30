@@ -275,6 +275,10 @@ function routePost_(action, body) {
       return recordMedal(user, d);
     case 'getMedalTally':
       return getMedalTally();
+    case 'changePassword':
+      return changePassword(user, d);
+    case 'updateUserProfile':
+      return updateUserProfile(user, d);
 
     // ----------------------------------------------------
     // Modul Khusus Admin Induk (Super Admin)
@@ -1021,6 +1025,16 @@ function updateSystemSettings(data) {
     map[String(values[i][0])] = i + 1;
   }
 
+  // Jika logo diunggah via base64, simpan ke Drive Assets
+  if (data.logoKoniBase64) {
+    const uploadedUrl = saveAssetFile_(data.logoKoniBase64, 'logo_koni_' + Date.now() + '.png');
+    if (uploadedUrl) data.LOGO_KONI_URL = uploadedUrl;
+  }
+  if (data.logoKonutBase64) {
+    const uploadedUrl = saveAssetFile_(data.logoKonutBase64, 'logo_konut_' + Date.now() + '.png');
+    if (uploadedUrl) data.LOGO_KONUT_URL = uploadedUrl;
+  }
+
   const keys = ['NAMA_APLIKASI', 'SUB_JUDUL', 'LOGO_KONI_URL', 'LOGO_KONUT_URL', 'BANNER_URL', 'KETUA_KONI', 'KONTAK_BANTUAN'];
   keys.forEach(k => {
     if (data[k] !== undefined) {
@@ -1033,7 +1047,124 @@ function updateSystemSettings(data) {
   });
 
   bump('global');
-  return { success: true, message: 'Pengaturan branding berhasil disimpan!' };
+  return {
+    success: true,
+    message: 'Pengaturan branding berhasil disimpan!',
+    logoKoniUrl: data.LOGO_KONI_URL,
+    logoKonutUrl: data.LOGO_KONUT_URL
+  };
+}
+
+function saveAssetFile_(base64Data, filename) {
+  try {
+    const rootId = prop_('ROOT_FOLDER_ID');
+    const root = rootId ? DriveApp.getFolderById(rootId) : DriveApp.getRootFolder();
+    let assetsFolder;
+    const it = root.getFoldersByName('📂 Assets');
+    if (it.hasNext()) {
+      assetsFolder = it.next();
+    } else {
+      const it2 = root.getFoldersByName('Assets');
+      assetsFolder = it2.hasNext() ? it2.next() : root.createFolder('📂 Assets');
+    }
+    const cleanBase64 = base64Data.replace(/^data:[^;]+;base64,/, '');
+    const decoded = Utilities.base64Decode(cleanBase64);
+    const blob = Utilities.newBlob(decoded, 'image/png', filename);
+    const file = assetsFolder.createFile(blob);
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    return 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w1000';
+  } catch (e) {
+    return '';
+  }
+}
+
+/**
+ * Ubah Password Mandiri oleh Pengguna yang Sedang Login
+ */
+function changePassword(user, d) {
+  const oldPass = String(d.oldPassword || '').trim();
+  const newPass = String(d.newPassword || '').trim();
+
+  if (!oldPass || !newPass) {
+    return { success: false, message: 'Password lama dan password baru wajib diisi!' };
+  }
+  if (newPass.length < 6) {
+    return { success: false, message: 'Password baru minimal 6 karakter!' };
+  }
+
+  const ss = getSpreadsheet_();
+  const shUser = ss.getSheetByName('TB_Pengguna');
+  const values = shUser.getDataRange().getValues();
+  const h = values[0].map(String);
+  const idxId = h.indexOf('id_user');
+  const idxPass = h.indexOf('password_hash');
+
+  let rowIndex = -1;
+  let currentHash = '';
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][idxId]) === String(user.userId)) {
+      rowIndex = i + 1;
+      currentHash = String(values[i][idxPass]);
+      break;
+    }
+  }
+
+  if (rowIndex === -1) {
+    return { success: false, message: 'Data pengguna tidak ditemukan.' };
+  }
+
+  const salt = prop_('SALT_' + user.userId) || 'KONI_KONUT_SALT_2026';
+  const checkOldHash = hashPass_(oldPass, salt);
+  if (!samaAman_(checkOldHash, currentHash)) {
+    return { success: false, message: 'Password lama Anda tidak sesuai!' };
+  }
+
+  const newSalt = Utilities.getUuid();
+  const newHash = hashPass_(newPass, newSalt);
+
+  shUser.getRange(rowIndex, idxPass + 1).setValue(newHash);
+  setProp_('SALT_' + user.userId, newSalt);
+
+  catatLog_(user.userId, user.role, 'CHANGE_PASSWORD', 'Pengguna berhasil mengubah password mandiri.');
+  return { success: true, message: 'Password Anda berhasil diperbarui!' };
+}
+
+/**
+ * Update Profil Pengguna yang Sedang Login
+ */
+function updateUserProfile(user, d) {
+  const namaLengkap = String(d.namaLengkap || '').trim();
+  const kontakWa = String(d.kontakWa || '').trim();
+
+  if (!namaLengkap) {
+    return { success: false, message: 'Nama lengkap wajib diisi!' };
+  }
+
+  const ss = getSpreadsheet_();
+  const shUser = ss.getSheetByName('TB_Pengguna');
+  const values = shUser.getDataRange().getValues();
+  const h = values[0].map(String);
+  const idxId = h.indexOf('id_user');
+  const idxNama = h.indexOf('nama_lengkap');
+  const idxWa = h.indexOf('kontak_wa');
+
+  let rowIndex = -1;
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][idxId]) === String(user.userId)) {
+      rowIndex = i + 1;
+      break;
+    }
+  }
+
+  if (rowIndex === -1) {
+    return { success: false, message: 'Data pengguna tidak ditemukan.' };
+  }
+
+  if (idxNama > -1) shUser.getRange(rowIndex, idxNama + 1).setValue(namaLengkap);
+  if (idxWa > -1 && kontakWa) shUser.getRange(rowIndex, idxWa + 1).setValue(kontakWa);
+
+  catatLog_(user.userId, user.role, 'UPDATE_PROFILE', 'Pengguna memperbarui profil.');
+  return { success: true, message: 'Profil Anda berhasil diperbarui!', namaLengkap: namaLengkap };
 }
 
 // =========================================================================

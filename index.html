@@ -61,25 +61,28 @@
         <span class="material-symbols-outlined text-2xl">menu</span>
       </button>
 
-      <div class="flex items-center -space-x-1.5 cursor-pointer" onclick="navigateTo('public-landing')">
-        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-black border-2 border-white dark:border-surface-dark shadow-sm">
-          K
-        </div>
-        <div class="w-8 h-8 rounded-full bg-tertiary flex items-center justify-center text-white text-[10px] font-black border-2 border-white dark:border-surface-dark shadow-sm">
-          KU
+      <!-- Logo Container Dinamis di Samping Tulisan KONI KONAWE UTARA -->
+      <div id="brand-logo-wrapper" class="flex items-center gap-1.5 cursor-pointer" onclick="navigateTo('public-landing')" title="KONI Kabupaten Konawe Utara">
+        <div id="brand-logo-img-container" class="flex items-center -space-x-1.5">
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-black border-2 border-white dark:border-surface-dark shadow-sm">
+            K
+          </div>
+          <div class="w-8 h-8 rounded-full bg-tertiary flex items-center justify-center text-white text-[10px] font-black border-2 border-white dark:border-surface-dark shadow-sm">
+            KU
+          </div>
         </div>
       </div>
 
       <div class="cursor-pointer" onclick="navigateTo('public-landing')">
         <div class="flex items-center gap-2">
-          <h1 class="font-extrabold text-base lg:text-lg text-primary dark:text-red-400 tracking-tight leading-none">
+          <h1 id="app-brand-title" class="font-extrabold text-base lg:text-lg text-primary dark:text-red-400 tracking-tight leading-none">
             KONI KONAWE UTARA
           </h1>
           <span class="hidden sm:inline-block px-2 py-0.5 bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-[10px] font-extrabold rounded-full">
             PORPROV 2026
           </span>
         </div>
-        <p class="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block">
+        <p id="app-brand-tagline" class="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block">
           Sistem Informasi Atlet & Kontingen Resmi Sultra
         </p>
       </div>
@@ -103,7 +106,7 @@
       </button>
 
       <!-- User Profile (When Logged In) -->
-      <div id="user-profile-chip" class="hidden flex items-center gap-2 pl-2 pr-1 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+      <div id="user-profile-chip" class="hidden flex items-center gap-2 pl-2 pr-1 py-1 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 cursor-pointer transition" onclick="navigateTo('profil-pengguna')" title="Klik untuk membuka Profil & Ubah Sandi">
         <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">
           <span class="material-symbols-outlined text-base">person</span>
         </div>
@@ -111,7 +114,7 @@
           <span id="user-profile-name" class="text-xs font-bold block leading-tight text-slate-900 dark:text-white">Admin</span>
           <span id="user-profile-role" class="text-[10px] text-slate-500 block leading-none">Super Admin</span>
         </div>
-        <button onclick="handleLogout()" class="p-1 hover:bg-red-100 dark:hover:bg-red-950/50 text-red-600 dark:text-red-400 rounded-full transition" title="Keluar">
+        <button onclick="event.stopPropagation(); handleLogout()" class="p-1 hover:bg-red-100 dark:hover:bg-red-950/50 text-red-600 dark:text-red-400 rounded-full transition" title="Keluar">
           <span class="material-symbols-outlined text-lg">logout</span>
         </button>
       </div>
@@ -196,6 +199,17 @@
             <span>Unduh Excel Kontingen</span>
           </button>
         </div>
+
+        <!-- PENGATURAN PROFIL & SANDI (SEMUA USER LOGIN) -->
+        <div class="user-logged-in-only hidden pt-3">
+          <div class="px-3 py-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+            Akun & Keamanan
+          </div>
+          <button onclick="navigateTo('profil-pengguna')" data-view="profil-pengguna" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-800">
+            <span class="material-symbols-outlined text-xl">manage_accounts</span>
+            <span>Profil & Ubah Sandi</span>
+          </button>
+        </div>
       </div>
 
       <!-- Footer Info Sidebar -->
@@ -243,6 +257,11 @@
           <button onclick="navigateTo('dokumen-nominatif-print')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800">
             <span class="material-symbols-outlined">print</span> Cetak Nominatif (A4)
           </button>
+          <div class="user-logged-in-only hidden">
+            <button onclick="navigateTo('profil-pengguna')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800">
+              <span class="material-symbols-outlined">manage_accounts</span> Profil & Ubah Sandi
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -844,6 +863,155 @@
             <button onclick="submitSystemSettings()" class="px-5 py-2.5 bg-primary hover:bg-crimson-dark text-white rounded-xl text-xs font-bold shadow-md transition">
               Simpan Pengaturan
             </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 9: PENGATURAN PROFIL, UBAH PASSWORD & GANTI LOGO
+           ===================================================================== -->
+      <section id="view-profil-pengguna" class="app-view space-y-6 hidden">
+        <div>
+          <h2 class="text-xl lg:text-2xl font-extrabold text-slate-900 dark:text-white">Pengaturan Profil & Keamanan</h2>
+          <p class="text-xs text-slate-500">Kelola identitas akun Anda, ubah kata sandi, dan sesuaikan logo instansi</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start max-w-5xl">
+          <!-- KOLOM KIRI: PROFIL & UBAH PASSWORD -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- KARTU 1: PROFIL PENGGUNA -->
+            <div class="bg-white dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-xs space-y-4">
+              <div class="flex items-center gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xl">
+                  <span class="material-symbols-outlined text-2xl">person</span>
+                </div>
+                <div>
+                  <h3 id="prof-display-name" class="font-bold text-base text-slate-900 dark:text-white">Nama Pengguna</h3>
+                  <span id="prof-display-role" class="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-[10px] font-bold rounded-full text-slate-600 dark:text-slate-300">
+                    Administrator
+                  </span>
+                </div>
+              </div>
+
+              <form onsubmit="submitUserProfileForm(event)" class="space-y-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Username Login</label>
+                  <input type="text" id="prof-input-username" readonly disabled
+                         class="w-full text-xs p-2.5 bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-500 font-mono cursor-not-allowed" />
+                  <span class="text-[10px] text-slate-400">Username tidak dapat diubah sembarangan demi keamanan otentikasi.</span>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Lengkap</label>
+                  <input type="text" id="prof-input-nama" required placeholder="Nama lengkap Anda..."
+                         class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nomor WhatsApp / Kontak</label>
+                  <input type="text" id="prof-input-wa" placeholder="08xxxxxxxxxx"
+                         class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
+                </div>
+                <div class="pt-2">
+                  <button type="submit" id="btn-save-profile" class="px-5 py-2 bg-slate-900 hover:bg-black dark:bg-slate-700 dark:hover:bg-slate-600 text-white rounded-xl text-xs font-bold transition">
+                    Simpan Perubahan Profil
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- KARTU 2: UBAH PASSWORD -->
+            <div class="bg-white dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-xs space-y-4">
+              <div class="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <span class="material-symbols-outlined text-primary text-xl">key</span>
+                <h3 class="font-bold text-base text-slate-900 dark:text-white">Ubah Password Akun</h3>
+              </div>
+
+              <form onsubmit="submitChangePasswordForm(event)" class="space-y-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Password Saat Ini (Lama)</label>
+                  <input type="password" id="pass-old" required placeholder="Masukkan password lama..."
+                         class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Password Baru</label>
+                    <input type="password" id="pass-new" required minlength="6" placeholder="Minimal 6 karakter..."
+                           class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Ulangi Password Baru</label>
+                    <input type="password" id="pass-confirm" required minlength="6" placeholder="Ketik ulang password baru..."
+                           class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
+                  </div>
+                </div>
+                <div class="pt-2">
+                  <button type="submit" id="btn-save-password" class="px-5 py-2 bg-primary hover:bg-crimson-dark text-white rounded-xl text-xs font-bold shadow-md transition">
+                    Perbarui Password
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- KOLOM KANAN: PENGATURAN LOGO DI SAMPING KONI KONAWE UTARA (ADMIN INDUK) -->
+          <div class="lg:col-span-5 space-y-4">
+            <div class="bg-white dark:bg-surface-dark p-6 rounded-2xl border border-border-light dark:border-border-dark shadow-xs space-y-4">
+              <div class="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <span class="material-symbols-outlined text-amber-500 text-xl">palette</span>
+                <h3 class="font-bold text-base text-slate-900 dark:text-white">Logo di Samping Tulisan</h3>
+              </div>
+              
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                Ubah logo di samping tulisan <strong>"KONI KONAWE UTARA"</strong> sesuai dengan lambang/logo resmi yang Anda inginkan.
+              </p>
+
+              <!-- LIVE PREVIEW HEADER BOX -->
+              <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-center">
+                <span class="text-[10px] uppercase font-bold text-slate-400 block mb-2">Pratinjau Tampilan Header</span>
+                <div class="inline-flex items-center gap-2.5 p-3 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-xs">
+                  <div id="prof-logo-preview-box" class="flex items-center justify-center">
+                    <img id="prof-logo-preview-img" src="" alt="Pratinjau Logo" class="h-10 w-auto max-w-[48px] object-contain hidden" />
+                    <div id="prof-logo-preview-default" class="flex items-center -space-x-1.5">
+                      <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-black">K</div>
+                      <div class="w-8 h-8 rounded-full bg-tertiary flex items-center justify-center text-white text-[10px] font-black">KU</div>
+                    </div>
+                  </div>
+                  <div class="text-left">
+                    <span class="font-extrabold text-sm text-primary dark:text-red-400 block leading-tight">KONI KONAWE UTARA</span>
+                    <span class="text-[9px] font-extrabold text-amber-700 dark:text-amber-300">PORPROV SULTRA 2026</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PILIHAN 1: UNGGAH GAMBAR DARI PERANGKAT -->
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  Pilihan 1: Unggah Gambar Logo (HP / Komputer)
+                </label>
+                <input type="file" id="prof-file-logo" accept="image/*" onchange="previewUploadedLogo(this)"
+                       class="w-full text-xs file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer" />
+                <span class="text-[10px] text-slate-400">Mendukung format PNG transparan, JPG, atau WEBP.</span>
+              </div>
+
+              <!-- PILIHAN 2: TEMPEL URL GAMBAR -->
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  Pilihan 2: Atau Masukkan Link / URL Logo
+                </label>
+                <input type="text" id="prof-input-logo-url" placeholder="https://domain.com/logo-koni.png"
+                       oninput="previewUrlLogo(this.value)"
+                       class="w-full text-xs p-2.5 bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-xl text-slate-900 dark:text-white" />
+              </div>
+
+              <div class="pt-2 flex items-center justify-between gap-2">
+                <button type="button" onclick="resetToDefaultLogo()" class="px-3 py-2 border rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                  Reset Default
+                </button>
+                <button type="button" onclick="applyLogoSettings()" id="btn-apply-logo" class="px-5 py-2 bg-primary hover:bg-crimson-dark text-white rounded-xl text-xs font-bold shadow-md transition">
+                  Terapkan Logo
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
